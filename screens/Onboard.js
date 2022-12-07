@@ -1,11 +1,18 @@
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 
 const Onboard = () => {
   return (
-    <View>
-      <Text>Onboard</Text>
-    </View>
+    <SafeAreaView>
+      <Text
+        style={{
+          fontFamily: "ManropeSemibold",
+          backgroundColor: "blue",
+        }}
+      >
+        Onboard
+      </Text>
+    </SafeAreaView>
   );
 };
 

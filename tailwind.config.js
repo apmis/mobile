@@ -7,7 +7,11 @@ module.exports = {
     "./utils/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // Manrope:
+      },
+    },
   },
   plugins: [],
 };

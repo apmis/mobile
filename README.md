@@ -22,6 +22,8 @@
 
 - For screens, components, ...REST, folders, Ensure to import & export files into `index.js`
 
+### Make Use of the Utils folder to write helper functions or project constants
+
 ### ASSETS 👇
 
 - Make use of the assets folder to add images + other required assets
