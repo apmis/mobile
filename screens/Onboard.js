@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 
-const Onboard = () => {
+const Onboard = ({navigation}) => {
   return (
     <SafeAreaView>
       <Text
