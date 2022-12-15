@@ -2,10 +2,10 @@
 
 =========================================================================================
 
-👇 To get started, Follow the procedures below:
+ ## 👇 To get started, Follow the procedures below:
 
 - Clone the repo `git clone <repo url>`
-- cd into the dir `cd apmis`
+- cd into the dir `cd mobile`
 - Install all the project dependencies `yarn insall`
 
 ### Styling
