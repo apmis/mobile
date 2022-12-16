@@ -27,7 +27,6 @@ import {
   Wallet,
 } from "./screens";
 
-
 import DrugsTaken from "./screens/DrugsTaken";
 import Prescriptions from "./screens/Prescriptions";
 import PrescriptionsData from "./screens/PrescriptionsData";
@@ -51,7 +50,6 @@ import Bills from "./screens/Bills";
 import Products from "./screens/Products";
 import ProductDetails from "./screens/ProductDetails";
 import OrderPlaced from "./screens/OrderPlaced";
-
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -83,86 +81,99 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <GlobalizeProvider locale="en-NG">
+          <NavigationContainer theme={theme}>
+            <Stack.Navigator
+              screenOptions={{ headerShown: false }}
+              initialRouteName="Dashboard"
+            >
+              {/* Add screen stack here 👇*/}
+              {/* =================================================== */}
+              <Stack.Screen name="SignUp" component={SignUp} />
+              <Stack.Screen name="SignUpScreen2" component={SignUpScreen2} />
+              <Stack.Screen name="Success" component={Success} />
+              <Stack.Screen
+                name="SuccessWithThanks"
+                component={SuccessWithThanks}
+              />
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Onboard" component={Onboard} />
+              <Stack.Screen name="ResetPassword" component={ResetPassword} />
+              <Stack.Screen name="Settings" component={Settings} />
+              <Stack.Screen
+                name="PasswordSettings"
+                component={PasswordSettings}
+              />
+              <Stack.Screen name="PatientProfile" component={PatientProfile} />
+              <Stack.Screen name="Wallet" component={Wallet} />
+              <Stack.Screen name="FundWallet" component={FundWallet} />
+              <Stack.Screen name="Dashboard" component={BottomTab} />
+              <Stack.Screen name="Notifications" component={Notifications} />
 
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <GlobalizeProvider locale="en-NG">
-        <NavigationContainer theme={theme}>
-          <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName="Dashboard"
-          >
-            {/* Add screen stack here 👇*/}
-            {/* =================================================== */}
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="SignUpScreen2" component={SignUpScreen2} />
-            <Stack.Screen name="Success" component={Success} />
-            <Stack.Screen
-              name="SuccessWithThanks"
-              component={SuccessWithThanks}
-            />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Onboard" component={Onboard} />
-            <Stack.Screen name="ResetPassword" component={ResetPassword} />
-            <Stack.Screen name="Settings" component={Settings} />
-            <Stack.Screen
-              name="PasswordSettings"
-              component={PasswordSettings}
-            />
-            <Stack.Screen name="PatientProfile" component={PatientProfile} />
-            <Stack.Screen name="Wallet" component={Wallet} />
-            <Stack.Screen name="FundWallet" component={FundWallet} />
-            <Stack.Screen name="Dashboard" component={BottomTab} />
-            <Stack.Screen name="Notifications" component={Notifications} />
+              <Stack.Screen
+                name="NotificationSettings"
+                component={NotificationSettings}
+              />
+              <Stack.Screen
+                name="ResetPasswordScreen2"
+                component={ResetPasswordScreen2}
+              />
+              <Stack.Screen
+                name="ResetPasswordScreen3"
+                component={ResetPasswordScreen3}
+              />
+              {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
 
-            <Stack.Screen
-              name="NotificationSettings"
-              component={NotificationSettings}
-            />
-            <Stack.Screen
-              name="ResetPasswordScreen2"
-              component={ResetPasswordScreen2}
-            />
-            <Stack.Screen
-              name="ResetPasswordScreen3"
-              component={ResetPasswordScreen3}
-            />
-            {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
-            
-       ==============================TOLA=========================
-        <Stack.Screen name="Onboard" component={Onboard} />
-          <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
-          <Stack.Screen name="ProductDetails" component={ProductDetails} />
-          <Stack.Screen name="Products" component={Products} />
-          <Stack.Screen name="ReferPerson" component={ReferPerson} />
-          <Stack.Screen name="ReferralMade" component={ReferralMade} />
-          <Stack.Screen name="LabTestRequest" component={LabTestRequest} />
-          <Stack.Screen name="LabRequestMade" component={LabRequestMade} />
-          <Stack.Screen name="LabResult" component={LabResult} />
-          <Stack.Screen name="AppointmentList" component={AppointmentList} />
-          <Stack.Screen name="ClinicalNotes" component={ClinicalNotes} />
-          <Stack.Screen
-            name="PrescriptionsData"
-            component={PrescriptionsData}
-          />
-          <Stack.Screen name="GetInsured" component={GetInsured} />
-          <Stack.Screen name="ProviderDetails" component={ProviderDetails} />
-          <Stack.Screen name="HealthInsurance" component={HealthInsurance} />
-          <Stack.Screen name="DrugsTaken" component={DrugsTaken} />
-          <Stack.Screen name="Prescriptions" component={Prescriptions} />
-          <Stack.Screen name="AppointmentDate" component={AppointmentDate} />
-          <Stack.Screen name="AppointmentPay" component={AppointmentPay} />
-          <Stack.Screen name="BookAppointment" component={BookAppointment} />
-          <Stack.Screen name="AppointmentDate" component={AppointmentDate} />
-          <Stack.Screen name="Bills" component={Bills} />
-          <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
-            
-            
-          </Stack.Navigator>
-        </NavigationContainer>
-      </GlobalizeProvider>
-    </GestureHandlerRootView>
-     
+              {/* ==============================TOLA========================= */}
+              <Stack.Screen name="Onboard" component={Onboard} />
+              <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
+              <Stack.Screen name="ProductDetails" component={ProductDetails} />
+              <Stack.Screen name="Products" component={Products} />
+              <Stack.Screen name="ReferPerson" component={ReferPerson} />
+              <Stack.Screen name="ReferralMade" component={ReferralMade} />
+              <Stack.Screen name="LabTestRequest" component={LabTestRequest} />
+              <Stack.Screen name="LabRequestMade" component={LabRequestMade} />
+              <Stack.Screen name="LabResult" component={LabResult} />
+              <Stack.Screen
+                name="AppointmentList"
+                component={AppointmentList}
+              />
+              <Stack.Screen name="ClinicalNotes" component={ClinicalNotes} />
+              <Stack.Screen
+                name="PrescriptionsData"
+                component={PrescriptionsData}
+              />
+              <Stack.Screen name="GetInsured" component={GetInsured} />
+              <Stack.Screen
+                name="ProviderDetails"
+                component={ProviderDetails}
+              />
+              <Stack.Screen
+                name="HealthInsurance"
+                component={HealthInsurance}
+              />
+              <Stack.Screen name="DrugsTaken" component={DrugsTaken} />
+              <Stack.Screen name="Prescriptions" component={Prescriptions} />
+              <Stack.Screen
+                name="AppointmentDate"
+                component={AppointmentDate}
+              />
+              <Stack.Screen name="AppointmentPay" component={AppointmentPay} />
+              <Stack.Screen
+                name="BookAppointment"
+                component={BookAppointment}
+              />
+              <Stack.Screen
+                name="AppointmentDate"
+                component={AppointmentDate}
+              />
+              <Stack.Screen name="Bills" component={Bills} />
+              <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </GlobalizeProvider>
+      </GestureHandlerRootView>
     </Provider>
-
   );
 }
