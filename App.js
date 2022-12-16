@@ -126,7 +126,7 @@ export default function App() {
               {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
 
               {/* ==============================TOLA========================= */}
-              <Stack.Screen name="Onboard" component={Onboard} />
+              
               <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
               <Stack.Screen name="ProductDetails" component={ProductDetails} />
               <Stack.Screen name="Products" component={Products} />
@@ -164,10 +164,7 @@ export default function App() {
                 name="BookAppointment"
                 component={BookAppointment}
               />
-              <Stack.Screen
-                name="AppointmentDate"
-                component={AppointmentDate}
-              />
+            
               <Stack.Screen name="Bills" component={Bills} />
               <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
             </Stack.Navigator>
