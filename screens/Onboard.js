@@ -38,7 +38,6 @@ const slides = [
 
 const Slide = ({ item, currentSlideIndex }) => {
 
-const Onboard = ({navigation}) => {
 
   return (
     <View className="items-center  ">
@@ -84,6 +83,7 @@ const Onboard = ({navigation}) => {
     </View>
   );
 };
+
 
 const Onboard = ({ navigation }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);

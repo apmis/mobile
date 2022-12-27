@@ -1,20 +1,21 @@
 import {
-  Image,
   Pressable,
-  Text,
   View,
-  TextInput,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import React from "react";
 import Button from "../components/seed1/Button";
 import Bar from "../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useState } from "react";
+import AppText from "../components/seed1/AppText";
+import UpperNavigation from "../components/seed1/UpperNavigation";
 
 export default function ClinicalNotes() {
   const [openedNote, setOpenedNote] = useState(-1);
+  const { width: windowWidth } = Dimensions.get("window");
 
   const openNote = (noteId) => {
     if (noteId == openedNote) {
@@ -26,36 +27,7 @@ export default function ClinicalNotes() {
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 20,
-          position: "relative",
-          marginBottom: 34,
-        }}
-      >
-        <Pressable style={{ position: "absolute", left: 34 }}>
-          <Ionicons
-            name="arrow-back-outline"
-            style={{
-              //   color: lightMode ? "#97938a" : "rgba(255, 255, 255, 0.5)",
-              fontSize: 26,
-            }}
-          />
-        </Pressable>
-        <Text
-          style={{
-            color: "#0E214D",
-            fontWeight: "600",
-            fontSize: 16,
-            textAlign: "center",
-          }}
-        >
-          Clinical Notes
-        </Text>
-      </View>
+      <UpperNavigation back title="Clinical Notes" />
 
       <ScrollView style={{ flex: 1 }}>
         {Array(8)
@@ -65,11 +37,8 @@ export default function ClinicalNotes() {
               key={i}
               style={{
                 backgroundColor: "#fff",
-                // height: 64,
-                marginHorizontal: 34,
-                // flexDirection: "row",
-                // alignItems: "center",
-                // justifyContent: "space-between",
+                width: windowWidth - 40,
+                marginHorizontal: 20,
                 paddingHorizontal: 18,
                 marginTop: 16,
                 borderRadius: 16,
@@ -84,25 +53,23 @@ export default function ClinicalNotes() {
                   justifyContent: "space-between",
                 }}
               >
-                <Text
+                <AppText
                   style={{ color: "#03045E", fontSize: 14, fontWeight: "400" }}
                 >
                   Blood Cancer Treatment
-                </Text>
+                </AppText>
                 <TouchableOpacity onPress={() => openNote(i)}>
                   {i == openedNote ? (
                     <Ionicons
-                      name="chevron-down-outline"
+                      name="chevron-forward-outline"
                       style={{
-                        //   color: lightMode ? "#97938a" : "rgba(255, 255, 255, 0.5)",
                         fontSize: 26,
                       }}
                     />
                   ) : (
                     <Ionicons
-                      name="chevron-forward-outline"
+                      name="chevron-down-outline"
                       style={{
-                        //   color: lightMode ? "#97938a" : "rgba(255, 255, 255, 0.5)",
                         fontSize: 26,
                       }}
                     />
@@ -111,7 +78,7 @@ export default function ClinicalNotes() {
               </View>
               {i == openedNote ? (
                 <View style={{ paddingBottom: 80 }}>
-                  <Text
+                  <AppText
                     style={{
                       color: "#0364FF",
                       fontSize: 16,
@@ -119,8 +86,8 @@ export default function ClinicalNotes() {
                     }}
                   >
                     22, November, 2022
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#6D7589",
                       fontSize: 16,
@@ -131,8 +98,8 @@ export default function ClinicalNotes() {
                   >
                     Both Ulna and Radius bones fractured, significant
                     displacement diagnosed.
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#0E214D",
                       fontSize: 14,
@@ -141,8 +108,8 @@ export default function ClinicalNotes() {
                     }}
                   >
                     Doctor On Duty
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#6D7589",
                       fontSize: 16,
@@ -151,8 +118,8 @@ export default function ClinicalNotes() {
                     }}
                   >
                     Brooklyn Simmons
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#0E214D",
                       fontSize: 14,
@@ -161,8 +128,8 @@ export default function ClinicalNotes() {
                     }}
                   >
                     Diagnosis
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#6D7589",
                       fontSize: 16,
@@ -177,8 +144,8 @@ export default function ClinicalNotes() {
                     (ALT), aspartate transaminase (AST), and alkaline
                     phosphatase (ALP). Increased levels of bilirubin. Decreased
                     levels of blood proteins.
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#0E214D",
                       fontSize: 14,
@@ -187,8 +154,8 @@ export default function ClinicalNotes() {
                     }}
                   >
                     Medications
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#6D7589",
                       fontSize: 16,
@@ -197,8 +164,8 @@ export default function ClinicalNotes() {
                     }}
                   >
                     Diclofenac, 200 mg
-                  </Text>
-                  <Text
+                  </AppText>
+                  <AppText
                     style={{
                       color: "#6D7589",
                       fontSize: 16,
@@ -208,7 +175,7 @@ export default function ClinicalNotes() {
                     }}
                   >
                     3 capsules with meals daily
-                  </Text>
+                  </AppText>
                 </View>
               ) : (
                 <></>

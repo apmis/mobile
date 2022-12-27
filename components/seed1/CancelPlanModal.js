@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Modal, Text, Pressable, View, StyleSheet } from "react-native";
+import AppText from "./AppText";
 import Button from "./Button";
 
 export default function CancelPlanModal({ show, setIsOpenCancelModal }) {
@@ -19,7 +20,7 @@ export default function CancelPlanModal({ show, setIsOpenCancelModal }) {
             }}
           >
             <View style={{ width: 295, }}>
-              <Text
+              <AppText
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
@@ -28,7 +29,7 @@ export default function CancelPlanModal({ show, setIsOpenCancelModal }) {
                 }}
               >
                 Are you sure you want to cancel the subscription plans
-              </Text>
+              </AppText>
             </View>
 
             <View

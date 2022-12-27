@@ -6,10 +6,11 @@ import {
   Dimensions,
 } from "react-native";
 import React from "react";
-import Button from "../components/seed1/Button";
-import UpperNavigation from "../components/seed1/UpperNavigation";
-import Bar from "../components/seed1/Bar";
+import Button from "../../components/seed1/Button";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "../../components/seed1/AppText";
 
 export default function BookAppointment({navigation}) {
   const windowWidth = Dimensions.get("window").width;
@@ -35,10 +36,10 @@ export default function BookAppointment({navigation}) {
           <View style={{ width: 153, height: 153, position: "relative" }}>
             <Image
               style={{ width: "100%", height: "100%" }}
-              source={require("../assets/images/DocPic.png")}
+              source={require("../../assets/images/DocPic.png")}
             />
           </View>
-          <Text
+          <AppText
             style={{
               color: "#0E214D",
               fontWeight: "600",
@@ -47,8 +48,8 @@ export default function BookAppointment({navigation}) {
             }}
           >
             Dr. Bellamy Nduka
-          </Text>
-          <Text
+          </AppText>
+          <AppText
             style={{
               color: "#6B779A",
               fontWeight: "400",
@@ -56,7 +57,7 @@ export default function BookAppointment({navigation}) {
             }}
           >
             Viralogist
-          </Text>
+          </AppText>
         </View>
       </View>
 
@@ -91,12 +92,12 @@ export default function BookAppointment({navigation}) {
               fontSize: 24,
             }}
           />
-          <Text style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
+          <AppText style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
             1000+
-          </Text>
-          <Text style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
+          </AppText>
+          <AppText style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
             Patients
-          </Text>
+          </AppText>
         </View>
 
         <View
@@ -117,12 +118,12 @@ export default function BookAppointment({navigation}) {
               fontSize: 24,
             }}
           />
-          <Text style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
+          <AppText style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
             1000+
-          </Text>
-          <Text style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
+          </AppText>
+          <AppText style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
             Patients
-          </Text>
+          </AppText>
         </View>
 
         <View
@@ -142,12 +143,12 @@ export default function BookAppointment({navigation}) {
               fontSize: 24,
             }}
           />
-          <Text style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
+          <AppText style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
             1000+
-          </Text>
-          <Text style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
+          </AppText>
+          <AppText style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
             Patients
-          </Text>
+          </AppText>
         </View>
 
         {/* </> */}
@@ -167,7 +168,7 @@ export default function BookAppointment({navigation}) {
               justifyContent: "space-between",
             }}
           >
-            <Text
+            <AppText
               style={{
                 fontWeight: "600",
                 fontSize: 16,
@@ -175,8 +176,8 @@ export default function BookAppointment({navigation}) {
               }}
             >
               About
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontWeight: "600",
                 fontSize: 16,
@@ -184,8 +185,8 @@ export default function BookAppointment({navigation}) {
               }}
             >
               Location
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontWeight: "600",
                 fontSize: 16,
@@ -193,8 +194,8 @@ export default function BookAppointment({navigation}) {
               }}
             >
               Availablity
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontWeight: "600",
                 fontSize: 16,
@@ -202,7 +203,7 @@ export default function BookAppointment({navigation}) {
               }}
             >
               Reviews
-            </Text>
+            </AppText>
           </View>
 
           <View
@@ -212,10 +213,10 @@ export default function BookAppointment({navigation}) {
               marginTop: 29,
             }}
           >
-            <Text style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
+            <AppText style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
               Biography
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontWeight: "400",
                 fontSize: 16,
@@ -226,7 +227,7 @@ export default function BookAppointment({navigation}) {
               Dr. Bruce specialist in peadiatric, and work in Royal Hospital
               consectetur adipiscing elit, sed do eiusmod tempor incidi
               utaliqua.
-            </Text>
+            </AppText>
           </View>
           <View
             style={{
@@ -235,10 +236,10 @@ export default function BookAppointment({navigation}) {
               marginTop: 24,
             }}
           >
-            <Text style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
+            <AppText style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
               Availability
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontWeight: "400",
                 fontSize: 16,
@@ -247,7 +248,7 @@ export default function BookAppointment({navigation}) {
               }}
             >
               Mon-Sat (8:00AM-9:0P.M)
-            </Text>
+            </AppText>
           </View>
 
           <View
@@ -257,9 +258,9 @@ export default function BookAppointment({navigation}) {
               marginTop: 29,
             }}
           >
-            <Text style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
+            <AppText style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
               Reviews
-            </Text>
+            </AppText>
           </View>
 
           {[1, 2, 3, 4].map((item, i) => (
@@ -301,11 +302,11 @@ export default function BookAppointment({navigation}) {
                   >
                     <Image
                       style={{ height: 40, width: 40 }}
-                      source={require("../assets/images/profile.png")}
+                      source={require("../../assets/images/profile.png")}
                     />
                   </View>
                   <View style={{ marginLeft: 15 }}>
-                    <Text>Natasha</Text>
+                    <AppText>Natasha</AppText>
                     <View style={{ display: "flex", flexDirection: "row" }}>
                       {[1, 2, 3, 4, 5].map((item, i) => (
                         <Ionicons
@@ -320,10 +321,10 @@ export default function BookAppointment({navigation}) {
                     </View>
                   </View>
                 </View>
-                <Text style={{color: "#6D7589", fontSize: 14, fontWeight: "400"}}>4 weeks ago</Text>
+                <AppText style={{color: "#6D7589", fontSize: 14, fontWeight: "400"}}>4 weeks ago</AppText>
               </View>
               <View>
-                <Text
+                <AppText
                   style={{
                     fontWeight: "400",
                     fontSize: 16,
@@ -336,7 +337,7 @@ export default function BookAppointment({navigation}) {
                   thorough, excellent manner and cares for her patients as
                   though they were her own family member. I highly recommend her
                   as a physician.
-                </Text>
+                </AppText>
               </View>
             </View>
           ))}

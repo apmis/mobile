@@ -6,18 +6,20 @@ import {
   Image,
   Dimensions,
   Modal,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import Bar from "../components/seed1/Bar";
-import UpperNavigation from "../components/seed1/UpperNavigation";
-import Button from "../components/seed1/Button";
+import Bar from "../../components/seed1/Bar";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import Button from "../../components/seed1/Button";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import CancelPlanModal from "../components/seed1/CancelPlanModal";
+import CancelPlanModal from "../../components/seed1/CancelPlanModal";
+import AppText from "../../components/seed1/AppText";
 
 export default function GetInsured({ navigation }) {
   const [chosenTab, setChosenTab] = useState("Plans");
-  const [isOpenCancelModal, setIsOpenCancelModal] = useState(true);
-  const windowWidth = Dimensions.get("window").width;
+  const [isOpenCancelModal, setIsOpenCancelModal] = useState(false);
+  const { width: windowWidth } = Dimensions.get("window");
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
@@ -28,6 +30,7 @@ export default function GetInsured({ navigation }) {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          width: windowWidth - 40,
           marginHorizontal: 20,
           backgroundColor: "#fff",
           height: 44,
@@ -50,7 +53,7 @@ export default function GetInsured({ navigation }) {
           onPress={() => setChosenTab("Providers")}
         >
           <View>
-            <Text
+            <AppText
               style={{
                 textAlign: "center",
                 fontWeight: "600",
@@ -59,7 +62,7 @@ export default function GetInsured({ navigation }) {
               }}
             >
               Providers
-            </Text>
+            </AppText>
           </View>
         </Pressable>
         <Pressable
@@ -76,7 +79,7 @@ export default function GetInsured({ navigation }) {
           onPress={() => setChosenTab("Plans")}
         >
           <View>
-            <Text
+            <AppText
               style={{
                 textAlign: "center",
                 fontWeight: "600",
@@ -85,12 +88,15 @@ export default function GetInsured({ navigation }) {
               }}
             >
               Active Plans
-            </Text>
+            </AppText>
           </View>
         </Pressable>
       </View>
 
-      <ScrollView style={{ flex: 1, marginHorizontal: 10 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ flex: 1, marginHorizontal: 10, paddingBottom: 20 }}
+      >
         {chosenTab == "Providers" ? (
           <View
             style={{
@@ -100,6 +106,7 @@ export default function GetInsured({ navigation }) {
               // backgroundColor: "red",
               flexWrap: "wrap",
               marginTop: 39,
+              width: windowWidth,
             }}
           >
             {[
@@ -115,28 +122,28 @@ export default function GetInsured({ navigation }) {
               <Pressable
                 key={i}
                 onPress={() => navigation.navigate("ProviderDetails")}
+                style={{ width: windowWidth / 3.3, marginHorizontal: 2 }}
               >
                 <View
                   style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-
                     marginVertical: 10,
-                    marginHorizontal: 10,
+                    // marginHorizontal: 10,
                   }}
                 >
                   <View style={{ height: 64, width: 64 }}>
                     <Image
                       style={{ width: "100%", height: "100%" }}
-                      source={require("../assets/images/ins_sample.png")}
+                      source={require("../../assets/images/ins_sample.png")}
                     />
                   </View>
-                  <Text
+                  <AppText
                     style={{ marginTop: 8, fontSize: 14, fontWeight: "400" }}
                   >
                     {item}
-                  </Text>
+                  </AppText>
                 </View>
               </Pressable>
             ))}
@@ -156,6 +163,7 @@ export default function GetInsured({ navigation }) {
                 height: 484,
                 borderRadius: 5,
                 backgroundColor: "#fff",
+                width: windowWidth - 40,
                 marginHorizontal: 20,
                 marginTop: 30,
                 paddingTop: 16,
@@ -164,12 +172,12 @@ export default function GetInsured({ navigation }) {
                 position: "relative",
               }}
             >
-              <Text
+              <AppText
                 style={{ color: "#000C23", fontSize: 20, fontWeight: "800" }}
               >
                 SILVER PLAN
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   color: "#000C23",
                   fontSize: 20,
@@ -178,13 +186,13 @@ export default function GetInsured({ navigation }) {
                 }}
               >
                 ₦40.50
-                <Text
+                <AppText
                   style={{ color: "#556D9E", fontSize: 12, fontWeight: "400" }}
                 >
                   {" "}
                   Monthly
-                </Text>
-              </Text>
+                </AppText>
+              </AppText>
 
               {[1, 2, 3, 4].map((item, i) => (
                 <View
@@ -206,7 +214,7 @@ export default function GetInsured({ navigation }) {
                       marginRight: 5,
                     }}
                   />
-                  <Text
+                  <AppText
                     style={{
                       color: "#556D9E",
                       fontSize: 14,
@@ -217,7 +225,7 @@ export default function GetInsured({ navigation }) {
                     }}
                   >
                     Combined medical cover of 1.2 million per year
-                  </Text>
+                  </AppText>
                 </View>
               ))}
 
@@ -231,11 +239,11 @@ export default function GetInsured({ navigation }) {
                   left: 20,
                 }}
               >
-                <Text
+                <AppText
                   style={{ fontSize: 14, fontWeight: "400", color: "#3679F8" }}
                 >
                   Expires: 30th Sept 2023
-                </Text>
+                </AppText>
               </View>
               <View
                 style={{
@@ -261,6 +269,46 @@ export default function GetInsured({ navigation }) {
                   }}
                 />
               </View>
+            </View>
+            <View style={{ marginBottom: 40 }}>
+              {[
+                {
+                  name: "Policy",
+                  link: "PolicyDetails",
+                },
+                {
+                  name: "Claims",
+                  link: "ClaimDetails",
+                },
+                {
+                  name: "Pre-authorization",
+                  link: "AuthorizationDetails",
+                },
+              ].map((item, i) => (
+                <TouchableOpacity
+                  style={{
+                    height: 72,
+                    backgroundColor: "#fff",
+                    borderRadius: 5,
+                    width: windowWidth - 40,
+                    marginHorizontal: 20,
+                    marginTop: 20,
+                    padding: 25,
+                  }}
+                  key={i}
+                  onPress={() => navigation.navigate(item.link)}
+                >
+                  <AppText
+                    style={{
+                      color: "#03045E",
+                      fontSize: 16,
+                      fontWeight: "600",
+                    }}
+                  >
+                    {item.name}
+                  </AppText>
+                </TouchableOpacity>
+              ))}
             </View>
           </View>
         )}

@@ -9,6 +9,7 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+import AppText from "./AppText";
 import Button from "./Button";
 
 export default function AppointmentBooked({ goHome, show, setBookedModal }) {
@@ -33,7 +34,7 @@ export default function AppointmentBooked({ goHome, show, setBookedModal }) {
               }}
             >
               <Image source={require("../../assets/images/checked.png")} />
-              <Text
+              <AppText
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
@@ -43,8 +44,8 @@ export default function AppointmentBooked({ goHome, show, setBookedModal }) {
                 }}
               >
                 Thank You! Your Appointment Created
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   fontSize: 14,
                   fontWeight: "600",
@@ -56,7 +57,7 @@ export default function AppointmentBooked({ goHome, show, setBookedModal }) {
               >
                 You booked an appoinment with Dr. Mildred Mathasgha on July 21,
                 at 10:00 am
-              </Text>
+              </AppText>
             </View>
           </View>
 

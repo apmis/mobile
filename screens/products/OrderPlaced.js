@@ -1,8 +1,10 @@
 import { View, Text, Dimensions, Image } from "react-native";
 import React from "react";
-import Bar from "../components/seed1/Bar";
-import Button from "../components/seed1/Button";
-import UpperNavigation from "../components/seed1/UpperNavigation";
+import Bar from "../../components/seed1/Bar";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import AppText from "../../components/seed1/AppText";
+import Button from "../../components/seed1/Button";
+
 
 export default function OrderPlaced({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
@@ -30,9 +32,9 @@ export default function OrderPlaced({ navigation }) {
               paddingBottom: 38,
             }}
           >
-            <Image source={require("../assets/images/checked.png")} />
+            <Image source={require("../../assets/images/checked.png")} />
           </View>
-          <Text
+          <AppText
             style={{
               color: "#6D7589",
               fontSize: 14,
@@ -42,10 +44,11 @@ export default function OrderPlaced({ navigation }) {
               width: windowWidth - 100,
               marginHorizontal: 50,
             }}
+           
           >
             Your Order has been placed! You will recieve an email reciept
             shortly
-          </Text>
+          </AppText>
           <View
             style={{
               width: windowWidth - 40,
@@ -57,7 +60,7 @@ export default function OrderPlaced({ navigation }) {
               onPressProp={() => navigation.navigate("Onboard")}
               bgColor={"#0364FF"}
               btnRadius={4}
-              btnH={55}
+              btnH={50}
               title={"Back to Home"}
               txtStyle={{ color: "white", fontWeight: "700", fontSize: 16 }}
             />

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Alert, Modal, Text, Pressable, View, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "./AppText";
 
 export default function AppointmentPreview({ show, setPreviewModal }) {
   return (
     <Modal animationType="slide" transparent={true} visible={show}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text
+          <AppText
             style={{
               fontSize: 20,
               fontWeight: "800",
@@ -16,9 +17,9 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
             }}
           >
             Pregnancy Visit
-          </Text>
+          </AppText>
           <View style={{marginBottom: 24}}>
-            <Text
+            <AppText
               style={{
                 fontSize: 16,
                 fontWeight: "500",
@@ -28,8 +29,8 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
               }}
             >
               Venue
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontSize: 14,
                 fontWeight: "500",
@@ -37,10 +38,10 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
               }}
             >
               Kings Hospital
-            </Text>
+            </AppText>
           </View>
           <View style={{marginBottom: 24}}>
-            <Text
+            <AppText
               style={{
                 fontSize: 16,
                 fontWeight: "500",
@@ -50,7 +51,7 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
               }}
             >
               Time
-            </Text>
+            </AppText>
             <Text
               style={{
                 fontSize: 14,
@@ -62,7 +63,7 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
             </Text>
           </View>
           <View style={{marginBottom: 24}}>
-            <Text
+            <AppText
               style={{
                 fontSize: 16,
                 fontWeight: "500",
@@ -72,8 +73,8 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
               }}
             >
             Instructions
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontSize: 14,
                 fontWeight: "400",
@@ -83,7 +84,7 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
               }}
             >
               Do not exceed 4 doses in any 24 hours. If symptoms persist consult your doctor 
-            </Text>
+            </AppText>
           </View>
           <Ionicons
             onPress={() => setPreviewModal(false)}
