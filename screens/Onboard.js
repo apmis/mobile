@@ -12,7 +12,6 @@ import React, { useRef, useState } from "react";
 import { assets, COLORS } from "../components/seed/constants";
 import { Btn } from "../components/seed";
 
-
 const { width, height } = Dimensions.get("window");
 
 const slides = [
@@ -37,8 +36,6 @@ const slides = [
 ];
 
 const Slide = ({ item, currentSlideIndex }) => {
-
-
   return (
     <View className="items-center  ">
       <Image source={item.image} />

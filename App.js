@@ -27,9 +27,11 @@ import {
   Wallet,
 } from "./screens";
 
+
 import DrugsTaken from "./screens/prescriptions/DrugsTaken";
 import Prescriptions from "./screens/prescriptions/Prescriptions";
 import PrescriptionData from "./screens/prescriptions/PrescriptionData";
+
 import MedicalProfile from "./screens/MedicalProfile";
 import HealthInsurance from "./screens/insurance/HealthInsurance";
 import GetInsured from "./screens/insurance/GetInsured";
@@ -54,6 +56,7 @@ import CartDetails from "./screens/products/CartDetails";
 import PolicyDetails from "./screens/insurance/PolicyDetails";
 import ClaimDetails from "./screens/insurance/ClaimDetails";
 import AuthorizationDetails from "./screens/insurance/AuthorizationDetails";
+
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -114,6 +117,7 @@ export default function App() {
               <Stack.Screen name="FundWallet" component={FundWallet} />
               <Stack.Screen name="Dashboard" component={BottomTab} />
               <Stack.Screen name="Notifications" component={Notifications} />
+
               <Stack.Screen
                 name="NotificationSettings"
                 component={NotificationSettings}
@@ -158,10 +162,12 @@ export default function App() {
                 name="AppointmentDate"
                 component={AppointmentDate}
               />
+
               <Stack.Screen
                 name="AppointmentList"
                 component={AppointmentList}
               />
+
               {/* APPOINTMENT ENDS */}
 
               {/* CLINICAL NOTES */}
@@ -181,7 +187,7 @@ export default function App() {
               <Stack.Screen name="GetInsured" component={GetInsured} />
               <Stack.Screen name="PolicyDetails" component={PolicyDetails} />
               <Stack.Screen name="ClaimDetails" component={ClaimDetails} />
-              <Stack.Screen name="AuthorizationDetails" component={AuthorizationDetails} />
+
               <Stack.Screen
                 name="ProviderDetails"
                 component={ProviderDetails}
@@ -190,6 +196,7 @@ export default function App() {
                 name="HealthInsurance"
                 component={HealthInsurance}
               />
+
               {/* INSURANCE ENDS */}
 
               {/* BILLS */}
@@ -199,6 +206,7 @@ export default function App() {
               {/* MEDICAL PROFILE */}
               <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
               {/* MEDICAL PROFILE ENDS */}
+
             </Stack.Navigator>
           </NavigationContainer>
         </GlobalizeProvider>
