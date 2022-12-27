@@ -3,7 +3,8 @@ import { Platform } from "react-native";
 import IonIcons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { Dashboard } from "../../screens";
+import { BlogHome, Dashboard, Home } from "../../screens";
+import Products from "../../screens/products/Products";
 import { COLORS } from "./constants";
 
 const Tab = createBottomTabNavigator();
@@ -33,8 +34,8 @@ function BottomTab() {
         }}
       />
       <Tab.Screen
-        name="Chat"
-        component={Dashboard}
+        name="ChatHome"
+        component={Home}
         options={{
           tabBarLabel: "Chat",
           tabBarIcon: ({ color, size }) => (
@@ -45,7 +46,7 @@ function BottomTab() {
       />
       <Tab.Screen
         name="Buy"
-        component={Dashboard}
+        component={Products}
         options={{
           tabBarLabel: "Buy",
           tabBarIcon: ({ color, size }) => (
@@ -55,7 +56,7 @@ function BottomTab() {
       />
       <Tab.Screen
         name="Read"
-        component={Dashboard}
+        component={BlogHome}
         options={{
           tabBarLabel: "Read",
           tabBarIcon: ({ color, size }) => (

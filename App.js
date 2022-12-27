@@ -8,8 +8,12 @@ import { loadCldr } from "react-native-globalize";
 import BottomTab from "./components/seed/BottomTab";
 loadCldr(require("react-native-globalize/locale-data/en-NG"));
 import {
+  BlogDetails,
+  BlogHome,
+  Conversation,
   Dashboard,
   FundWallet,
+  Home,
   Login,
   Notifications,
   NotificationSettings,
@@ -24,9 +28,9 @@ import {
   SignUpScreen2,
   Success,
   SuccessWithThanks,
+  VideoCall,
   Wallet,
 } from "./screens";
-
 
 import DrugsTaken from "./screens/prescriptions/DrugsTaken";
 import Prescriptions from "./screens/prescriptions/Prescriptions";
@@ -56,7 +60,6 @@ import CartDetails from "./screens/products/CartDetails";
 import PolicyDetails from "./screens/insurance/PolicyDetails";
 import ClaimDetails from "./screens/insurance/ClaimDetails";
 import AuthorizationDetails from "./screens/insurance/AuthorizationDetails";
-
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -93,7 +96,7 @@ export default function App() {
           <NavigationContainer theme={theme}>
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
-              initialRouteName="Dashboard"
+              initialRouteName="Onboard"
             >
               {/* Add screen stack here 👇*/}
               {/* =================================================== */}
@@ -117,6 +120,11 @@ export default function App() {
               <Stack.Screen name="FundWallet" component={FundWallet} />
               <Stack.Screen name="Dashboard" component={BottomTab} />
               <Stack.Screen name="Notifications" component={Notifications} />
+              <Stack.Screen name="ChatHome" component={Home} />
+              <Stack.Screen name="Conversation" component={Conversation} />
+              <Stack.Screen name="VideoCall" component={VideoCall} />
+              <Stack.Screen name="BlogDetails" component={BlogDetails} />
+              <Stack.Screen name="BlogHome" component={BlogHome} />
 
               <Stack.Screen
                 name="NotificationSettings"
@@ -132,12 +140,10 @@ export default function App() {
               />
               {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
               {/* ==============================TOLA========================= */}
-
-              {/* PRODUCTS */}
-              {/* <Stack.Screen name="Products" component={Products} /> */}
+              <Stack.Screen name="Products" component={Products} />
+              <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
               <Stack.Screen name="ProductDetails" component={ProductDetails} />
               <Stack.Screen name="CartDetails" component={CartDetails} />
-              <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
               {/* PRODUCTS ENDS */}
 
               {/* REFERRER */}
@@ -197,16 +203,12 @@ export default function App() {
                 component={HealthInsurance}
               />
 
-              {/* INSURANCE ENDS */}
-
-              {/* BILLS */}
               <Stack.Screen name="Bills" component={Bills} />
               {/* BILLS ENDS */}
 
               {/* MEDICAL PROFILE */}
               <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
               {/* MEDICAL PROFILE ENDS */}
-
             </Stack.Navigator>
           </NavigationContainer>
         </GlobalizeProvider>

@@ -1,16 +1,16 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import React from "react";
-import { assets } from "./constants";
 import { useNavigation } from "@react-navigation/native";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Backbtn = () => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       onPress={() => navigation.goBack()}
-      className="absolute z-10 left-5 top-[6px]"
+      className="absolute z-10 left-5 top-[2px]"
     >
-      <Image source={assets.backArrow} />
+      <MaterialIcons size={23} name="keyboard-backspace" />
     </TouchableOpacity>
   );
 };
