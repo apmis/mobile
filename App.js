@@ -94,7 +94,7 @@ export default function App() {
             >
               {/* Add screen stack here 👇*/}
               {/* =================================================== */}
-              {/* <Stack.Screen name="SignUp" component={SignUp} />
+              <Stack.Screen name="SignUp" component={SignUp} />
               <Stack.Screen name="SignUpScreen2" component={SignUpScreen2} />
               <Stack.Screen name="Success" component={Success} />
               <Stack.Screen
@@ -125,7 +125,7 @@ export default function App() {
               <Stack.Screen
                 name="ResetPasswordScreen3"
                 component={ResetPasswordScreen3}
-              /> */}
+              />
               {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
               {/* ==============================TOLA========================= */}
 
@@ -137,19 +137,19 @@ export default function App() {
               {/* PRODUCTS ENDS */}
 
               {/* REFERRER */}
-              {/* <Stack.Screen name="ReferPerson" component={ReferPerson} />
-              <Stack.Screen name="ReferralMade" component={ReferralMade} /> */}
+              <Stack.Screen name="ReferPerson" component={ReferPerson} />
+              <Stack.Screen name="ReferralMade" component={ReferralMade} />
 
               {/* REFERRER ENDS */}
 
               {/* LAB */}
-              {/* <Stack.Screen name="LabTestRequest" component={LabTestRequest} />
+              <Stack.Screen name="LabTestRequest" component={LabTestRequest} />
               <Stack.Screen name="LabRequestMade" component={LabRequestMade} />
-              <Stack.Screen name="LabResult" component={LabResult} /> */}
+              <Stack.Screen name="LabResult" component={LabResult} />
               {/* LAB ENDS */}
 
               {/* APPOINTMENT */}
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="BookAppointment"
                 component={BookAppointment}
               />
@@ -161,20 +161,20 @@ export default function App() {
               <Stack.Screen
                 name="AppointmentList"
                 component={AppointmentList}
-              /> */}
+              />
               {/* APPOINTMENT ENDS */}
 
               {/* CLINICAL NOTES */}
-              {/* <Stack.Screen name="ClinicalNotes" component={ClinicalNotes} /> */}
+              <Stack.Screen name="ClinicalNotes" component={ClinicalNotes} />
               {/* CLINICAL NOTES ENDS */}
 
               {/* PRESCRIPTIONS */}
-              {/* <Stack.Screen name="Prescriptions" component={Prescriptions} />
+              <Stack.Screen name="Prescriptions" component={Prescriptions} />
               <Stack.Screen
                 name="PrescriptionData"
                 component={PrescriptionData}
               />
-              <Stack.Screen name="DrugsTaken" component={DrugsTaken} /> */}
+              <Stack.Screen name="DrugsTaken" component={DrugsTaken} />
               {/* PRESCRIPTIONS ENDS */}
 
               {/* INSURANCE */}
@@ -193,11 +193,11 @@ export default function App() {
               {/* INSURANCE ENDS */}
 
               {/* BILLS */}
-              {/* <Stack.Screen name="Bills" component={Bills} /> */}
+              <Stack.Screen name="Bills" component={Bills} />
               {/* BILLS ENDS */}
 
               {/* MEDICAL PROFILE */}
-              {/* <Stack.Screen name="MedicalProfile" component={MedicalProfile} /> */}
+              <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
               {/* MEDICAL PROFILE ENDS */}
             </Stack.Navigator>
           </NavigationContainer>
