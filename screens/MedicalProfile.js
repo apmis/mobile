@@ -15,6 +15,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Button from "../components/seed1/Button";
 import UpperNavigation from "../components/seed1/UpperNavigation";
 import { Picker } from "@react-native-picker/picker";
+import AppText from "../components/seed1/AppText";
 
 export default function MedicalProfile() {
   const [openBio, setOpenBio] = useState(true);
@@ -75,7 +76,7 @@ export default function MedicalProfile() {
               />
             </Pressable>
           </View>
-          <Text
+          <AppText
             style={{
               color: "#0E214D",
               fontWeight: "600",
@@ -84,7 +85,7 @@ export default function MedicalProfile() {
             }}
           >
             Banjo Oluwaseun
-          </Text>
+          </AppText>
         </View>
         <View
           style={{ height: 170, backgroundColor: "#E4F3FE", width: "100%" }}
@@ -102,7 +103,9 @@ export default function MedicalProfile() {
             }}
             key={i}
           >
-            <Text style={{ fontWeight: "400", fontSize: 16 }}>{item}</Text>
+            <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+              {item}
+            </AppText>
             <TextInput
               style={{
                 height: 55,
@@ -131,9 +134,11 @@ export default function MedicalProfile() {
             marginTop: 24,
           }}
         >
-          <Text style={{ color: "#03045E", fontSize: 16, fontWeight: "800" }}>
+          <AppText
+            style={{ color: "#03045E", fontSize: 16, fontWeight: "800" }}
+          >
             BIO DATA
-          </Text>
+          </AppText>
           <TouchableOpacity onPress={() => setOpenBio(!openBio)}>
             {openBio ? (
               <Ionicons
@@ -164,7 +169,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>Email</Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Email
+              </AppText>
               <TextInput
                 style={{
                   height: 55,
@@ -186,9 +193,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
                 Phone Number 1
-              </Text>
+              </AppText>
               <TextInput
                 style={{
                   height: 55,
@@ -210,9 +217,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
                 Phone Number 2
-              </Text>
+              </AppText>
               <TextInput
                 style={{
                   height: 55,
@@ -235,7 +242,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>Gender</Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Gender
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -273,7 +282,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>Religion</Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Religion
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -308,9 +319,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
                 Profession
-              </Text>
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -350,9 +361,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
                 Marital Status
-              </Text>
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -401,9 +412,11 @@ export default function MedicalProfile() {
             marginTop: 24,
           }}
         >
-          <Text style={{ color: "#03045E", fontSize: 16, fontWeight: "800" }}>
+          <AppText
+            style={{ color: "#03045E", fontSize: 16, fontWeight: "800" }}
+          >
             ADDRESS
-          </Text>
+          </AppText>
           <TouchableOpacity onPress={() => setOpenAddress(!openAddress)}>
             {openAddress ? (
               <Ionicons
@@ -433,7 +446,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>Country</Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Country
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -472,9 +487,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
                 Residential Address
-              </Text>
+              </AppText>
               <TextInput
                 style={{
                   height: 55,
@@ -496,7 +511,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>State</Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                State
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -519,7 +536,6 @@ export default function MedicalProfile() {
                 >
                   <Picker.Item label="Lagos" value="Lagos" />
                   <Picker.Item label="Others" value="Others" />
-           
                 </Picker>
               </View>
             </View>
@@ -531,7 +547,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>Local Government</Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Local Government
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -554,7 +572,6 @@ export default function MedicalProfile() {
                 >
                   <Picker.Item label="Epe" value="Epe" />
                   <Picker.Item label="Others" value="Others" />
-           
                 </Picker>
               </View>
             </View>
@@ -566,7 +583,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>Local Government</Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Town
+              </AppText>
               <View
                 style={{
                   height: 55,
@@ -589,7 +608,6 @@ export default function MedicalProfile() {
                 >
                   <Picker.Item label="Ikorodu" value="Ikorodu" />
                   <Picker.Item label="Others" value="Others" />
-           
                 </Picker>
               </View>
             </View>
@@ -601,9 +619,45 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>
-              Neigbourhood
-              </Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                City
+              </AppText>
+              <View
+                style={{
+                  height: 55,
+                  borderWidth: 1,
+                  padding: 10,
+                  backgroundColor: "#fafafa",
+                  borderColor: "#D2D2D2",
+                  borderRadius: 4,
+                  marginTop: 8,
+                  display: "flex",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                }}
+              >
+                <Picker
+                // selectedValue={selectedLanguage}
+                // onValueChange={(itemValue, itemIndex) =>
+                //   setSelectedLanguage(itemValue)
+                // }
+                >
+                  <Picker.Item label="Ikorodu" value="Ikorodu" />
+                  <Picker.Item label="Others" value="Others" />
+                </Picker>
+              </View>
+            </View>
+            <View
+              style={{
+                width: windowWidth - 40,
+                marginHorizontal: 20,
+                borderRadius: 4,
+                marginTop: 26,
+              }}
+            >
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Neigbourhood
+              </AppText>
               <TextInput
                 style={{
                   height: 55,
@@ -625,9 +679,9 @@ export default function MedicalProfile() {
                 marginTop: 26,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 16 }}>
-              Street Address
-              </Text>
+              <AppText style={{ fontWeight: "400", fontSize: 16 }}>
+                Street Address
+              </AppText>
               <TextInput
                 style={{
                   height: 55,
@@ -664,7 +718,7 @@ export default function MedicalProfile() {
             />
           </View>
           <View style={{ width: "90%" }}>
-            <Text
+            <AppText
               style={{
                 color: "#6D7589",
                 fontSize: 14,
@@ -674,7 +728,7 @@ export default function MedicalProfile() {
             >
               I give the doctor consent to see my Healh Profile during my
               appointment and/ or treatment
-            </Text>
+            </AppText>
           </View>
         </View>
 

@@ -1,23 +1,23 @@
-import { Text, View, TextInput, ScrollView, Dimensions } from "react-native";
+import {  View, TextInput, ScrollView, Dimensions } from "react-native";
 import React, { useState } from "react";
-import Bar from "../components/seed1/Bar";
-import Button from "../components/seed1/Button";
-import UpperNavigation from "../components/seed1/UpperNavigation";
+
 import { Picker } from "@react-native-picker/picker";
 import { useSelector } from "react-redux";
+
+import Bar from "../../components/seed1/Bar";
+import Button from "../../components/seed1/Button";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import AppText from "../../components/seed1/AppText";
 
 export default function LabTestRequest({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const isLoggedIn = useSelector((state) => state.isLoggedInState);
+  // const isLoggedIn = useSelector((state) => state.isLoggedInState);
 
-  const goBack = () => {
-    navigation.goBack();
-  };
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
-      <UpperNavigation goBack={goBack} back title="Request Lab Test" />
+      <UpperNavigation back title="Request Lab Test" />
 
       <ScrollView style={{ flex: 1, marginTop: 40 }}>
         <View
@@ -28,9 +28,9 @@ export default function LabTestRequest({ navigation }) {
             marginTop: 10,
           }}
         >
-          <Text style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
+          <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
             Select Test Type
-          </Text>
+          </AppText>
 
           <View
             style={{
@@ -67,10 +67,10 @@ export default function LabTestRequest({ navigation }) {
             marginTop: 10,
           }}
         >
-          <Text style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
+          <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
             
             Select Laboratory
-          </Text>
+          </AppText>
 
           <View
             style={{
@@ -108,9 +108,9 @@ export default function LabTestRequest({ navigation }) {
             marginTop: 10,
           }}
         >
-          <Text style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
+          <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
             Price
-          </Text>
+          </AppText>
 
           <TextInput
             style={{

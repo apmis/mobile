@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Text, View, StyleSheet, Image, Dimensions } from "react-native";
 import Button from "./Button";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "./AppText";
 
 export default function BillPayModal({ goHome, show, setBillModal }) {
   const windowWidth = Dimensions.get("window").width;
@@ -11,12 +12,12 @@ export default function BillPayModal({ goHome, show, setBillModal }) {
         <View style={styles.modalView}>
           <View style={{ width: "100%", marginTop: 40 }}>
             <View style={{ marginTop: 20 }}>
-              <Text
+              <AppText
                 style={{ fontWeight: "600", fontSize: 16, color: "#0E214D" }}
               >
                 Description
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   fontWeight: "400",
                   fontSize: 16,
@@ -25,15 +26,15 @@ export default function BillPayModal({ goHome, show, setBillModal }) {
                 }}
               >
                 Lab Order
-              </Text>
+              </AppText>
             </View>
             <View style={{ marginTop: 20 }}>
-              <Text
+              <AppText
                 style={{ fontWeight: "600", fontSize: 16, color: "#0E214D" }}
               >
                 Amount
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   fontWeight: "400",
                   fontSize: 16,
@@ -42,15 +43,15 @@ export default function BillPayModal({ goHome, show, setBillModal }) {
                 }}
               >
                 ₦5,000
-              </Text>
+              </AppText>
             </View>
             <View style={{ marginTop: 20 }}>
-              <Text
+              <AppText
                 style={{ fontWeight: "600", fontSize: 16, color: "#0E214D" }}
               >
                 Status
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   fontWeight: "400",
                   fontSize: 16,
@@ -59,7 +60,7 @@ export default function BillPayModal({ goHome, show, setBillModal }) {
                 }}
               >
                 Unpaid
-              </Text>
+              </AppText>
             </View>
           </View>
           <View

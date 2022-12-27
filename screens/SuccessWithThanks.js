@@ -6,7 +6,7 @@ const SuccessWithThanks = ({ route, navigation }) => {
   const { screen, successMessage, btnText } = route.params;
   return (
     <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }} className="">
-      <View className="relative ">
+      <View className="relative">
         <Header title="Thank You!" />
       </View>
       <View className="flex h-full mt-[40%] items-center">

@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import AppText from "./AppText";
 
 export default function Button({
   title,
@@ -35,7 +30,7 @@ export default function Button({
         },
       ]}
     >
-      <Text style={txtStyle}>{title}</Text>
+      <AppText style={txtStyle}>{title}</AppText>
     </TouchableOpacity>
   );
 }
@@ -45,12 +40,5 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: "center",
     justifyContent: "center",
-
-  },
-  text: {
-    color: "teal",
-    fontSize: 12,
-    fontWeight: "500",
-    textTransform: "uppercase",
   },
 });

@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import UpperNavigation from "../components/seed1/UpperNavigation";
-import Bar from "../components/seed1/Bar";
-import AppointmentFilter from "../components/seed1/AppointmentFilter";
-import AppointmentPreview from "../components/seed1/AppointmentPreview";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import Bar from "../../components/seed1/Bar";
+import AppointmentFilter from "../../components/seed1/AppointmentFilter";
+import AppointmentPreview from "../../components/seed1/AppointmentPreview";
+import AppText from "../../components/seed1/AppText";
 
 export default function AppointmentList({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
@@ -26,7 +27,6 @@ export default function AppointmentList({ navigation }) {
     <View style={{ backgroundColor: "#f3f3f3", flex: 1, position: "relative", paddingBottom: 30 }}>
       <Bar hideBar={false} />
       <UpperNavigation
-        goBack={() => navigation.goBack()}
         back
         title="Appointments"
         rightIcon
@@ -44,27 +44,27 @@ export default function AppointmentList({ navigation }) {
       >
         {["Today", "Tuesday June 16"].map((item, i) => (
           <View key={i} style={{ marginTop: 30 }}>
-            <Text style={{ fontWeight: "600", fontSize: 16, color: "#0E214D" }}>
+            <AppText style={{ fontWeight: "600", fontSize: 16, color: "#0E214D" }}>
               {item}
-            </Text>
+            </AppText>
 
             {[
               {
                 name: "Ante-Natal",
-                icon: require("../assets/images/circle1.png"),
+                icon: require("../../assets/images/circle1.png"),
               },
               {
                 name: "X-Ray Visit",
-                icon: require("../assets/images/circle2.png"),
+                icon: require("../../assets/images/circle2.png"),
               },
               {
                 name: "Monthly Checkup",
-                icon: require("../assets/images/circle3.png"),
+                icon: require("../../assets/images/circle3.png"),
               },
             ].map((item, index) => (
-              <TouchableOpacity onPress={() => setPreviewModal(true)}>
+              <TouchableOpacity key={index} onPress={() => setPreviewModal(true)}>
                 <View key={index} style={{ marginTop: 15 }}>
-                  <Text
+                  <AppText
                     style={{
                       fontWeight: "600",
                       fontSize: 14,
@@ -72,7 +72,7 @@ export default function AppointmentList({ navigation }) {
                     }}
                   >
                     8:40 a.m
-                  </Text>
+                  </AppText>
                   <View
                     style={{
                       display: "flex",
@@ -102,7 +102,7 @@ export default function AppointmentList({ navigation }) {
                         />
                       </View>
                       <View>
-                        <Text
+                        <AppText
                           style={{
                             fontWeight: "700",
                             fontSize: 16,
@@ -110,8 +110,8 @@ export default function AppointmentList({ navigation }) {
                           }}
                         >
                           {item.name}
-                        </Text>
-                        <Text
+                        </AppText>
+                        <AppText
                           style={{
                             fontWeight: "600",
                             fontSize: 14,
@@ -119,7 +119,7 @@ export default function AppointmentList({ navigation }) {
                           }}
                         >
                           Pregnancy Visit
-                        </Text>
+                        </AppText>
                       </View>
                     </View>
                   </View>

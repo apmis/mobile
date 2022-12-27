@@ -4,19 +4,16 @@ import Bar from "../components/seed1/Bar";
 import Button from "../components/seed1/Button";
 import UpperNavigation from "../components/seed1/UpperNavigation";
 import { Picker } from "@react-native-picker/picker";
+import AppText from "../components/seed1/AppText";
 
 export default function ReferPerson({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
   const [selectedLanguage, setSelectedLanguage] = useState();
 
-  const goBack = () => {
-    navigation.goBack();
-  };
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
       <UpperNavigation
-        goBack={goBack}
         back
         title="Refer Someone to A Hospital"
       />
@@ -30,9 +27,9 @@ export default function ReferPerson({ navigation }) {
             marginTop: 10,
           }}
         >
-          <Text style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
+          <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
             Enter Email/Phone
-          </Text>
+          </AppText>
 
           <TextInput
             style={{
@@ -56,9 +53,9 @@ export default function ReferPerson({ navigation }) {
             marginTop: 10,
           }}
         >
-          <Text style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
+          <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
             Select Hospital
-          </Text>
+          </AppText>
 
           <View
             style={{

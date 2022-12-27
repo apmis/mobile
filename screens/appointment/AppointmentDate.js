@@ -7,10 +7,11 @@ import {
   TextInput,
 } from "react-native";
 import React from "react";
-import Button from "../components/seed1/Button";
-import UpperNavigation from "../components/seed1/UpperNavigation";
-import Bar from "../components/seed1/Bar";
+import Button from "../../components/seed1/Button";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "../../components/seed1/AppText";
 
 export default function AppointmentDate({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
@@ -24,7 +25,6 @@ export default function AppointmentDate({ navigation }) {
     >
       <Bar hideBar={false} />
       <UpperNavigation
-        goBack={() => navigation.goBack()}
         back
         title="Book Appointment"
       />
@@ -39,7 +39,7 @@ export default function AppointmentDate({ navigation }) {
           marginHorizontal: 20,
         }}
       >
-        <Text
+        <AppText
           style={{
             color: "#222B45",
             marginRight: 21,
@@ -48,7 +48,7 @@ export default function AppointmentDate({ navigation }) {
           }}
         >
           July, 2020
-        </Text>
+        </AppText>
         <Ionicons
           name="chevron-down"
           style={{
@@ -82,10 +82,10 @@ export default function AppointmentDate({ navigation }) {
               marginRight: 10,
             }}
           >
-            <Text style={{ fontWeight: "400", fontSize: 24, color: "#6D7589" }}>
+            <AppText style={{ fontWeight: "400", fontSize: 24, color: "#6D7589" }}>
               13
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontWeight: "400",
                 fontSize: 12,
@@ -94,7 +94,7 @@ export default function AppointmentDate({ navigation }) {
               }}
             >
               MON
-            </Text>
+            </AppText>
           </View>
           <View
             style={{
@@ -110,10 +110,10 @@ export default function AppointmentDate({ navigation }) {
               marginRight: 10,
             }}
           >
-            <Text style={{ fontWeight: "400", fontSize: 24, color: "#fff" }}>
+            <AppText style={{ fontWeight: "400", fontSize: 24, color: "#fff" }}>
               14
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 fontWeight: "400",
                 fontSize: 12,
@@ -122,7 +122,7 @@ export default function AppointmentDate({ navigation }) {
               }}
             >
               TUE
-            </Text>
+            </AppText>
           </View>
           {[15, 16, 17, 18].map((item, i) => (
             <View
@@ -141,12 +141,12 @@ export default function AppointmentDate({ navigation }) {
                 marginRight: 10,
               }}
             >
-              <Text
+              <AppText
                 style={{ fontWeight: "400", fontSize: 24, color: "#6D7589" }}
               >
                 {item}
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   fontWeight: "400",
                   fontSize: 12,
@@ -155,7 +155,7 @@ export default function AppointmentDate({ navigation }) {
                 }}
               >
                 MON
-              </Text>
+              </AppText>
             </View>
           ))}
         </ScrollView>
@@ -169,7 +169,7 @@ export default function AppointmentDate({ navigation }) {
             marginTop: 32,
           }}
         >
-          <Text
+          <AppText
             style={{
               fontWeight: "600",
               fontSize: 16,
@@ -178,7 +178,7 @@ export default function AppointmentDate({ navigation }) {
             }}
           >
             Available Time
-          </Text>
+          </AppText>
 
           <View
             style={{
@@ -188,7 +188,7 @@ export default function AppointmentDate({ navigation }) {
               justifyContent: "space-between",
             }}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 5, 5, 5, 5].map((item, i) => (
+            {[1, 2, 3, 4, 5, 6, 7, 8, 5, 5, 5].map((item, i) => (
               <View
                 key={i}
                 style={{
@@ -203,11 +203,11 @@ export default function AppointmentDate({ navigation }) {
                   // marginRight: 12
                 }}
               >
-                <Text
+                <AppText
                   style={{ fontWeight: "400", fontSize: 14, color: "#6D7589" }}
                 >
                   09:00 AM
-                </Text>
+                </AppText>
               </View>
             ))}
 
@@ -223,9 +223,9 @@ export default function AppointmentDate({ navigation }) {
                 marginVertical: 5,
               }}
             >
-              <Text style={{ fontWeight: "400", fontSize: 14, color: "#fff" }}>
+              <AppText style={{ fontWeight: "400", fontSize: 14, color: "#fff" }}>
                 09:00 AM
-              </Text>
+              </AppText>
             </View>
           </View>
         </View>
@@ -235,7 +235,7 @@ export default function AppointmentDate({ navigation }) {
             marginTop: 20,
           }}
         >
-          <Text
+          <AppText
             style={{
               fontWeight: "400",
               fontSize: 16,
@@ -244,7 +244,7 @@ export default function AppointmentDate({ navigation }) {
             }}
           >
             Syptoms
-          </Text>
+          </AppText>
           <TextInput
             style={{
               height: 200,
@@ -271,7 +271,7 @@ export default function AppointmentDate({ navigation }) {
           }}
         >
           <Button
-            onPressProp={() => navigation.navigate("AppointmentPayment")}
+            onPressProp={() => navigation.navigate("AppointmentPay")}
             bgColor="#0364FF"
             btnRadius={4}
             btnH={44}

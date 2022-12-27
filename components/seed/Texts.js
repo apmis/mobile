@@ -13,6 +13,7 @@ export const BoldText = ({ value = "Text" }) => {
   );
 };
 
+
 export const LightText = ({ value = "Text" }) => {
   return (
     <Text style={{ fontFamily: "ManropeRegular", color: COLORS.lightText }}>

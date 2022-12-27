@@ -10,10 +10,11 @@ import React, { useState } from "react";
 import Bar from "../components/seed1/Bar";
 import UpperNavigation from "../components/seed1/UpperNavigation";
 import BillPayModal from "../components/seed1/BillPayModal";
+import AppText from "../components/seed1/AppText";
 
 export default function Bills() {
   const windowWidth = Dimensions.get("window").width;
-  const [billModal, setBillModal] = useState(true);
+  const [billModal, setBillModal] = useState(false);
   return (
     <View style={{ flex: 1 }}>
       <Bar hideBar={false} />
@@ -52,7 +53,7 @@ export default function Bills() {
                       source={require("../assets/images/pending_arrow.png")}
                     />
                     <View style={{ marginLeft: 16 }}>
-                      <Text
+                      <AppText
                         style={{
                           fontWeight: "400",
                           fontSize: 16,
@@ -60,8 +61,8 @@ export default function Bills() {
                         }}
                       >
                         Drugs
-                      </Text>
-                      <Text
+                      </AppText>
+                      <AppText
                         style={{
                           fontWeight: "400",
                           fontSize: 12,
@@ -69,10 +70,10 @@ export default function Bills() {
                         }}
                       >
                         Pending, 11:25P.M
-                      </Text>
+                      </AppText>
                     </View>
                   </View>
-                  <Text
+                  <AppText
                     style={{
                       fontWeight: "600",
                       fontSize: 16,
@@ -80,7 +81,7 @@ export default function Bills() {
                     }}
                   >
                     ₦186,000.00
-                  </Text>
+                  </AppText>
                 </View>
               </Pressable>
               <View style={{ borderWidth: 1, borderColor: "#ccc" }}></View>
@@ -111,7 +112,7 @@ export default function Bills() {
                     source={require("../assets/images/completed_arrow.png")}
                   />
                   <View style={{ marginLeft: 16 }}>
-                    <Text
+                    <AppText
                       style={{
                         fontWeight: "400",
                         fontSize: 16,
@@ -119,8 +120,8 @@ export default function Bills() {
                       }}
                     >
                       Drugs
-                    </Text>
-                    <Text
+                    </AppText>
+                    <AppText
                       style={{
                         fontWeight: "400",
                         fontSize: 12,
@@ -128,14 +129,14 @@ export default function Bills() {
                       }}
                     >
                       Completed, 11:25P.M
-                    </Text>
+                    </AppText>
                   </View>
                 </View>
-                <Text
+                <AppText
                   style={{ fontWeight: "600", fontSize: 16, color: "#001B6A" }}
                 >
                   ₦186,000.00
-                </Text>
+                </AppText>
               </View>
               <View style={{ borderWidth: 1, borderColor: "#ccc" }}></View>
             </View>
