@@ -2,12 +2,12 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { COLORS } from "./constants";
 
-export const Btn = ({ value = "Button", onPressHandler }) => {
+export const Btn = ({ value = "Button", onPressHandler, btnWidth = "90%" }) => {
   return (
     <TouchableOpacity
       onPress={onPressHandler}
-      style={{ backgroundColor: COLORS.primaryBlue }}
-      className={`py-2 w-[90%] rounded-[4px] mx-auto flex-row justify-center items-center`}
+      style={{ backgroundColor: COLORS.primaryBlue, width: btnWidth }}
+      className={`py-2 rounded-[4px] mx-auto flex-row justify-center items-center`}
     >
       <Text
         style={{ fontFamily: "ManropeBold" }}
