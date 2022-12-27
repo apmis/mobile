@@ -19,6 +19,12 @@ import profilePic from "../../../assets/profile-pic.png";
 import walletPattern from "../../../assets/wallet-pattern.png";
 import changeProfileImage from "../../../assets/change-profile-image.png";
 import appointmentCardGradient from "../../../assets/appointmentcard-gradient.png";
+import videoGradient from "../../../assets/video-gradient.png";
+import blog from "../../../assets/blog.png";
+
+import profile2 from "../../../assets/profile2.png";
+import profile3 from "../../../assets/profile3.png";
+import profile4 from "../../../assets/profile4.png";
 export default {
   apmisFullLogo,
   apple,
@@ -40,5 +46,10 @@ export default {
   buy,
   read,
   record,
+  videoGradient,
   appointmentCardGradient,
+  profile2,
+  profile3,
+  profile4,
+  blog,
 };

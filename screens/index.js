@@ -4,6 +4,8 @@ import { SignUp, SignUpScreen2 } from "./signup";
 import Success from "./Success";
 import SuccessWithThanks from "./SuccessWithThanks";
 import { Wallet, FundWallet } from "./wallet";
+import { Home, Conversation, VideoCall } from "./chat";
+import { BlogHome, BlogDetails } from "./blog";
 import {
   ResetPassword,
   ResetPasswordScreen2,
@@ -31,4 +33,9 @@ export {
   PatientProfile,
   Wallet,
   FundWallet,
+  Home,
+  Conversation,
+  VideoCall,
+  BlogDetails,
+  BlogHome,
 };

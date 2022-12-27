@@ -13,9 +13,29 @@ export const BoldText = ({ value = "Text" }) => {
   );
 };
 
-export const LightText = ({ value = "Text" }) => {
+export const LightText = ({ value = "Text", textColor = COLORS.lightText }) => {
   return (
-    <Text style={{ fontFamily: "ManropeRegular", color: COLORS.lightText }}>
+    <Text style={{ fontFamily: "ManropeRegular", color: textColor }}>
+      {value}
+    </Text>
+  );
+};
+export const LightTextBase = ({ value = "Text" }) => {
+  return (
+    <Text
+      className="text-base"
+      style={{ fontFamily: "ManropeRegular", color: COLORS.lightText }}
+    >
+      {value}
+    </Text>
+  );
+};
+export const LightTextWhite = ({ value = "Text" }) => {
+  return (
+    <Text
+      className="text-base"
+      style={{ fontFamily: "ManropeRegular", color: "white" }}
+    >
       {value}
     </Text>
   );

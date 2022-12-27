@@ -10,7 +10,7 @@ import {
   Platform,
   Keyboard,
 } from "react-native";
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -18,10 +18,12 @@ import {
 import Search from "react-native-vector-icons/EvilIcons";
 import MateriaCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import IonIcon from "react-native-vector-icons/Ionicons";
 import Foundation from "react-native-vector-icons/Foundation";
 import { assets, COLORS } from "../components/seed/constants";
 import { AppointmentCard } from "../components/seed";
 const Dashboard = ({ navigation }) => {
+  const [isClose, setIsClose] = useState(false);
   // ref
   const bottomSheetModalRef = useRef();
 
@@ -32,23 +34,28 @@ const Dashboard = ({ navigation }) => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
+  const handleDismissModal = useCallback(() => {
+    bottomSheetModalRef.current?.dismiss();
   }, []);
+
+  const handleSheetChanges = useCallback((index) => {}, []);
   const handleModal = () => {
     Keyboard.dismiss();
     handlePresentModalPress();
   };
   return (
     <BottomSheetModalProvider>
-      <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }}>
+      {/* This style was initially added into SafeAreaView 👉  style={{ paddingTop: StatusBar.currentHeight }}   */}
+      <SafeAreaView>
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
-
+        <StatusBar backgroundColor={"white"} barStyle="dark-content" />
         <View
           style={{ backgroundColor: COLORS.primaryBlue }}
           className="w-full py-3 px-[29]"
         >
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("PatientProfile")}
+          >
             <Text
               style={{ fontFamily: "ManropeRegular" }}
               className="text-white text-base"
@@ -176,37 +183,49 @@ const Dashboard = ({ navigation }) => {
             <AppointmentCard />
           </View>
         </ScrollView>
-        <View className="bg-gray">
+        <View className="bg-gray relative">
           <BottomSheetModal
             ref={bottomSheetModalRef}
             index={1}
             snapPoints={snapPoints}
+            enablePanDownToClose={true}
             onChange={handleSheetChanges}
           >
+            <TouchableOpacity
+              onPress={handleDismissModal}
+              className="absolute right-8 top-1"
+            >
+              <IonIcon name="close-outline" size={30} />
+            </TouchableOpacity>
+
             <View className="flex-1 py-[10%] space-y-8 px-[25]">
-              <View className="flex-row items-center space-x-2">
-                <FontAwesome5 name="hospital" size={20} />
+              <View className="flex-row items-center space-x-3">
+                <FontAwesome5 color="#0E214D" name="hospital" size={20} />
 
                 <Text
-                  className="text-center  text-base"
+                  className="text-center text-[#0E214D] text-base"
                   style={{ fontFamily: "ManropeSemibold" }}
                 >
                   Healthcare Facility
                 </Text>
               </View>
-              <View className="flex-row items-center space-x-2">
-                <Foundation name="first-aid" size={24} />
+              <View className="flex-row items-center space-x-3">
+                <Foundation name="first-aid" color="#0E214D" size={24} />
                 <Text
-                  className="text-center text-base"
+                  className="text-center text-base text-[#0E214D]"
                   style={{ fontFamily: "ManropeSemibold" }}
                 >
                   Healthcare Professionals
                 </Text>
               </View>
-              <View className="flex-row items-center space-x-2">
-                <MateriaCommunityIcon name="ambulance" size={24} />
+              <View className="flex-row items-center space-x-3">
+                <MateriaCommunityIcon
+                  color="#0E214D"
+                  name="ambulance"
+                  size={24}
+                />
                 <Text
-                  className="text-center text-base"
+                  className="text-center text-base text-[#0E214D]"
                   style={{ fontFamily: "ManropeSemibold" }}
                 >
                   Ambulance

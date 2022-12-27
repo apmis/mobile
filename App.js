@@ -8,8 +8,12 @@ import { loadCldr } from "react-native-globalize";
 import BottomTab from "./components/seed/BottomTab";
 loadCldr(require("react-native-globalize/locale-data/en-NG"));
 import {
+  BlogDetails,
+  BlogHome,
+  Conversation,
   Dashboard,
   FundWallet,
+  Home,
   Login,
   Notifications,
   NotificationSettings,
@@ -24,6 +28,7 @@ import {
   SignUpScreen2,
   Success,
   SuccessWithThanks,
+  VideoCall,
   Wallet,
 } from "./screens";
 
@@ -86,7 +91,7 @@ export default function App() {
           <NavigationContainer theme={theme}>
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
-              initialRouteName="Dashboard"
+              initialRouteName="Onboard"
             >
               {/* Add screen stack here 👇*/}
               {/* =================================================== */}
@@ -110,6 +115,11 @@ export default function App() {
               <Stack.Screen name="FundWallet" component={FundWallet} />
               <Stack.Screen name="Dashboard" component={BottomTab} />
               <Stack.Screen name="Notifications" component={Notifications} />
+              <Stack.Screen name="ChatHome" component={Home} />
+              <Stack.Screen name="Conversation" component={Conversation} />
+              <Stack.Screen name="VideoCall" component={VideoCall} />
+              <Stack.Screen name="BlogDetails" component={BlogDetails} />
+              <Stack.Screen name="BlogHome" component={BlogHome} />
 
               <Stack.Screen
                 name="NotificationSettings"
@@ -126,7 +136,6 @@ export default function App() {
               {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
 
               {/* ==============================TOLA========================= */}
-              <Stack.Screen name="Onboard" component={Onboard} />
               <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
               <Stack.Screen name="ProductDetails" component={ProductDetails} />
               <Stack.Screen name="Products" component={Products} />
@@ -163,10 +172,6 @@ export default function App() {
               <Stack.Screen
                 name="BookAppointment"
                 component={BookAppointment}
-              />
-              <Stack.Screen
-                name="AppointmentDate"
-                component={AppointmentDate}
               />
               <Stack.Screen name="Bills" component={Bills} />
               <Stack.Screen name="MedicalProfile" component={MedicalProfile} />

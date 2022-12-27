@@ -1,11 +1,18 @@
-import { Input, InputWithLabel } from "./Inputs";
+import { Input, InputWithLabel, ChatInput } from "./Inputs";
 import { Btn, Tab, TabGeneral } from "./Buttons";
 import OtpInput from "./OtpInput";
 import OAuth from "./OAuth";
 import Backbtn from "./Backbtn";
 import Header from "./Header";
 import AppointmentCard from "./AppointmentCard";
-import { BoldText, LightText, LightBlueText, Label } from "./Texts";
+import {
+  BoldText,
+  LightText,
+  LightTextWhite,
+  LightBlueText,
+  Label,
+  LightTextBase,
+} from "./Texts";
 export {
   Input,
   Btn,
@@ -15,10 +22,13 @@ export {
   OAuth,
   BoldText,
   LightText,
+  LightTextWhite,
   LightBlueText,
   Label,
   InputWithLabel,
   Backbtn,
   AppointmentCard,
   Header,
+  LightTextBase,
+  ChatInput,
 };

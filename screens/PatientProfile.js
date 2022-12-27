@@ -19,7 +19,7 @@ const PatientProfile = ({ navigation }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
-    <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }} className="">
+    <SafeAreaView style={{}} className="">
       <View className="relative pb-2 ">
         <Header title="My Profile" />
       </View>
