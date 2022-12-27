@@ -1,7 +1,8 @@
 import { View, Text, Dimensions, Image } from "react-native";
 import React from "react";
-import Bar from "../components/seed1/Bar";
-import Button from "../components/seed1/Button";
+import Bar from "../../components/seed1/Bar";
+import Button from "../../components/seed1/Button";
+import AppText from "../../components/seed1/AppText";
 
 export default function LabRequestMade({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
@@ -29,9 +30,9 @@ export default function LabRequestMade({ navigation }) {
               padding: 0,
             }}
           >
-            <Image source={require("../assets/images/checked.png")} />
+            <Image source={require("../../assets/images/checked.png")} />
           </View>
-          <Text
+          <AppText
             style={{
               color: "#6D7589",
               fontSize: 14,
@@ -43,7 +44,7 @@ export default function LabRequestMade({ navigation }) {
             }}
           >
             Lab Test Request Successful
-          </Text>
+          </AppText>
           <View
             style={{
               width: windowWidth - 40,

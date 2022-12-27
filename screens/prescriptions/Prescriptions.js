@@ -1,26 +1,17 @@
-import {
-  View,
-  Text,
-  Pressable,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Dimensions, Image, ScrollView, Pressable } from "react-native";
 import React from "react";
-import Bar from "../components/seed1/Bar";
+import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import UpperNavigation from "../components/seed1/UpperNavigation";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import AppText from "../../components/seed1/AppText";
 
-export default function LabResult({ navigation }) {
-  const goBack = () => {
-    navigation.goBack();
-  };
+export default function Prescriptions({navigation}) {
+  const windowWidth = Dimensions.get("window").width;
   return (
-    <View style={{ backgroundColor: "#F3F3F3", flex: 1, position: "relative" }}>
+    <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
-      <UpperNavigation goBack={goBack} back title="Lab Test Results" />
-
-      <Text
+      <UpperNavigation title="Prescriptions" back />
+      <AppText
         style={{
           color: "#0E214D",
           fontSize: 16,
@@ -31,16 +22,17 @@ export default function LabResult({ navigation }) {
         }}
       >
         Tuesday June 16
-      </Text>
+      </AppText>
       <ScrollView style={{ flex: 1 }}>
-        {[1, 2, 3].map((item, i) => (
-          <View
+        {[1, 2, 3, 4, 5].map((item, i) => (
+          <Pressable
             key={i}
             style={{
               backgroundColor: "#fff",
               borderRadius: 12,
               height: 159,
-              marginHorizontal: 34,
+              width: windowWidth - 40,
+              marginHorizontal: 20,
               paddingHorizontal: 17,
               paddingTop: 23,
               display: "flex",
@@ -48,6 +40,7 @@ export default function LabResult({ navigation }) {
               justifyContent: "flex-start",
               marginBottom: 27,
             }}
+            onPress={()=>navigation.navigate("PrescriptionData")}
           >
             <View
               style={{
@@ -58,28 +51,28 @@ export default function LabResult({ navigation }) {
               }}
             >
               <View>
-                <Text
+                <AppText
                   style={{
                     color: "#0E214D",
                     fontSize: 16,
                     fontWeight: "700",
                   }}
                 >
-                  Random Blood Glucose
-                </Text>
-                <Text
+                  Tabs Paracetamol 1g TDS x 3/7
+                </AppText>
+                <AppText
                   style={{
                     color: "#6D7589",
                     fontSize: 16,
                     fontWeight: "600",
                   }}
                 >
-                  ₦800
-                </Text>
+                  Capsule After Breakfast
+                </AppText>
               </View>
               <Image
                 style={{ height: 25, width: 25 }}
-                source={require("../assets/images/lab.png")}
+                source={require("../../assets/images/jar.png")}
               />
             </View>
             <View
@@ -89,7 +82,7 @@ export default function LabResult({ navigation }) {
                 marginTop: 21,
               }}
             ></View>
-            <Text
+            <AppText
               style={{
                 color: "#FCB222",
                 fontSize: 14,
@@ -99,23 +92,10 @@ export default function LabResult({ navigation }) {
               }}
             >
               Pending
-            </Text>
-          </View>
+            </AppText>
+          </Pressable>
         ))}
       </ScrollView>
-
-      <TouchableOpacity onPress={()=>navigation.navigate("LabTestRequest")}>
-        <Ionicons
-          name="add-circle"
-          style={{
-            fontSize: 72,
-            position: "absolute",
-            bottom: 30,
-            right: 20,
-            color: "#0364ff",
-          }}
-        />
-      </TouchableOpacity>
     </View>
   );
 }

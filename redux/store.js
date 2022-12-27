@@ -1,9 +1,9 @@
-import { isLoggedInState } from "./reducers";
+import { isLoggedInState,cartState,reRender } from "./reducers";
 import { combineReducers, createStore  } from "redux";
 
 
 const myReducers = combineReducers({
-    isLoggedInState,
+    isLoggedInState,cartState,reRender
 });
 
 

@@ -1,23 +1,30 @@
-import { View, Text, Pressable, ScrollView, Image } from "react-native";
+import { View, Text, Dimensions, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Button from "../components/seed1/Button";
-import UpperNavigation from "../components/seed1/UpperNavigation";
-import Bar from "../components/seed1/Bar";
+import Button from "../../components/seed1/Button";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import Bar from "../../components/seed1/Bar";
+import AppText from "../../components/seed1/AppText";
 
 export default function ProviderDetails() {
-
-  const [planBought, setPlanBought] = useState(false)
+  const [planBought, setPlanBought] = useState(false);
+  const windowWidth = Dimensions.get("window").width;
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
       {!planBought ? (
         <>
           <UpperNavigation color="#03045E" back title="Reliance Health Care" />
-          <View style={{ marginHorizontal: 20, marginTop: 30 }}>
-            <Text
+          <View
+            style={{
+              width: windowWidth - 40,
+              marginHorizontal: 20,
+              marginTop: 30,
+            }}
+          >
+            <AppText
               style={{
-                textAlign: "center",
+                textAlign: "justify",
                 lineHeight: 22,
                 fontSize: 16,
                 fontWeight: "400",
@@ -26,9 +33,12 @@ export default function ProviderDetails() {
               Reliance Health care guarantees life insurance for everyone and
               has differnt plans that benefits you. You can choose to subscribe
               to any of the plans monthly, annually or quarterly.
-            </Text>
+            </AppText>
           </View>
-          <ScrollView horizontal style={{ flex: 1, marginHorizontal: 10 }}>
+          <ScrollView
+            horizontal
+            style={{ flex: 1, width: windowWidth - 40, marginHorizontal: 20 }}
+          >
             <View
               style={{
                 display: "flex",
@@ -36,7 +46,6 @@ export default function ProviderDetails() {
                 height: 484,
                 borderRadius: 5,
                 backgroundColor: "#202244",
-                marginHorizontal: 20,
                 marginTop: 30,
                 paddingTop: 16,
                 paddingBottom: 26,
@@ -44,10 +53,12 @@ export default function ProviderDetails() {
                 position: "relative",
               }}
             >
-              <Text style={{ color: "#fff", fontSize: 20, fontWeight: "800" }}>
+              <AppText
+                style={{ color: "#fff", fontSize: 20, fontWeight: "800" }}
+              >
                 GOLD PLAN
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   color: "#fff",
                   fontSize: 20,
@@ -56,13 +67,13 @@ export default function ProviderDetails() {
                 }}
               >
                 ₦40.50
-                <Text
+                <AppText
                   style={{ color: "#fff", fontSize: 12, fontWeight: "400" }}
                 >
                   {" "}
                   Monthly
-                </Text>
-              </Text>
+                </AppText>
+              </AppText>
 
               {[1, 2, 3, 4].map((item, i) => (
                 <View
@@ -84,7 +95,7 @@ export default function ProviderDetails() {
                       marginRight: 5,
                     }}
                   />
-                  <Text
+                  <AppText
                     style={{
                       color: "#fff",
                       fontSize: 14,
@@ -95,7 +106,7 @@ export default function ProviderDetails() {
                     }}
                   >
                     Combined medical cover of 1.2 million per year
-                  </Text>
+                  </AppText>
                 </View>
               ))}
 
@@ -109,11 +120,11 @@ export default function ProviderDetails() {
                   left: 20,
                 }}
               >
-                <Text
+                <AppText
                   style={{ fontSize: 16, fontWeight: "700", color: "#fff" }}
                 >
                   View Hospital
-                </Text>
+                </AppText>
                 <Ionicons
                   name="chevron-down"
                   style={{
@@ -132,7 +143,7 @@ export default function ProviderDetails() {
                 }}
               >
                 <Button
-                onPressProp={()=>setPlanBought(true)}
+                  onPressProp={() => setPlanBought(true)}
                   title="Buy Plan"
                   bgColor="#fff"
                   btnW={270}
@@ -159,10 +170,12 @@ export default function ProviderDetails() {
                 position: "relative",
               }}
             >
-              <Text style={{ color: "#fff", fontSize: 20, fontWeight: "800" }}>
+              <AppText
+                style={{ color: "#fff", fontSize: 20, fontWeight: "800" }}
+              >
                 SILVER PLAN
-              </Text>
-              <Text
+              </AppText>
+              <AppText
                 style={{
                   color: "#fff",
                   fontSize: 20,
@@ -171,13 +184,13 @@ export default function ProviderDetails() {
                 }}
               >
                 ₦40.50
-                <Text
+                <AppText
                   style={{ color: "#fff", fontSize: 12, fontWeight: "400" }}
                 >
                   {" "}
                   Monthly
-                </Text>
-              </Text>
+                </AppText>
+              </AppText>
 
               {[1, 2, 3, 4].map((item, i) => (
                 <View
@@ -199,7 +212,7 @@ export default function ProviderDetails() {
                       marginRight: 5,
                     }}
                   />
-                  <Text
+                  <AppText
                     style={{
                       color: "#fff",
                       fontSize: 14,
@@ -210,7 +223,7 @@ export default function ProviderDetails() {
                     }}
                   >
                     Combined medical cover of 1.2 million per year
-                  </Text>
+                  </AppText>
                 </View>
               ))}
 
@@ -224,11 +237,11 @@ export default function ProviderDetails() {
                   left: 20,
                 }}
               >
-                <Text
+                <AppText
                   style={{ fontSize: 16, fontWeight: "700", color: "#fff" }}
                 >
                   View Hospital
-                </Text>
+                </AppText>
                 <Ionicons
                   name="chevron-down"
                   style={{
@@ -247,7 +260,7 @@ export default function ProviderDetails() {
                 }}
               >
                 <Button
-                onPressProp={()=>setPlanBought(true)}
+                  onPressProp={() => setPlanBought(true)}
                   title="Buy Plan"
                   bgColor="#fff"
                   btnW={270}
@@ -265,34 +278,49 @@ export default function ProviderDetails() {
         <>
           <UpperNavigation color="#03045E" back title="Thank You!" />
 
-          <View style={{ flex: 1, alignItems: "center", display: "flex", justifyContent: "center" }}>
-            <View >
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <View>
               <View
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  // marginTop: 100,
-                  marginHorizontal: 32,
+
+                  width: windowWidth - 40,
+                  marginHorizontal: 20,
                   marginBottom: 52,
                   padding: 0,
                 }}
               >
-                <Image source={require("../assets/images/checked.png")} />
+                <Image source={require("../../assets/images/checked.png")} />
               </View>
-              <Text
+              <AppText
                 style={{
                   color: "#6D7589",
                   fontSize: 16,
                   fontWeight: "400",
                   textAlign: "center",
-                  marginHorizontal: 32,
+                  width: windowWidth - 40,
+                  marginHorizontal: 20,
                 }}
               >
                 Your Gold plan subscription has been activated! You will recieve
                 an email reciept shortly.
-              </Text>
-              <View style={{ marginHorizontal: 32, marginTop: 120 }}>
+              </AppText>
+              <View
+                style={{
+                  width: windowWidth - 40,
+                  marginHorizontal: 20,
+                  marginTop: 120,
+                }}
+              >
                 <Button
                   bgColor={"#0364FF"}
                   btnRadius={4}

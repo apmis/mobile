@@ -7,11 +7,12 @@ import {
   TextInput,
 } from "react-native";
 import React, { useState } from "react";
-import Button from "../components/seed1/Button";
-import UpperNavigation from "../components/seed1/UpperNavigation";
-import Bar from "../components/seed1/Bar";
+import Button from "../../components/seed1/Button";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import AppointmentBooked from "../components/seed1/AppointmentBooked";
+import AppointmentBooked from "../../components/seed1/AppointmentBooked";
+import AppText from "../../components/seed1/AppText";
 
 export default function AppointmentPayment({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
@@ -26,7 +27,6 @@ export default function AppointmentPayment({ navigation }) {
     >
       <Bar hideBar={false} />
       <UpperNavigation
-        goBack={() => navigation.goBack()}
         back
         title="Make Payment"
       />
@@ -42,8 +42,8 @@ export default function AppointmentPayment({ navigation }) {
           marginTop: 105,
         }}
       >
-        <Image source={require("../assets/images/DocPic.png")} />
-        <Text
+        <Image source={require("../../assets/images/DocPic.png")} />
+        <AppText
           style={{
             fontWeight: "600",
             fontSize: 16,
@@ -53,7 +53,7 @@ export default function AppointmentPayment({ navigation }) {
           }}
         >
           You are about to pay ₦4,000 for consultation with Dr. Mildred Mathasga
-        </Text>
+        </AppText>
       </View>
 
       <View

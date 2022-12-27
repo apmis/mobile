@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   Text,
@@ -7,20 +7,30 @@ import {
   Image,
   Dimensions,
   ScrollView,
+  TouchableOpacity,
+  TextInput,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "./AppText";
+import Button from "./Button";
 
 export default function ProductReview({ goHome, show, setProdReview }) {
   const windowWidth = Dimensions.get("window").width;
+  const [writeReview, setWriteReview] = useState(false);
   return (
-    <Modal animationType="slide" transparent={true} visible={show}>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={show}
+      style={{ position: "relative" }}
+    >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <ScrollView
             style={{ width: windowWidth - 60, marginHorizontal: 30 }}
             showsVerticalScrollIndicator={false}
           >
-            {[1, 2, 3, 4].map((item, i) => (
+            {[1, 2, 3, 4, 1, 2, 3, 4].map((item, i) => (
               <View
                 key={i}
                 style={{
@@ -61,7 +71,7 @@ export default function ProductReview({ goHome, show, setProdReview }) {
                       />
                     </View>
                     <View style={{ marginLeft: 15 }}>
-                      <Text>Natasha</Text>
+                      <AppText>Natasha</AppText>
                       <View style={{ display: "flex", flexDirection: "row" }}>
                         {[1, 2, 3, 4, 5].map((item, i) => (
                           <Ionicons
@@ -76,7 +86,7 @@ export default function ProductReview({ goHome, show, setProdReview }) {
                       </View>
                     </View>
                   </View>
-                  <Text
+                  <AppText
                     style={{
                       color: "#6D7589",
                       fontSize: 14,
@@ -84,10 +94,10 @@ export default function ProductReview({ goHome, show, setProdReview }) {
                     }}
                   >
                     4 weeks ago
-                  </Text>
+                  </AppText>
                 </View>
                 <View>
-                  <Text
+                  <AppText
                     style={{
                       fontWeight: "400",
                       fontSize: 16,
@@ -100,7 +110,7 @@ export default function ProductReview({ goHome, show, setProdReview }) {
                     thorough, excellent manner and cares for her patients as
                     though they were her own family member. I highly recommend
                     her as a physician.
-                  </Text>
+                  </AppText>
                 </View>
               </View>
             ))}
@@ -116,6 +126,62 @@ export default function ProductReview({ goHome, show, setProdReview }) {
             }}
           />
         </View>
+        {writeReview ? (
+          <View
+            style={{
+              position: "absolute",
+              top: 100,
+              // width: "100%",
+              backgroundColor: "#fff",
+              zIndex: 999999,
+              width: windowWidth - 60, marginHorizontal: 30
+            }}
+          >
+            <View
+              style={{
+                borderWidth: 2,
+                padding: 10,
+                borderRadius: 8,
+                borderColor: "#eee",
+                height: 200,
+                width: "100%",
+              }}
+            >
+              <TextInput
+                style={{ height: "100%" }}
+                placeholder="Write a review about this product"
+              />
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 10,
+              }}
+            >
+              <Button title="Submit" btnW="45%" txtStyle={{ color: "#fff" }} />
+              <Button
+                title="Cancel"
+                bgColor="orange"
+                btnW="45%"
+                txtStyle={{ color: "#fff" }}
+                onPressProp={() => setWriteReview(!writeReview)}
+              />
+            </View>
+          </View>
+        ) : (
+          <></>
+        )}
+        <TouchableOpacity
+          style={{ position: "absolute" }}
+          onPress={() => setWriteReview(!writeReview)}
+        >
+          <Ionicons
+            name="add-circle"
+            style={{ fontSize: 35, color: "#0364FF" }}
+          />
+        </TouchableOpacity>
       </View>
     </Modal>
   );

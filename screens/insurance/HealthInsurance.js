@@ -1,8 +1,9 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import Bar from "../components/seed1/Bar";
-import UpperNavigation from "../components/seed1/UpperNavigation";
-import Button from "../components/seed1/Button";
+import Bar from "../../components/seed1/Bar";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import Button from "../../components/seed1/Button";
+import AppText from "../../components/seed1/AppText";
 
 export default function HealthInsurance({navigation}) {
   return (
@@ -29,11 +30,11 @@ export default function HealthInsurance({navigation}) {
           }}
         >
           <TouchableOpacity>
-            <Image source={require("../assets/images/health_circle.png")} />
+            <Image source={require("../../assets/images/health_circle.png")} />
           </TouchableOpacity>
-          <Text style={{ fontSize: 16, fontWeight: "400", marginVertical: 40 }}>
+          <AppText style={{ fontSize: 16, fontWeight: "400", marginVertical: 40 }}>
             You do not have any insurance plan yet
-          </Text>
+          </AppText>
           <Button
             onPressProp={()=>navigation.navigate("GetInsured")}
             bgColor="#0364FF"

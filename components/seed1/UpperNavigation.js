@@ -1,12 +1,10 @@
-import {
-  Pressable,
-  Text,
-  View,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, Dimensions, TouchableOpacity } from "react-native";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "./AppText";
+import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function UpperNavigation({
   title,
@@ -16,9 +14,11 @@ export default function UpperNavigation({
   rightIcon = false,
   rightIconName = "options-outline",
   rightIconFunc,
+  isCart = false,
 }) {
-  const windowWidth = Dimensions.get("window").width;
-
+  // const windowWidth = Dimensions.get("window").width;
+  const navigation = useNavigation();
+  const cartItems = useSelector((state) => state.cartState);
   return (
     <View
       style={{
@@ -31,7 +31,10 @@ export default function UpperNavigation({
     >
       {back ? (
         <TouchableOpacity
-          onPress={goBack}
+        onPress={() => {
+          navigation.goBack();
+        }}
+          // onPress={goBack}
           style={{ position: "absolute", left: 20 }}
         >
           <Ionicons
@@ -45,7 +48,7 @@ export default function UpperNavigation({
         <></>
       )}
 
-      <Text
+      <AppText
         style={{
           color: color ? color : "#0E214D",
           fontWeight: "600",
@@ -54,7 +57,7 @@ export default function UpperNavigation({
         }}
       >
         {title}
-      </Text>
+      </AppText>
 
       {rightIcon ? (
         <TouchableOpacity
@@ -64,9 +67,31 @@ export default function UpperNavigation({
           <Ionicons
             name={rightIconName}
             style={{
-              fontSize: 26,
+              fontSize: 30,
             }}
           />
+        </TouchableOpacity>
+      ) : (
+        <></>
+      )}
+
+      {isCart && cartItems.length ? (
+        
+        <TouchableOpacity
+          onPress={()=>navigation.navigate("CartDetails")}
+          style={{
+            height: 20,
+            width: 20,
+            backgroundColor: "#0364FF",
+            borderRadius: 100,
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            right: 10,
+            top: -10,
+          }}
+        >
+          <AppText style={{ color: "#fff" }}>{cartItems.length}</AppText>
         </TouchableOpacity>
       ) : (
         <></>

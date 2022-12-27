@@ -1,48 +1,24 @@
-import { View, Text, Pressable, Image, ScrollView } from "react-native";
+import { View, Text, Pressable, Image, Dimensions } from "react-native";
 import React from "react";
-import Bar from "../components/seed1/Bar";
+import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "../../components/seed1/AppText";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
 
-export default function PrescriptionsData() {
+export default function PrescriptionData({navigation}) {
+  const windowWidth = Dimensions.get("window").width;
+
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 20,
-          position: "relative",
-          marginBottom: 34,
-        }}
-      >
-        <Pressable style={{ position: "absolute", left: 34 }}>
-          <Ionicons
-            name="arrow-back-outline"
-            style={{
-              //   color: lightMode ? "#97938a" : "rgba(255, 255, 255, 0.5)",
-              fontSize: 26,
-            }}
-          />
-        </Pressable>
-        <Text
-          style={{
-            color: "#0E214D",
-            fontWeight: "600",
-            fontSize: 16,
-            textAlign: "center",
-          }}
-        >
-          Prescriptions
-        </Text>
-      </View>
+      <UpperNavigation  title="Prescriptions" back />
       <View
         style={{
           flex: 1,
           backgroundColor: "#fff",
           borderRadius: 14,
-          marginHorizontal: 34,
+          width: windowWidth - 40,
+          marginHorizontal: 20,
           marginBottom: 38,
           marginTop: 59,
           display: "flex",
@@ -62,7 +38,7 @@ export default function PrescriptionsData() {
               height: 70,
             }}
           >
-            <Text
+            <AppText
               style={{
                 color: "#0E214D",
                 fontWeight: "500",
@@ -70,8 +46,8 @@ export default function PrescriptionsData() {
               }}
             >
               Drug Name
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 color: "#6D7589",
                 fontWeight: "400",
@@ -80,7 +56,7 @@ export default function PrescriptionsData() {
               }}
             >
               Tabs Paracetamol 1g TDS x 3/7
-            </Text>
+            </AppText>
           </View>
           <View
             style={{ borderWidth: 1, borderColor: "#E5E5E5", marginTop: 10 }}
@@ -95,7 +71,7 @@ export default function PrescriptionsData() {
               height: 70,
             }}
           >
-            <Text
+            <AppText
               style={{
                 color: "#0E214D",
                 fontWeight: "500",
@@ -103,8 +79,8 @@ export default function PrescriptionsData() {
               }}
             >
               Strength
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 color: "#6D7589",
                 fontWeight: "400",
@@ -113,7 +89,7 @@ export default function PrescriptionsData() {
               }}
             >
               1-2 Tablets
-            </Text>
+            </AppText>
           </View>
           <View
             style={{ borderWidth: 1, borderColor: "#E5E5E5", marginTop: 10 }}
@@ -128,7 +104,7 @@ export default function PrescriptionsData() {
               height: 70,
             }}
           >
-            <Text
+            <AppText
               style={{
                 color: "#0E214D",
                 fontWeight: "500",
@@ -136,8 +112,8 @@ export default function PrescriptionsData() {
               }}
             >
               Duration
-            </Text>
-            <Text
+            </AppText>
+            <AppText
               style={{
                 color: "#6D7589",
                 fontWeight: "400",
@@ -146,7 +122,7 @@ export default function PrescriptionsData() {
               }}
             >
               5 Days
-            </Text>
+            </AppText>
           </View>
           <View
             style={{ borderWidth: 1, borderColor: "#E5E5E5", marginTop: 10 }}
@@ -159,7 +135,7 @@ export default function PrescriptionsData() {
             alignItems: "center",
           }}
         >
-          <Text
+          <AppText
             style={{
               color: "#6D7589",
               fontWeight: "400",
@@ -171,8 +147,8 @@ export default function PrescriptionsData() {
           >
             Take 1-2 tablets every 4-6 hours as required. Do not take more than
             8 tablets in 24 hours.
-          </Text>
-          <Text
+          </AppText>
+          <AppText
             style={{
               color: "#0E214D",
               fontWeight: "600",
@@ -183,7 +159,7 @@ export default function PrescriptionsData() {
             }}
           >
             Dr. Aniebiet Ubaha
-          </Text>
+          </AppText>
           <View
             style={{
               borderWidth: 1,
@@ -192,7 +168,7 @@ export default function PrescriptionsData() {
               marginTop: 9,
             }}
           ></View>
-          <Text
+          <AppText
             style={{
               color: "#6D7589",
               fontWeight: "500",
@@ -204,7 +180,7 @@ export default function PrescriptionsData() {
             }}
           >
             Doctor
-          </Text>
+          </AppText>
         </View>
       </View>
     </View>

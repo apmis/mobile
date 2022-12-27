@@ -1,29 +1,38 @@
-import { View, Text, Pressable, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
-import Bar from "../components/seed1/Bar";
+import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import UpperNavigation from "../components/seed1/UpperNavigation";
+import UpperNavigation from "../../components/seed1/UpperNavigation";
+import AppText from "../../components/seed1/AppText";
 
-export default function Prescriptions() {
+export default function LabResult({ navigation }) {
+
   return (
-    <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
+    <View style={{ backgroundColor: "#F3F3F3", flex: 1, position: "relative" }}>
       <Bar hideBar={false} />
-      <UpperNavigation title="Prescriptions" back />
-      <Text
+      <UpperNavigation back title="Lab Test Results" />
+
+      <AppText
         style={{
           color: "#0E214D",
           fontSize: 16,
           fontWeight: "600",
           marginLeft: 32,
           marginBottom: 16,
-          marginTop: 25
-          
+          marginTop: 25,
         }}
       >
         Tuesday June 16
-      </Text>
+      </AppText>
       <ScrollView style={{ flex: 1 }}>
-        {[1, 2, 3, 4, 5].map((item, i) => (
+        {[1, 2, 3, 8].map((item, i) => (
           <View
             key={i}
             style={{
@@ -48,28 +57,28 @@ export default function Prescriptions() {
               }}
             >
               <View>
-                <Text
+                <AppText
                   style={{
                     color: "#0E214D",
                     fontSize: 16,
                     fontWeight: "700",
                   }}
                 >
-                  Tabs Paracetamol 1g TDS x 3/7
-                </Text>
-                <Text
+                  Random Blood Glucose
+                </AppText>
+                <AppText
                   style={{
                     color: "#6D7589",
                     fontSize: 16,
                     fontWeight: "600",
                   }}
                 >
-                  Capsule After Breakfast
-                </Text>
+                  ₦800
+                </AppText>
               </View>
               <Image
                 style={{ height: 25, width: 25 }}
-                source={require("../assets/images/jar.png")}
+                source={require("../../assets/images/lab.png")}
               />
             </View>
             <View
@@ -79,7 +88,7 @@ export default function Prescriptions() {
                 marginTop: 21,
               }}
             ></View>
-            <Text
+            <AppText
               style={{
                 color: "#FCB222",
                 fontSize: 14,
@@ -89,10 +98,23 @@ export default function Prescriptions() {
               }}
             >
               Pending
-            </Text>
+            </AppText>
           </View>
         ))}
       </ScrollView>
+
+      <TouchableOpacity onPress={()=>navigation.navigate("LabTestRequest")}>
+        <Ionicons
+          name="add-circle"
+          style={{
+            fontSize: 72,
+            position: "absolute",
+            bottom: 30,
+            right: 20,
+            color: "#0364ff",
+          }}
+        />
+      </TouchableOpacity>
     </View>
   );
 }

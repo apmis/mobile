@@ -81,6 +81,7 @@ const Slide = ({ item, currentSlideIndex }) => {
   );
 };
 
+
 const Onboard = ({ navigation }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const updateCurrentSlideIndex = (e) => {

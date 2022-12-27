@@ -3,6 +3,7 @@ import React from "react";
 import Bar from "../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Button from "../components/seed1/Button";
+import AppText from "../components/seed1/AppText";
 
 export default function ReferralMade({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
@@ -31,7 +32,7 @@ export default function ReferralMade({ navigation }) {
           >
             <Image source={require("../assets/images/checked.png")} />
           </View>
-          <Text
+          <AppText
             style={{
               color: "#6D7589",
               fontSize: 14,
@@ -43,7 +44,7 @@ export default function ReferralMade({ navigation }) {
             }}
           >
             Referral Successful
-          </Text>
+          </AppText>
           <View
             style={{
               width: windowWidth - 40,

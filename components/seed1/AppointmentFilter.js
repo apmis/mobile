@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Modal, Text, Pressable, View, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AppText from "./AppText";
 
 export default function AppointmentFilter({ show, setFilterModal }) {
   return (
@@ -9,7 +10,7 @@ export default function AppointmentFilter({ show, setFilterModal }) {
         <View style={styles.modalView}>
           {["Yesterday", "Today", "This Week", "This Month"].map((item, i) => (
             <Pressable key={i}>
-              <Text
+              <AppText
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
@@ -18,7 +19,7 @@ export default function AppointmentFilter({ show, setFilterModal }) {
                 }}
               >
                 {item}
-              </Text>
+              </AppText>
             </Pressable>
           ))}
 
