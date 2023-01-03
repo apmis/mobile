@@ -11,6 +11,7 @@ import {
   LightTextWhite,
   LightBlueText,
   Label,
+  LabelSmall,
   LightTextBase,
 } from "./Texts";
 export {
@@ -25,6 +26,7 @@ export {
   LightTextWhite,
   LightBlueText,
   Label,
+  LabelSmall,
   InputWithLabel,
   Backbtn,
   AppointmentCard,

@@ -21,6 +21,7 @@ import changeProfileImage from "../../../assets/change-profile-image.png";
 import appointmentCardGradient from "../../../assets/appointmentcard-gradient.png";
 import videoGradient from "../../../assets/video-gradient.png";
 import blog from "../../../assets/blog.png";
+import hospital from "../../../assets/hospital.png";
 
 import profile2 from "../../../assets/profile2.png";
 import profile3 from "../../../assets/profile3.png";
@@ -52,4 +53,5 @@ export default {
   profile3,
   profile4,
   blog,
+  hospital,
 };

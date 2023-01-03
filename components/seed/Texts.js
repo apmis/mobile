@@ -13,9 +13,16 @@ export const BoldText = ({ value = "Text" }) => {
   );
 };
 
-export const LightText = ({ value = "Text", textColor = COLORS.lightText }) => {
+export const LightText = ({
+  value = "Text",
+  textColor = COLORS.lightText,
+  styling,
+}) => {
   return (
-    <Text style={{ fontFamily: "ManropeRegular", color: textColor }}>
+    <Text
+      className={styling}
+      style={{ fontFamily: "ManropeRegular", color: textColor }}
+    >
       {value}
     </Text>
   );
@@ -41,11 +48,15 @@ export const LightTextWhite = ({ value = "Text" }) => {
   );
 };
 
-export const LightBlueText = ({ value = "Text", styling }) => {
+export const LightBlueText = ({
+  value = "Text",
+  color = COLORS.primaryBlue,
+  styling,
+}) => {
   return (
     <Text
       className={styling}
-      style={{ fontFamily: "ManropeRegular", color: COLORS.primaryBlue }}
+      style={{ fontFamily: "ManropeRegular", color: color }}
     >
       {value}
     </Text>
@@ -58,6 +69,13 @@ export const Label = ({ value = "Label" }) => {
       style={{ fontFamily: "ManropeRegular" }}
       className="text-base mb-2 text-black"
     >
+      {value}
+    </Text>
+  );
+};
+export const LabelSmall = ({ value = "Label" }) => {
+  return (
+    <Text style={{ fontFamily: "ManropeRegular" }} className="mb-2 text-black">
       {value}
     </Text>
   );

@@ -8,21 +8,34 @@ import { loadCldr } from "react-native-globalize";
 import BottomTab from "./components/seed/BottomTab";
 loadCldr(require("react-native-globalize/locale-data/en-NG"));
 import {
+  AmbulanceForm,
+  AmbulanceSummary,
+  AmbulanceTime,
   BlogDetails,
   BlogHome,
   Conversation,
   Dashboard,
+  ForumDetails,
+  Forums,
   FundWallet,
   Home,
+  HospitalAppointment,
+  HospitalDirection,
+  HospitalPayment,
   Login,
   Notifications,
   NotificationSettings,
   Onboard,
   PasswordSettings,
   PatientProfile,
+  Replies,
   ResetPassword,
   ResetPasswordScreen2,
   ResetPasswordScreen3,
+  SearchAmbulanceHome,
+  SearchDoctorHome,
+  SearchHospitalHome,
+  SearchPharmacyHome,
   Settings,
   SignUp,
   SignUpScreen2,
@@ -125,6 +138,47 @@ export default function App() {
               <Stack.Screen name="VideoCall" component={VideoCall} />
               <Stack.Screen name="BlogDetails" component={BlogDetails} />
               <Stack.Screen name="BlogHome" component={BlogHome} />
+              <Stack.Screen name="Forums" component={Forums} />
+              <Stack.Screen name="ForumDetails" component={ForumDetails} />
+              <Stack.Screen name="Replies" component={Replies} />
+              <Stack.Screen name="AmbulanceForm" component={AmbulanceForm} />
+              <Stack.Screen name="AmbulanceTime" component={AmbulanceTime} />
+              <Stack.Screen
+                name="HospitalPayment"
+                component={HospitalPayment}
+              />
+              <Stack.Screen
+                name="HospitalAppointment"
+                component={HospitalAppointment}
+              />
+              <Stack.Screen
+                name="HospitalDirection"
+                component={HospitalDirection}
+              />
+              <Stack.Screen
+                name="AmbulanceSummary"
+                component={AmbulanceSummary}
+              />
+              <Stack.Screen
+                // options={{ presentation: "containedTransparentModal" }}
+                name="SearchHospitalHome"
+                component={SearchHospitalHome}
+              />
+              <Stack.Screen
+                // options={{ presentation: "containedTransparentModal" }}
+                name="SearchDoctorHome"
+                component={SearchDoctorHome}
+              />
+              <Stack.Screen
+                // options={{ presentation: "containedTransparentModal" }}
+                name="SearchAmbulanceHome"
+                component={SearchAmbulanceHome}
+              />
+              <Stack.Screen
+                // options={{ presentation: "containedTransparentModal" }}
+                name="SearchPharmacyHome"
+                component={SearchPharmacyHome}
+              />
 
               <Stack.Screen
                 name="NotificationSettings"

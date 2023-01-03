@@ -8,7 +8,7 @@ import {
   TextInput,
   ScrollView,
   Platform,
-  Keyboard,
+  Pressable,
 } from "react-native";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
@@ -17,13 +17,15 @@ import {
 } from "@gorhom/bottom-sheet";
 import Search from "react-native-vector-icons/EvilIcons";
 import MateriaCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import Foundation from "react-native-vector-icons/Foundation";
+import Fontisto from "react-native-vector-icons/Fontisto";
 import { assets, COLORS } from "../components/seed/constants";
 import { AppointmentCard } from "../components/seed";
 const Dashboard = ({ navigation }) => {
-  const [isClose, setIsClose] = useState(false);
+  const [isClose, setIsClose] = useState(true);
   // ref
   const bottomSheetModalRef = useRef();
 
@@ -34,14 +36,18 @@ const Dashboard = ({ navigation }) => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
+
   const handleDismissModal = useCallback(() => {
     bottomSheetModalRef.current?.dismiss();
+    setIsClose(true);
   }, []);
 
   const handleSheetChanges = useCallback((index) => {}, []);
   const handleModal = () => {
-    Keyboard.dismiss();
-    handlePresentModalPress();
+    // Keyboard.dismiss();
+    setIsClose((prev) => !prev);
+    // navigation.navigate("SearchHome");
+    isClose ? handlePresentModalPress() : handleDismissModal();
   };
   return (
     <BottomSheetModalProvider>
@@ -104,14 +110,24 @@ const Dashboard = ({ navigation }) => {
             <View className="flex-row px-[21] items-center space-x-1">
               <Search name="search" color="gray" size={24} />
               <TextInput
-                onFocus={() => handleModal()}
+                // onFocus={() => handleModal()}
                 placeholder="Search"
                 placeholderTextColor="#8F8F8F"
                 style={{
                   fontFamily: "ManropeLight",
-                  width: "100%",
                 }}
+                className="flex-1"
               />
+              <View className="flex-row items-center space-x-1">
+                <View className="h-5 bg-gray-200 w-[1px]" />
+                <TouchableOpacity onPress={() => handleModal()}>
+                  <MaterialIcons
+                    name={isClose ? "keyboard-arrow-up" : "keyboard-arrow-down"}
+                    color="gray"
+                    size={28}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
           <Text
@@ -199,38 +215,59 @@ const Dashboard = ({ navigation }) => {
             </TouchableOpacity>
 
             <View className="flex-1 py-[10%] space-y-8 px-[25]">
-              <View className="flex-row items-center space-x-3">
-                <FontAwesome5 color="#0E214D" name="hospital" size={20} />
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SearchHospitalHome")}
+                className="flex-row items-center space-x-3"
+              >
+                <FontAwesome5 color="#0E214D" name="hospital" size={16} />
 
                 <Text
-                  className="text-center text-[#0E214D] text-base"
+                  className="text-center text-[#0E214D]"
                   style={{ fontFamily: "ManropeSemibold" }}
                 >
                   Healthcare Facility
                 </Text>
-              </View>
-              <View className="flex-row items-center space-x-3">
-                <Foundation name="first-aid" color="#0E214D" size={24} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SearchDoctorHome")}
+                className="flex-row items-center space-x-3"
+              >
+                <Foundation name="first-aid" color="#0E214D" size={20} />
                 <Text
-                  className="text-center text-base text-[#0E214D]"
+                  className="text-center  text-[#0E214D]"
                   style={{ fontFamily: "ManropeSemibold" }}
                 >
                   Healthcare Professionals
                 </Text>
-              </View>
-              <View className="flex-row items-center space-x-3">
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SearchPharmacyHome")}
+                className="flex-row items-center space-x-3"
+              >
+                <Fontisto name="pills" color="#0E214D" size={18} />
+                <Text
+                  className="text-center  text-[#0E214D]"
+                  style={{ fontFamily: "ManropeSemibold" }}
+                >
+                  Pharmacy
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SearchAmbulanceHome")}
+                className="flex-row items-center space-x-3"
+              >
                 <MateriaCommunityIcon
                   color="#0E214D"
                   name="ambulance"
-                  size={24}
+                  size={20}
                 />
                 <Text
-                  className="text-center text-base text-[#0E214D]"
+                  className="text-center text-[#0E214D]"
                   style={{ fontFamily: "ManropeSemibold" }}
                 >
                   Ambulance
                 </Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </BottomSheetModal>
         </View>

@@ -38,6 +38,7 @@ export const ChatInput = () => {
 };
 
 export const InputWithLabel = ({
+  width = "90%",
   inputValue,
   labelValue,
   changeHandler,
@@ -46,7 +47,7 @@ export const InputWithLabel = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   return (
-    <View className="w-[90%] mx-auto">
+    <View style={{ width: width }} className="mx-auto">
       <Label value={labelValue} />
       <TextInput
         style={{ fontFamily: "ManropeRegular" }}
