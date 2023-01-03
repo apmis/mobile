@@ -1,19 +1,20 @@
 import {
   Image,
-  Text,
   View,
   ScrollView,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/seed1/Button";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AppText from "../../components/seed1/AppText";
 
-export default function BookAppointment({navigation}) {
-  const windowWidth = Dimensions.get("window").width;
+export default function BookAppointment({ navigation }) {
+  const { width: windowWidth } = Dimensions.get("window");
+  const [chosenTab, setChosenTab] = useState("About");
   return (
     <View style={{ backgroundColor: "#Faf83F9", flex: 1 }}>
       <Bar hideBar={false} />
@@ -73,11 +74,8 @@ export default function BookAppointment({navigation}) {
           flexDirection: "row",
           marginTop: 20,
           justifyContent: "space-evenly",
-          //   paddingTop: 23
         }}
       >
-        {/* {[1, 2, "tola"].map((item, i) => ( */}
-        {/* <> */}
         <View
           style={{
             display: "flex",
@@ -92,10 +90,14 @@ export default function BookAppointment({navigation}) {
               fontSize: 24,
             }}
           />
-          <AppText style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
+          <AppText
+            style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}
+          >
             1000+
           </AppText>
-          <AppText style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
+          <AppText
+            style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}
+          >
             Patients
           </AppText>
         </View>
@@ -112,17 +114,21 @@ export default function BookAppointment({navigation}) {
           }}
         >
           <Ionicons
-            name="person-outline"
+            name="location-outline"
             style={{
               color: "#0E214D",
               fontSize: 24,
             }}
           />
-          <AppText style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
-            1000+
+          <AppText
+            style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}
+          >
+            1.5km
           </AppText>
-          <AppText style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
-            Patients
+          <AppText
+            style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}
+          >
+            From You
           </AppText>
         </View>
 
@@ -137,75 +143,61 @@ export default function BookAppointment({navigation}) {
           }}
         >
           <Ionicons
-            name="person-outline"
+            name="star-outline"
             style={{
               color: "#0E214D",
               fontSize: 24,
             }}
           />
-          <AppText style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}>
-            1000+
+          <AppText
+            style={{ fontSize: 14, fontWeight: "500", color: "#03045E" }}
+          >
+            4.5
           </AppText>
-          <AppText style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}>
-            Patients
+          <AppText
+            style={{ fontSize: 12, fontWeight: "400", color: "#6B779A" }}
+          >
+            Ratings
           </AppText>
         </View>
-
-        {/* </> */}
-        {/* ))} */}
       </View>
+      <View
+        style={{
+          width: windowWidth - 40,
+          height: 22,
+          marginHorizontal: 20,
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "row",
+          marginTop: 20,
+          justifyContent: "space-between",
+        }}
+      >
+        {["About", "Location", "Availability", "Reviews"].map((item, i) => (
+          <TouchableOpacity key={i} onPress={() => setChosenTab(item)}>
+            <AppText
+              style={{
+                fontWeight: "650",
+                fontSize: 16,
+                color: item == chosenTab ? "#03045E" : "#6D7589",
+              }}
+            >
+              {item}
+            </AppText>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <View
+        style={{
+          borderWidth: 1,
+          borderColor: "rgba(221, 221, 221, 0.8)",
+          marginTop: 8,
+          marginHorizontal: 20,
+        }}
+      ></View>
       <ScrollView style={{ flex: 1 }}>
         <View style={{ flex: 1, backgroundColor: "rgb(243,243,243)" }}>
-          <View
-            style={{
-              width: windowWidth - 40,
-              height: 22,
-              marginHorizontal: 20,
-              alignItems: "center",
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 20,
-              justifyContent: "space-between",
-            }}
-          >
-            <AppText
-              style={{
-                fontWeight: "600",
-                fontSize: 16,
-                color: true ? "#03045E" : "#6D7589",
-              }}
-            >
-              About
-            </AppText>
-            <AppText
-              style={{
-                fontWeight: "600",
-                fontSize: 16,
-                color: false ? "#03045E" : "#6D7589",
-              }}
-            >
-              Location
-            </AppText>
-            <AppText
-              style={{
-                fontWeight: "600",
-                fontSize: 16,
-                color: false ? "#03045E" : "#6D7589",
-              }}
-            >
-              Availablity
-            </AppText>
-            <AppText
-              style={{
-                fontWeight: "600",
-                fontSize: 16,
-                color: false ? "#03045E" : "#6D7589",
-              }}
-            >
-              Reviews
-            </AppText>
-          </View>
-
           <View
             style={{
               width: windowWidth - 40,
@@ -213,7 +205,9 @@ export default function BookAppointment({navigation}) {
               marginTop: 29,
             }}
           >
-            <AppText style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
+            <AppText
+              style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}
+            >
               Biography
             </AppText>
             <AppText
@@ -236,7 +230,9 @@ export default function BookAppointment({navigation}) {
               marginTop: 24,
             }}
           >
-            <AppText style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
+            <AppText
+              style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}
+            >
               Availability
             </AppText>
             <AppText
@@ -258,7 +254,9 @@ export default function BookAppointment({navigation}) {
               marginTop: 29,
             }}
           >
-            <AppText style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}>
+            <AppText
+              style={{ fontWeight: "500", fontSize: 16, color: "#03045E" }}
+            >
               Reviews
             </AppText>
           </View>
@@ -310,7 +308,7 @@ export default function BookAppointment({navigation}) {
                     <View style={{ display: "flex", flexDirection: "row" }}>
                       {[1, 2, 3, 4, 5].map((item, i) => (
                         <Ionicons
-                            key={i}
+                          key={i}
                           name="star"
                           style={{
                             color: "#ffbd14",
@@ -321,7 +319,11 @@ export default function BookAppointment({navigation}) {
                     </View>
                   </View>
                 </View>
-                <AppText style={{color: "#6D7589", fontSize: 14, fontWeight: "400"}}>4 weeks ago</AppText>
+                <AppText
+                  style={{ color: "#6D7589", fontSize: 14, fontWeight: "400" }}
+                >
+                  4 weeks ago
+                </AppText>
               </View>
               <View>
                 <AppText
@@ -349,9 +351,11 @@ export default function BookAppointment({navigation}) {
             }}
           >
             <Button
-              bgColor="#fff"
+              bgColor="#f3f3f3"
               btnRadius={4}
-              btnH={44}
+              btnH={50}
+              borderColor="#E6EAEE"
+              borderW={1}
               title="See All Reviews"
               txtStyle={{ color: "#0E214D", fontSize: 16, fontWeight: "700" }}
             />
@@ -361,11 +365,11 @@ export default function BookAppointment({navigation}) {
               width: windowWidth - 40,
               marginHorizontal: 20,
               marginTop: 20,
-              marginBottom: 40
+              marginBottom: 40,
             }}
           >
             <Button
-              onPressProp={()=>navigation.navigate("AppointmentDate")}
+              onPressProp={() => navigation.navigate("AppointmentDate")}
               bgColor="#0364FF"
               btnRadius={4}
               btnH={44}

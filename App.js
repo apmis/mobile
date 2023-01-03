@@ -60,6 +60,15 @@ import CartDetails from "./screens/products/CartDetails";
 import PolicyDetails from "./screens/insurance/PolicyDetails";
 import ClaimDetails from "./screens/insurance/ClaimDetails";
 import AuthorizationDetails from "./screens/insurance/AuthorizationDetails";
+import MedicalRecords from "./screens/medicalRecords/MedicalRecords";
+import PayWithPaystack from "./screens/payment/PayWithPaystack";
+import Payment from "./screens/payment/Payment";
+import ImagingRequest from "./screens/imaging/ImagingRequest";
+import ImagingRequestMade from "./screens/imaging/ImagingRequestMade";
+import BloodRequest from "./screens/blood/BloodRequest";
+import BloodRequestMade from "./screens/blood/BloodRequestMade";
+import BloodRequestList from "./screens/blood/BloodRequestList";
+import BloodDetails from "./screens/blood/BloodDetails";
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -158,6 +167,28 @@ export default function App() {
               <Stack.Screen name="LabResult" component={LabResult} />
               {/* LAB ENDS */}
 
+              {/* IMAGING */}
+              <Stack.Screen name="ImagingRequest" component={ImagingRequest} />
+              <Stack.Screen
+                name="ImagingRequestMade"
+                component={ImagingRequestMade}
+              />
+              {/* <Stack.Screen name="LabResult" component={LabResult} /> */}
+              {/* IMAGING ENDS */}
+
+              {/* BLOOD */}
+              <Stack.Screen name="BloodRequest" component={BloodRequest} />
+              <Stack.Screen
+                name="BloodRequestMade"
+                component={BloodRequestMade}
+              />
+              <Stack.Screen
+                name="BloodRequestList"
+                component={BloodRequestList}
+              />
+              <Stack.Screen name="BloodDetails" component={BloodDetails} />
+              {/* BLOOD ENDS */}
+
               {/* APPOINTMENT */}
               <Stack.Screen
                 name="BookAppointment"
@@ -193,6 +224,10 @@ export default function App() {
               <Stack.Screen name="GetInsured" component={GetInsured} />
               <Stack.Screen name="PolicyDetails" component={PolicyDetails} />
               <Stack.Screen name="ClaimDetails" component={ClaimDetails} />
+              <Stack.Screen
+                name="AuthorizationDetails"
+                component={AuthorizationDetails}
+              />
 
               <Stack.Screen
                 name="ProviderDetails"
@@ -202,13 +237,29 @@ export default function App() {
                 name="HealthInsurance"
                 component={HealthInsurance}
               />
+              {/* INSURANCE ENDS */}
 
+              {/* BILLS */}
               <Stack.Screen name="Bills" component={Bills} />
               {/* BILLS ENDS */}
 
               {/* MEDICAL PROFILE */}
               <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
               {/* MEDICAL PROFILE ENDS */}
+
+              {/* OTHER */}
+              {/* <Stack.Screen name="Others" component={Other} /> */}
+              <Stack.Screen name="MedicalRecords" component={MedicalRecords} />
+              {/* OTHER ENDS */}
+
+              {/* PAYMENT */}
+              <Stack.Screen
+                name="PayWithPaystack"
+                component={PayWithPaystack}
+              />
+              <Stack.Screen name="Payment" component={Payment} />
+
+              {/* PAYMENT ENDS */}
             </Stack.Navigator>
           </NavigationContainer>
         </GlobalizeProvider>

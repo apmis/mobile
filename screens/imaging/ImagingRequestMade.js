@@ -4,7 +4,7 @@ import Bar from "../../components/seed1/Bar";
 import Button from "../../components/seed1/Button";
 import AppText from "../../components/seed1/AppText";
 
-export default function LabRequestMade({ navigation }) {
+export default function ImagingRequestMade({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
@@ -13,6 +13,7 @@ export default function LabRequestMade({ navigation }) {
       <View
         style={{
           flex: 1,
+          // backgroundColor: "yellow",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -42,7 +43,7 @@ export default function LabRequestMade({ navigation }) {
               marginHorizontal: 20,
             }}
           >
-            Lab Test Request Successful
+            Imaging Examination Request Successful
           </AppText>
           <View
             style={{

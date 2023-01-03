@@ -4,7 +4,9 @@ import IonIcons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { BlogHome, Dashboard, Home } from "../../screens";
+import Buy from "../../screens/buy";
 import Products from "../../screens/products/Products";
+import Others from "../../screens/view/Others";
 import { COLORS } from "./constants";
 
 const Tab = createBottomTabNavigator();
@@ -46,7 +48,7 @@ function BottomTab() {
       />
       <Tab.Screen
         name="Buy"
-        component={Products}
+        component={Buy}
         options={{
           tabBarLabel: "Buy",
           tabBarIcon: ({ color, size }) => (
@@ -70,7 +72,7 @@ function BottomTab() {
       />
       <Tab.Screen
         name="View"
-        component={Dashboard}
+        component={Others}
         options={{
           tabBarLabel: "View",
           tabBarIcon: ({ color, size }) => (

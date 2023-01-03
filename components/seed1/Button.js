@@ -21,7 +21,7 @@ export default function Button({
         styles.btn,
         {
           backgroundColor: bgColor ? bgColor : "#0364FF",
-          height: btnH ? btnH : 40,
+          height: btnH ? btnH : 44,
           borderRadius: btnRadius ? btnRadius : 4,
           width: btnW ? btnW : "100%",
           padding: btnPadding ? btnPadding : 8,
@@ -37,7 +37,6 @@ export default function Button({
 
 const styles = StyleSheet.create({
   btn: {
-    height: 40,
     alignItems: "center",
     justifyContent: "center",
   },
