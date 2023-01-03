@@ -1,11 +1,12 @@
 {
   "expo": {
     "name": "APMIS",
-    "slug": "APMIS",
+    "slug": "apmis",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "backgroundColor": "#f3f3f3",
     "splash": {
       "image": "./assets/splash-screen.png",
       "resizeMode": "cover",
@@ -14,7 +15,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -22,10 +25,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.jujuman.apmis"
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "75b7d8a6-b564-4192-86cf-f22cfdd17175"
+      }
     }
   }
 }
