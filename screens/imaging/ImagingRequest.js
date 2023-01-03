@@ -9,7 +9,7 @@ import Button from "../../components/seed1/Button";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import AppText from "../../components/seed1/AppText";
 
-export default function LabTestRequest({ navigation }) {
+export default function ImagingRequest({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
   const [selectedLanguage, setSelectedLanguage] = useState();
   // const isLoggedIn = useSelector((state) => state.isLoggedInState);
@@ -17,7 +17,7 @@ export default function LabTestRequest({ navigation }) {
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
-      <UpperNavigation back title="Request Lab Test" />
+      <UpperNavigation back title="Request Imaging Examination" />
 
       <ScrollView style={{ flex: 1, marginTop: 40 }}>
         <View
@@ -29,7 +29,7 @@ export default function LabTestRequest({ navigation }) {
           }}
         >
           <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
-            Select Test Type
+            Choose Center
           </AppText>
 
           <View
@@ -68,8 +68,7 @@ export default function LabTestRequest({ navigation }) {
           }}
         >
           <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
-            
-            Select Laboratory
+            Imaging Type
           </AppText>
 
           <View
@@ -92,13 +91,53 @@ export default function LabTestRequest({ navigation }) {
                 setSelectedLanguage(itemValue)
               }
             >
-              <Picker.Item label="Dakorea Lab" value="Dakorea Lab" />
-              <Picker.Item label="HTML" value="HTML" />
-              <Picker.Item label="React Native" value="React Native" />
-              <Picker.Item label="Node" value="Node js" />
+              <Picker.Item label="USS" value="USS" />
+              <Picker.Item label="X-RAY" value="X-RAY" />
+              <Picker.Item label="MRI" value="MRI" />
+              <Picker.Item label="ECHOGRAM" value="ECHOGRAM" />
             </Picker>
           </View>
         </View>
+        <View
+          style={{
+            width: windowWidth - 40,
+            marginHorizontal: 20,
+            borderRadius: 4,
+            marginTop: 10,
+          }}
+        >
+          <AppText style={{ fontWeight: "400", fontSize: 16, marginTop: 20 }}>
+            Imaging
+          </AppText>
+
+          <View
+            style={{
+              height: 55,
+              borderWidth: 1,
+              padding: 10,
+              backgroundColor: "#fafafa",
+              borderColor: "#D2D2D2",
+              borderRadius: 4,
+              marginTop: 8,
+              display: "flex",
+              justifyContent: "center",
+              overflow: "hidden",
+            }}
+          >
+            <Picker
+              selectedValue={selectedLanguage}
+              onValueChange={(itemValue, itemIndex) =>
+                setSelectedLanguage(itemValue)
+              }
+            >
+              <Picker.Item label="Abdominal scan" value="Abdominal scan" />
+              <Picker.Item label="Pelvic Scan" value="Pelvic Scan" />
+              <Picker.Item label="MRI" value="MRI" />
+              <Picker.Item label="ECHOGRAM" value="ECHOGRAM" />
+            </Picker>
+          </View>
+        </View>
+    
 
         <View
           style={{
@@ -133,10 +172,10 @@ export default function LabTestRequest({ navigation }) {
           }}
         >
           <Button
-            onPressProp={() => navigation.navigate("LabRequestMade")}
+            onPressProp={() => navigation.navigate("ImagingRequestMade")}
             btnRadius={4}
             bgColor={"#0364FF"}
-            title={"Request"}
+            title={"Submit"}
             txtStyle={{ color: "#FFFFFF", fontSize: 16, fontWeight: "700" }}
           />
         </View>

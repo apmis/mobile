@@ -5,8 +5,9 @@ import {
   ScrollView,
   Dimensions,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/seed1/Button";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import Bar from "../../components/seed1/Bar";
@@ -14,7 +15,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import AppText from "../../components/seed1/AppText";
 
 export default function AppointmentDate({ navigation }) {
-  const windowWidth = Dimensions.get("window").width;
+  const { width: windowWidth } = Dimensions.get("window");
+  const [selectedDay, setSelectedDay] = useState("14");
+  const [selectedTime, setSelectedTime] = useState("09:00 AM");
   return (
     <View
       style={{
@@ -24,10 +27,7 @@ export default function AppointmentDate({ navigation }) {
       }}
     >
       <Bar hideBar={false} />
-      <UpperNavigation
-        back
-        title="Book Appointment"
-      />
+      <UpperNavigation back title="Book Appointment" />
 
       <View
         style={{
@@ -68,70 +68,19 @@ export default function AppointmentDate({ navigation }) {
             marginTop: 20,
           }}
         >
-          <View
-            style={{
-              height: 100,
-              width: 90,
-              backgroundColor: "#f3f3f3",
-              borderRadius: 13,
-              borderWidth: 1,
-              borderColor: "rgba(107, 119, 154, 0.1)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 10,
-            }}
-          >
-            <AppText style={{ fontWeight: "400", fontSize: 24, color: "#6D7589" }}>
-              13
-            </AppText>
-            <AppText
-              style={{
-                fontWeight: "400",
-                fontSize: 12,
-                color: "#6B779A",
-                marginTop: 9,
-              }}
-            >
-              MON
-            </AppText>
-          </View>
-          <View
-            style={{
-              height: 100,
-              width: 90,
-              backgroundColor: "#0364ff",
-              borderRadius: 13,
-              borderWidth: 1,
-              borderColor: "rgba(107, 119, 154, 0.1)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 10,
-            }}
-          >
-            <AppText style={{ fontWeight: "400", fontSize: 24, color: "#fff" }}>
-              14
-            </AppText>
-            <AppText
-              style={{
-                fontWeight: "400",
-                fontSize: 12,
-                color: "#fff",
-                marginTop: 9,
-              }}
-            >
-              TUE
-            </AppText>
-          </View>
-          {[15, 16, 17, 18].map((item, i) => (
-            <View
-              key={i}
+          {[
+            { date: 13, day: "MON" },
+            { date: 14, day: "TUE" },
+            { date: 15, day: "WED" },
+            { date: 16, day: "THU" },
+          ].map((item, i) => (
+            <TouchableOpacity
+              onPress={() => setSelectedDay(item.date)}
               style={{
                 height: 100,
                 width: 90,
-
-                backgroundColor: "#f3f3f3",
+                backgroundColor:
+                  item.date == selectedDay ? "#0364ff" : "#f3f3f3",
                 borderRadius: 13,
                 borderWidth: 1,
                 borderColor: "rgba(107, 119, 154, 0.1)",
@@ -142,21 +91,25 @@ export default function AppointmentDate({ navigation }) {
               }}
             >
               <AppText
-                style={{ fontWeight: "400", fontSize: 24, color: "#6D7589" }}
+                style={{
+                  fontWeight: "400",
+                  fontSize: 24,
+                  color: item.date == selectedDay ? "#fff" : "#6D7589",
+                }}
               >
-                {item}
+                {item.date}
               </AppText>
               <AppText
                 style={{
                   fontWeight: "400",
                   fontSize: 12,
-                  color: "#6B779A",
+                  color: item.date == selectedDay ? "#fff" : "#6D7589",
                   marginTop: 9,
                 }}
               >
-                MON
+                {item.day}
               </AppText>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
@@ -179,60 +132,52 @@ export default function AppointmentDate({ navigation }) {
           >
             Available Time
           </AppText>
-
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 5, 5, 5].map((item, i) => (
-              <View
-                key={i}
-                style={{
-                  width: windowWidth / 3.8,
-                  backgroundColor: "#f3f3f3",
-                  borderRadius: 10,
-                  height: 40,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginVertical: 5,
-                  // marginRight: 12
-                }}
-              >
-                <AppText
-                  style={{ fontWeight: "400", fontSize: 14, color: "#6D7589" }}
-                >
-                  09:00 AM
-                </AppText>
-              </View>
-            ))}
-
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View
               style={{
-                width: windowWidth / 3.8,
-                backgroundColor: "#0364FF",
-                borderRadius: 10,
-                height: 40,
                 display: "flex",
-                justifyContent: "center",
+                flexDirection: "row",
                 alignItems: "center",
-                marginVertical: 5,
+                justifyContent: "space-between",
               }}
             >
-              <AppText style={{ fontWeight: "400", fontSize: 14, color: "#fff" }}>
-                09:00 AM
-              </AppText>
+              {["08:00 AM", "09:00 AM", "10:00 AM", "12:00 PM", "02:00 PM"].map(
+                (item, i) => (
+                  <TouchableOpacity
+                    key={i}
+                    onPress={() => setSelectedTime(item)}
+                    style={{
+                      width: 100,
+                      backgroundColor:
+                        item == selectedTime ? "#0364FF" : "#f3f3f3",
+                      borderRadius: 10,
+                      height: 40,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginVertical: 5,
+                      marginHorizontal: 5,
+                    }}
+                  >
+                    <AppText
+                      style={{
+                        fontWeight: "400",
+                        fontSize: 14,
+                        color: item == selectedTime ? "#fff" : "#6D7589",
+                      }}
+                    >
+                      {item}
+                    </AppText>
+                  </TouchableOpacity>
+                )
+              )}
             </View>
-          </View>
+          </ScrollView>
         </View>
 
         <View
           style={{
-            marginTop: 20,
+            marginTop: 25,
           }}
         >
           <AppText
@@ -255,14 +200,7 @@ export default function AppointmentDate({ navigation }) {
             }}
             placeholder="Enter  how you are feeling"
           />
-          {/* <View
-          style={{
-            height: 238,
-            borderWidth: 1,
-            borderColor: "#eee",
-            marginBottom: 40,
-          }}
-        ></View> */}
+
         </View>
         <View
           style={{
@@ -272,9 +210,6 @@ export default function AppointmentDate({ navigation }) {
         >
           <Button
             onPressProp={() => navigation.navigate("AppointmentPay")}
-            bgColor="#0364FF"
-            btnRadius={4}
-            btnH={44}
             title="Proceed"
             txtStyle={{ color: "#FFF", fontSize: 16, fontWeight: "700" }}
           />

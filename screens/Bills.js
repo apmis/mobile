@@ -29,8 +29,8 @@ export default function Bills() {
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           {[1, 2, 3, 5].map((item, i) => (
-            <>
-              <Pressable key={i} onPress={() => setBillModal(true)}>
+            <React.Fragment key={i}>
+              <Pressable onPress={() => setBillModal(true)}>
                 <View
                   style={{
                     display: "flex",
@@ -85,7 +85,7 @@ export default function Bills() {
                 </View>
               </Pressable>
               <View style={{ borderWidth: 1, borderColor: "#ccc" }}></View>
-            </>
+            </React.Fragment>
           ))}
 
           {[1, 2, 3, 4, 5].map((item, i) => (

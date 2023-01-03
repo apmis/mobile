@@ -12,10 +12,12 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useState } from "react";
 import AppText from "../components/seed1/AppText";
 import UpperNavigation from "../components/seed1/UpperNavigation";
+import ShareNote from "../components/seed1/ShareNote";
 
 export default function ClinicalNotes() {
   const [openedNote, setOpenedNote] = useState(-1);
   const { width: windowWidth } = Dimensions.get("window");
+  const [share, setShare] = useState(false);
 
   const openNote = (noteId) => {
     if (noteId == openedNote) {
@@ -27,7 +29,14 @@ export default function ClinicalNotes() {
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
-      <UpperNavigation back title="Clinical Notes" />
+      <UpperNavigation
+        back
+        title="Clinical Notes"
+        rightIcon
+        rightIconName="arrow-redo"
+        rightIconSize={22}
+        rightIconFunc={() => setShare(true)}
+      />
 
       <ScrollView style={{ flex: 1 }}>
         {Array(8)
@@ -183,6 +192,8 @@ export default function ClinicalNotes() {
             </View>
           ))}
       </ScrollView>
+
+      <ShareNote setShare={setShare} show={share} />
     </View>
   );
 }

@@ -15,6 +15,7 @@ export default function UpperNavigation({
   rightIconName = "options-outline",
   rightIconFunc,
   isCart = false,
+  rightIconSize = 30
 }) {
   // const windowWidth = Dimensions.get("window").width;
   const navigation = useNavigation();
@@ -34,7 +35,6 @@ export default function UpperNavigation({
         onPress={() => {
           navigation.goBack();
         }}
-          // onPress={goBack}
           style={{ position: "absolute", left: 20 }}
         >
           <Ionicons
@@ -67,7 +67,7 @@ export default function UpperNavigation({
           <Ionicons
             name={rightIconName}
             style={{
-              fontSize: 30,
+              fontSize: rightIconSize,
             }}
           />
         </TouchableOpacity>

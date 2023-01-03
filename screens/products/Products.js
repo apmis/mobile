@@ -6,6 +6,7 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
+  Text,
 } from "react-native";
 import React, { useState } from "react";
 
@@ -65,19 +66,17 @@ export default function Products({ navigation }) {
   const { width: windowWidth } = Dimensions.get("window");
   const { numberWithCommas } = useAppHooks();
   const searchProduct = (text) => {
-
-
     if (!text) {
       setDisplayedProducts(products);
     } else {
       let result = products.filter((prod) => {
-        return prod.product_name
-          .toLowerCase()
-          .includes(text.toLowerCase());
+        return prod.product_name.toLowerCase().includes(text.toLowerCase());
       });
       setDisplayedProducts(result);
     }
   };
+
+
 
   return (
     <View style={{ flex: 1, backgroundColor: "#f3f3f3" }}>
@@ -90,6 +89,7 @@ export default function Products({ navigation }) {
         rightIconFunc={() => navigation.navigate("CartDetails")}
         isCart
       />
+
 
       <View
         style={{
@@ -237,6 +237,7 @@ export default function Products({ navigation }) {
         )}
       </View>
       <NotificationCard content="Product added to cart" show={false} />
+
     </View>
   );
 }
