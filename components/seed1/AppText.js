@@ -3,5 +3,5 @@ import React from "react";
 
 
 export default function AppText({ children, style }) {
-  return <Text style={[style, { fontFamily: "ManropeRegular" }]}>{children}</Text>;
+  return <Text style={[style, { fontFamily: "ManropeRegular"}]}>{children}</Text>;
 }

@@ -1,5 +1,5 @@
 import { View, Dimensions } from "react-native";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useSelector } from "react-redux";
@@ -10,21 +10,27 @@ import Button from "../../components/seed1/Button";
 import CartItem from "../../components/seed1/CartItem";
 import NotificationCard from "../../components/seed1/NotificationCard";
 
-
 export default function CartDetails({ navigation }) {
-  const windowWidth = Dimensions.get("window").width;
+  const {width:windowWidth} = Dimensions.get("window");
   const [showNotification, setShowNotification] = useState(false);
-  
+
   //GLOBAL STATES
   const cartItems = useSelector((state) => state.cartState);
   const reRender = useSelector((state) => state.reRender);
+
 
 
   useEffect(() => {}, [reRender]);
   return (
     <View style={{ flex: 1, paddingBottom: 20 }}>
       <Bar hideBar={false} />
-      <UpperNavigation back title="Carts" rightIcon rightIconName="cart" isCart />
+      <UpperNavigation
+        back
+        title="Carts"
+        rightIcon
+        rightIconName="cart"
+        isCart
+      />
 
       {cartItems.length ? (
         <ScrollView
@@ -37,7 +43,11 @@ export default function CartDetails({ navigation }) {
           }}
         >
           {cartItems?.map((item, i) => (
-            <CartItem key={i} product={item} setShowNotification={setShowNotification} />
+            <CartItem
+              key={i}
+              product={item}
+              setShowNotification={setShowNotification}
+            />
           ))}
         </ScrollView>
       ) : (
@@ -46,7 +56,7 @@ export default function CartDetails({ navigation }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flex: 1
+            flex: 1,
           }}
         >
           <AppText style={{ fontSize: 20 }}>Your cart is empty!</AppText>
@@ -66,24 +76,31 @@ export default function CartDetails({ navigation }) {
       >
         {cartItems.length ? (
           <Button
-            onPressProp={() => navigation.navigate("OrderPlaced")}
+            onPressProp={() => navigation.navigate("Payment")}
             btnRadius={4}
-            btnH={50}
             txtStyle={{ color: "white", fontWeight: "700", fontSize: 16 }}
             title={"Checkout"}
           />
         ) : (
+          // <Button
+          //   onPressProp={() => navigation.navigate("OrderPlaced")}
+          //   btnRadius={4}
+          //   txtStyle={{ color: "white", fontWeight: "700", fontSize: 16 }}
+          //   title={"Checkout"}
+          // />
           <Button
             onPressProp={() => navigation.navigate("Products")}
             btnRadius={4}
-            btnH={50}
             txtStyle={{ color: "white", fontWeight: "700", fontSize: 16 }}
             title={"Go back"}
           />
         )}
       </View>
 
-      <NotificationCard content="Item removed from cart" show={showNotification} />
+      <NotificationCard
+        content="Item removed from cart"
+        show={showNotification}
+      />
     </View>
   );
 }

@@ -6,7 +6,7 @@ import AppText from "../../components/seed1/AppText";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 
 export default function PrescriptionData({navigation}) {
-  const windowWidth = Dimensions.get("window").width;
+  const {width: windowWidth} = Dimensions.get("window");
 
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>

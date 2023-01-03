@@ -27,9 +27,15 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.jujuman.apmis"
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "75b7d8a6-b564-4192-86cf-f22cfdd17175"
+      }
     }
   }
 }
