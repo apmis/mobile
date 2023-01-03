@@ -3,7 +3,7 @@ import Backbtn from "./Backbtn";
 
 const Header = ({ title }) => {
   return (
-    <View className="relative mt-3 ">
+    <View className="relative mt-5 ">
       <Backbtn />
       <Text
         style={{ fontFamily: "ManropeSemibold" }}

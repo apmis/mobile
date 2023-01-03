@@ -12,6 +12,8 @@ import React, { useState } from "react";
 import { Header, LightText, TabGeneral } from "../../components/seed";
 import { assets, COLORS } from "../../components/seed/constants";
 import Feather from "react-native-vector-icons/Feather";
+import ForumsTab from "./forum/ForumsTab";
+import CommentModal from "./forum/CommentModal";
 
 const DATA = [
   {
@@ -338,9 +340,15 @@ const Row = ({
 
 const Home = ({ navigation }) => {
   const [isFirstSelected, setIsFirstSelected] = useState(true);
+  const [searchOptionID, setSearchOptionID] = useState(0);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   return (
     <SafeAreaView>
       <StatusBar backgroundColor={COLORS.primaryBlue} barStyle="default" />
+      {isCommentModalOpen && (
+        <CommentModal setIsCommentModalOpen={setIsCommentModalOpen} />
+      )}
+
       <Header title="Chat & Forums" />
       <View className="w-[90%] mx-auto">
         <View className="mt-5 mb-7">
@@ -361,19 +369,48 @@ const Home = ({ navigation }) => {
             <Feather size={20} name="search" color="gray" />
           </View>
         </View>
-        <View className="h-[80%]">
-          <FlatList
-            className="flex-1"
-            data={DATA}
-            keyExtractor={(d) => d.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 180, paddingTop: 10 }}
-            ItemSeparatorComponent={() => <View className="mb-6 " />}
-            renderItem={({ item }) => (
-              <Row navigation={navigation} item={item} />
-            )}
-          />
-        </View>
+        {!isFirstSelected && (
+          <View className="flex-row w-[90%] mx-auto  -mt-5 mb-6 space-x-[3px]">
+            {["Popular topics", "Recommendations"].map((text, i) => (
+              <TouchableOpacity
+                onPress={() => setSearchOptionID(i)}
+                key={i}
+                className={`py-3 rounded ${
+                  searchOptionID === i ? "bg-[#DAE1F3]" : "bg-[#E7ECF5]"
+                } px-3`}
+              >
+                <Text
+                  style={{
+                    fontFamily:
+                      searchOptionID === i ? "ManropeBold" : "ManropeRegular",
+                  }}
+                  className={`text-xs ${
+                    searchOptionID === i ? "text-[#0E214D]" : "text-[#6D7589]"
+                  } `}
+                >
+                  {text}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+        {isFirstSelected ? (
+          <View className="h-[80%]">
+            <FlatList
+              className="flex-1"
+              data={DATA}
+              keyExtractor={(d) => d.id}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ paddingBottom: 180, paddingTop: 10 }}
+              ItemSeparatorComponent={() => <View className="mb-6 " />}
+              renderItem={({ item }) => (
+                <Row navigation={navigation} item={item} />
+              )}
+            />
+          </View>
+        ) : (
+          <ForumsTab setIsCommentModalOpen={setIsCommentModalOpen} />
+        )}
       </View>
     </SafeAreaView>
   );

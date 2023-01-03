@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import Modal from "react-native-modal";
@@ -13,16 +14,45 @@ import { Accordion } from "react-native-animated-accordion";
 import { StatusBar } from "react-native";
 import { assets } from "../components/seed/constants";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { Backbtn, Btn, Header, InputWithLabel } from "../components/seed";
+import { Btn, Header, InputWithLabel } from "../components/seed";
 const PatientProfile = ({ navigation }) => {
-  const { deviceWidth, deviceHeight } = Dimensions.get("window");
+  // const { deviceWidth, deviceHeight } = Dimensions.get("window");
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   return (
     <SafeAreaView style={{}} className="">
       <View className="relative pb-2 ">
         <Header title="My Profile" />
       </View>
+      {/* ----------------------IMAGE SELECTION MODAL------------------- */}
+      {isModalVisible && (
+        <>
+          <Pressable
+            onPress={() => setIsModalVisible(false)}
+            className="absolute z-20 top-0 bottom-0 left-0 right-0 bg-[#000000]/50"
+          />
+          <View className="absolute top-0 bottom-0 left-0 right-0">
+            <View className="h-[20%]  w-[90%] mx-auto z-30 top-[25%] py-10 pl-[30px]  rounded-[10px] bg-white">
+              <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                <Text
+                  style={{ fontFamily: "ManropeSemibold" }}
+                  className="text-base align-middle text-[#475464]"
+                >
+                  Upload From Gallery
+                </Text>
+              </TouchableOpacity>
+              <View className="my-4 w-[90%] opacity-20 h-[1px] bg-[#475464]" />
+              <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                <Text
+                  style={{ fontFamily: "ManropeSemibold" }}
+                  className="text-base text-[#475464]"
+                >
+                  Take Live Photo
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </>
+      )}
       <ScrollView showsVerticalScrollIndicator={false} className="">
         <View className="w-[100%] mt-[25%] h-[170px] mb-[34px] bg-[#E4F3FE] flex-row space-x-2">
           <View className="mx-auto relative -top-14">
@@ -111,37 +141,7 @@ const PatientProfile = ({ navigation }) => {
             </View>
           </Accordion>
         </View>
-        <Modal
-          animationOut="zoomOut"
-          coverScreen={false}
-          animationInTiming={400}
-          animationOutTiming={400}
-          deviceHeight={deviceHeight + StatusBar.currentHeight}
-          deviceWidth={deviceWidth}
-          onBackdropPress={() => setIsModalVisible(false)}
-          onBackButtonPress={() => setIsModalVisible(false)}
-          isVisible={isModalVisible}
-        >
-          <View className="h-[20%] relative -top-16 py-10 pl-[30px]  rounded-[10px] bg-white">
-            <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-              <Text
-                style={{ fontFamily: "ManropeSemibold" }}
-                className="text-base align-middle text-[#475464]"
-              >
-                Upload From Gallery
-              </Text>
-            </TouchableOpacity>
-            <View className="my-4 w-[90%] opacity-20 h-[1px] bg-[#475464]" />
-            <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-              <Text
-                style={{ fontFamily: "ManropeSemibold" }}
-                className="text-base text-[#475464]"
-              >
-                Take Live Photo
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+
         {/* ------------------------- ADDRESS ACCORDION ---------------------------------- */}
         <View className="mb-12">
           <Accordion

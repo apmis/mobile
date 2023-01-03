@@ -5,7 +5,7 @@ import { Backbtn, Btn, Header } from "../components/seed";
 const SuccessWithThanks = ({ route, navigation }) => {
   const { screen, successMessage, btnText } = route.params;
   return (
-    <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }} className="">
+    <SafeAreaView className="">
       <View className="relative">
         <Header title="Thank You!" />
       </View>

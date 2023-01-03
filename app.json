@@ -26,7 +26,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.omotola.apmis"
+      "package": "com.jujuman.apmis"
+
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -4,8 +4,27 @@ import { SignUp, SignUpScreen2 } from "./signup";
 import Success from "./Success";
 import SuccessWithThanks from "./SuccessWithThanks";
 import { Wallet, FundWallet } from "./wallet";
-import { Home, Conversation, VideoCall } from "./chat";
+import {
+  Home,
+  Conversation,
+  VideoCall,
+  ForumDetails,
+  Replies,
+  Forums,
+} from "./chat";
 import { BlogHome, BlogDetails } from "./blog";
+import {
+  SearchHospitalHome,
+  SearchDoctorHome,
+  SearchAmbulanceHome,
+  SearchPharmacyHome,
+  AmbulanceForm,
+  AmbulanceTime,
+  AmbulanceSummary,
+  HospitalDirection,
+  HospitalPayment,
+  HospitalAppointment,
+} from "./search";
 import {
   ResetPassword,
   ResetPasswordScreen2,
@@ -38,4 +57,17 @@ export {
   VideoCall,
   BlogDetails,
   BlogHome,
+  ForumDetails,
+  Replies,
+  Forums,
+  SearchHospitalHome,
+  SearchDoctorHome,
+  SearchAmbulanceHome,
+  AmbulanceForm,
+  AmbulanceTime,
+  AmbulanceSummary,
+  SearchPharmacyHome,
+  HospitalDirection,
+  HospitalAppointment,
+  HospitalPayment,
 };
