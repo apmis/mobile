@@ -64,3 +64,37 @@ export const InputWithLabel = ({
     </View>
   );
 };
+
+export const InputWithLabelAuth = ({
+  width = "90%",
+  inputValue,
+  onBlur,
+  labelValue,
+  changeHandler,
+  placeholder = "Enter placeholder",
+  keyboardType,
+  ...restProps
+}) => {
+  const [isFocused, setIsFocused] = useState(false);
+  return (
+    <View style={{ width: width }} className="mx-auto">
+      <Label value={labelValue} />
+      <TextInput
+        style={{ fontFamily: "ManropeRegular" }}
+        className={`w-full bg-transparent ${
+          isFocused ? "border-[#0364FF]" : "border-[#d2d2d2]"
+        } text-[#6D7589] text-sm px-4 mx-auto py-2 rounded-md border-[1px]`}
+        placeholder={placeholder}
+        {...restProps}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => {
+          onBlur;
+          setIsFocused(false);
+        }}
+        keyboardType={keyboardType}
+        onChangeText={changeHandler}
+        value={inputValue}
+      />
+    </View>
+  );
+};

@@ -1,4 +1,4 @@
-import { Input, InputWithLabel, ChatInput } from "./Inputs";
+import { Input, InputWithLabel, ChatInput, InputWithLabelAuth } from "./Inputs";
 import { Btn, Tab, TabGeneral } from "./Buttons";
 import OtpInput from "./OtpInput";
 import OAuth from "./OAuth";
@@ -28,6 +28,7 @@ export {
   Label,
   LabelSmall,
   InputWithLabel,
+  InputWithLabelAuth,
   Backbtn,
   AppointmentCard,
   Header,

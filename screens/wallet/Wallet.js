@@ -13,70 +13,33 @@ import { assets, COLORS } from "../../components/seed/constants";
 import { useGlobalize } from "react-native-globalize";
 import Arrow from "react-native-vector-icons/AntDesign";
 import Eye from "react-native-vector-icons/Octicons";
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "Drugs Treatment",
-    transactionType: "outgoing",
-    status: "Pending",
-    time: "2:45pm",
-    price: "50000",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bb",
-    title: "You funded your wallet",
-    transactionType: "incoming",
-    status: "Successful",
-    time: "2:45pm",
-    price: "50000",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bc",
-    title: "You paid for drugs",
-    transactionType: "outgoing",
-    status: "Successful",
-    time: "2:45pm",
-    price: "50000",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bd",
-    title: "You funded your wallet",
-    transactionType: "incoming",
-    status: "Successful",
-    time: "2:45pm",
-    price: "50000",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28be",
-    title: "You funded your wallet",
-    transactionType: "incoming",
-    status: "Successful",
-    time: "2:45pm",
-    price: "50000",
-  },
-];
+import { useEffect } from "react";
+import client from "../../feathers";
+import timeHandler from "../../utils/functions/time";
+
 // ================ TRANSACTION COMPONENT =====================
 const Transaction = ({ formatCurrency, data }) => {
-  const { title, price, status, time, transactionType } = data;
+  const { description, amount, createdAt, category, paymentmode } = data;
+
   return (
     <View className="pt-2 pb-4  px-4 ">
       <View className="flex-row justify-between items-center">
         <View className="flex-row space-x-3 items-center">
           <View
             className={`rounded-full p-1  ${
-              transactionType === "incoming" && status === "Successful"
-                ? "-rotate-[160deg] bg-[#cdf8d6]  "
-                : transactionType === "outgoing" && status === "Successful"
-                ? "bg-[#f6b4bb] rotate-[24deg] "
+              paymentmode !== "Wallet"
+                ? " rotate-[24deg] bg-[#cdf8d6]  "
+                : paymentmode === "credit"
+                ? "bg-[#f6b4bb] -rotate-[160deg] "
                 : "bg-[#f5e3be] "
             }`}
           >
             <Arrow
               name="arrowup"
               color={
-                transactionType === "incoming"
+                category !== "credit"
                   ? "#4AD768"
-                  : transactionType === "outgoing" && status === "Pending"
+                  : category === "credit" && paymentmode === "Cash"
                   ? "#FCB222"
                   : "#ED0423"
               }
@@ -84,11 +47,11 @@ const Transaction = ({ formatCurrency, data }) => {
             />
           </View>
           <View>
-            <Text style={{ fontFamily: "ManropeRegular" }}>{title}</Text>
+            <Text style={{ fontFamily: "ManropeRegular" }}>{description}</Text>
           </View>
         </View>
         <Text style={{ fontFamily: "ManropeExtrBold" }} className="text-[14px]">
-          {formatCurrency(Number(price), "NGN", {
+          {formatCurrency(Number(amount), "NGN", {
             // maximumFractionDigits: 0,
             useGrouping: true,
           })}
@@ -98,9 +61,9 @@ const Transaction = ({ formatCurrency, data }) => {
         className="text-[#6D7589] ml-[54px]"
         style={{ fontFamily: "ManropeLight", fontSize: 12 }}
       >
-        {status}
+        {paymentmode}
         {", "}
-        <Text>{time}</Text>
+        <Text>{timeHandler(createdAt)}</Text>
       </Text>
     </View>
   );
@@ -176,6 +139,48 @@ const Board = ({ formatCurrency, navigation }) => {
 
 const Wallet = ({ navigation }) => {
   const { formatCurrency } = useGlobalize();
+  const [data, setData] = useState();
+  const wallet = client.service("wallet");
+  const wallettransaction = client.service("wallettransaction");
+  const fetch = async () => {
+    try {
+      const transaction = await wallettransaction.find({
+        query: {
+          createdby: "6054aed837bc490015f56fe8",
+          // paymentmode: "Wallet",
+          $limit: 18,
+          description: { $ne: "" },
+
+          $sort: {
+            createdAt: -1,
+          },
+          $select: [
+            "description",
+            "amount",
+            "paymentmode",
+            "category",
+            "createdAt",
+          ],
+        },
+      });
+
+      /*    const walletRes = await wallet.find({
+        query: {
+          $limit: 18,
+        },
+      });
+      console.log(walletRes); */
+
+      // console.log(transaction.data);
+      setData(transaction.data);
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }} className="">
@@ -191,8 +196,8 @@ const Wallet = ({ navigation }) => {
       </View>
       <View className="w-[96%] mx-auto mt-[24px]  ">
         <FlatList
-          keyExtractor={(d) => d.id}
-          data={DATA}
+          keyExtractor={(d) => d._id}
+          data={data}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             paddingBottom: 60,

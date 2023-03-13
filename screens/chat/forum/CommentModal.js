@@ -7,7 +7,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CommentModal = ({ setIsCommentModalOpen }) => {
   const [isFocused, setIsFocused] = useState(false);
-
   return (
     <>
       <Pressable

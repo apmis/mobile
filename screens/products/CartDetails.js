@@ -11,14 +11,12 @@ import CartItem from "../../components/seed1/CartItem";
 import NotificationCard from "../../components/seed1/NotificationCard";
 
 export default function CartDetails({ navigation }) {
-  const {width:windowWidth} = Dimensions.get("window");
+  const { width: windowWidth } = Dimensions.get("window");
   const [showNotification, setShowNotification] = useState(false);
 
   //GLOBAL STATES
   const cartItems = useSelector((state) => state.cartState);
   const reRender = useSelector((state) => state.reRender);
-
-
 
   useEffect(() => {}, [reRender]);
   return (
@@ -76,7 +74,7 @@ export default function CartDetails({ navigation }) {
       >
         {cartItems.length ? (
           <Button
-            onPressProp={() => navigation.navigate("Payment")}
+            onPressProp={() => navigation.navigate("Dashboard")}
             btnRadius={4}
             txtStyle={{ color: "white", fontWeight: "700", fontSize: 16 }}
             title={"Checkout"}

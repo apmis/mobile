@@ -74,8 +74,8 @@ import PolicyDetails from "./screens/insurance/PolicyDetails";
 import ClaimDetails from "./screens/insurance/ClaimDetails";
 import AuthorizationDetails from "./screens/insurance/AuthorizationDetails";
 import MedicalRecords from "./screens/medicalRecords/MedicalRecords";
-import PayWithPaystack from "./screens/payment/PayWithPaystack";
-import Payment from "./screens/payment/Payment";
+// import PayWithPaystack from "./screens/payment/PayWithPaystack";
+// import Payment from "./screens/payment/Payment";
 import ImagingRequest from "./screens/imaging/ImagingRequest";
 import ImagingRequestMade from "./screens/imaging/ImagingRequestMade";
 import BloodRequest from "./screens/blood/BloodRequest";
@@ -188,7 +188,6 @@ export default function App() {
                 name="SearchPharmacyHome"
                 component={SearchPharmacyHome}
               />
-
               <Stack.Screen
                 name="NotificationSettings"
                 component={NotificationSettings}
@@ -208,19 +207,15 @@ export default function App() {
               <Stack.Screen name="ProductDetails" component={ProductDetails} />
               <Stack.Screen name="CartDetails" component={CartDetails} />
               {/* PRODUCTS ENDS */}
-
               {/* REFERRER */}
               <Stack.Screen name="ReferPerson" component={ReferPerson} />
               <Stack.Screen name="ReferralMade" component={ReferralMade} />
-
               {/* REFERRER ENDS */}
-
               {/* LAB */}
               <Stack.Screen name="LabTestRequest" component={LabTestRequest} />
               <Stack.Screen name="LabRequestMade" component={LabRequestMade} />
               <Stack.Screen name="LabResult" component={LabResult} />
               {/* LAB ENDS */}
-
               {/* IMAGING */}
               <Stack.Screen name="ImagingRequest" component={ImagingRequest} />
               <Stack.Screen
@@ -229,7 +224,6 @@ export default function App() {
               />
               {/* <Stack.Screen name="LabResult" component={LabResult} /> */}
               {/* IMAGING ENDS */}
-
               {/* BLOOD */}
               <Stack.Screen name="BloodRequest" component={BloodRequest} />
               <Stack.Screen
@@ -242,7 +236,6 @@ export default function App() {
               />
               <Stack.Screen name="BloodDetails" component={BloodDetails} />
               {/* BLOOD ENDS */}
-
               {/* APPOINTMENT */}
               <Stack.Screen
                 name="BookAppointment"
@@ -253,18 +246,14 @@ export default function App() {
                 name="AppointmentDate"
                 component={AppointmentDate}
               />
-
               <Stack.Screen
                 name="AppointmentList"
                 component={AppointmentList}
               />
-
               {/* APPOINTMENT ENDS */}
-
               {/* CLINICAL NOTES */}
               <Stack.Screen name="ClinicalNotes" component={ClinicalNotes} />
               {/* CLINICAL NOTES ENDS */}
-
               {/* PRESCRIPTIONS */}
               <Stack.Screen name="Prescriptions" component={Prescriptions} />
               <Stack.Screen
@@ -273,7 +262,6 @@ export default function App() {
               />
               <Stack.Screen name="DrugsTaken" component={DrugsTaken} />
               {/* PRESCRIPTIONS ENDS */}
-
               {/* INSURANCE */}
               <Stack.Screen name="GetInsured" component={GetInsured} />
               <Stack.Screen name="PolicyDetails" component={PolicyDetails} />
@@ -282,7 +270,6 @@ export default function App() {
                 name="AuthorizationDetails"
                 component={AuthorizationDetails}
               />
-
               <Stack.Screen
                 name="ProviderDetails"
                 component={ProviderDetails}
@@ -292,27 +279,23 @@ export default function App() {
                 component={HealthInsurance}
               />
               {/* INSURANCE ENDS */}
-
               {/* BILLS */}
               <Stack.Screen name="Bills" component={Bills} />
               {/* BILLS ENDS */}
-
               {/* MEDICAL PROFILE */}
               <Stack.Screen name="MedicalProfile" component={MedicalProfile} />
               {/* MEDICAL PROFILE ENDS */}
-
               {/* OTHER */}
               {/* <Stack.Screen name="Others" component={Other} /> */}
               <Stack.Screen name="MedicalRecords" component={MedicalRecords} />
               {/* OTHER ENDS */}
-
               {/* PAYMENT */}
-              <Stack.Screen
+              {/* FIXME: */}
+              {/* <Stack.Screen
                 name="PayWithPaystack"
                 component={PayWithPaystack}
               />
-              <Stack.Screen name="Payment" component={Payment} />
-
+              <Stack.Screen name="Payment" component={Payment} /> */}
               {/* PAYMENT ENDS */}
             </Stack.Navigator>
           </NavigationContainer>

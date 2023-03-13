@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+/* import { View, Text } from "react-native";
 import React from "react";
 import { Paystack } from "react-native-paystack-webview";
 import { useSelector } from "react-redux";
@@ -30,3 +30,4 @@ export default function PayWithPaystack({ navigation }) {
     </View>
   );
 }
+ */

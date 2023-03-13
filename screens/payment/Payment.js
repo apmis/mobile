@@ -1,4 +1,4 @@
-import {
+/* import {
   View,
   Dimensions,
   TouchableOpacity,
@@ -93,7 +93,7 @@ export default function Payment({ navigation }) {
           )}
         />
 
-        {/* <View
+        <View
           style={{
             marginVertical: 10,
             backgroundColor: "#eda123",
@@ -105,16 +105,17 @@ export default function Payment({ navigation }) {
           }}
         >
           <ActivityIndicator color="#fff" />
-        </View> */}
+        </View>
 
-        {/* <View style={{ marginVertical: 10 }}>
+        <View style={{ marginVertical: 10 }}>
           <Button
             bgColor="#eda123"
             txtStyle={{ color: "#fff", fontSize: 16, fontWeight: "700" }}
             title="Pay With Fullterwave"
           />
-        </View> */}
+        </View>
       </View>
     </View>
   );
 }
+ */
