@@ -9,15 +9,17 @@ import React from "react";
 import Button from "../components/seed1/Button";
 import Bar from "../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppText from "../components/seed1/AppText";
 import UpperNavigation from "../components/seed1/UpperNavigation";
 import ShareNote from "../components/seed1/ShareNote";
+import client from "../feathers";
 
 export default function ClinicalNotes() {
   const [openedNote, setOpenedNote] = useState(-1);
   const { width: windowWidth } = Dimensions.get("window");
   const [share, setShare] = useState(false);
+  const clinicalNotes = client.service("clinicaldocument");
 
   const openNote = (noteId) => {
     if (noteId == openedNote) {
@@ -26,6 +28,32 @@ export default function ClinicalNotes() {
       setOpenedNote(noteId);
     }
   };
+
+  const fetch = async () => {
+    try {
+      const clinicalNotesRes = await clinicalNotes.find({
+        query: {
+          client: "61dc1aefad488300168cb5fe",
+          $limit: 1,
+          // description: { $ne: "" },
+          $sort: {
+            createdAt: -1,
+          },
+          // $select: ["provider.facilityName", "provider.facilitylogo"],
+        },
+      });
+      // console.log(authRes.data[0]);
+      console.log(clinicalNotesRes.data[0].documentdetail);
+      // setData(clinicalNotesRes.data);
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />

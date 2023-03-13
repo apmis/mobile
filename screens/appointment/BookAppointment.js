@@ -5,16 +5,59 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../components/seed1/Button";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AppText from "../../components/seed1/AppText";
+import client from "../../feathers";
 
 export default function BookAppointment({ navigation }) {
   const { width: windowWidth } = Dimensions.get("window");
   const [chosenTab, setChosenTab] = useState("About");
+  const appointments = client.service("appointments");
+  const [data, setData] = useState();
+
+  const fetch = async () => {
+    try {
+      const appointmentsRes = await appointments.find({
+        query: {
+          clientId: "60bdf029beeed33c682ac75b",
+          $limit: 4,
+          // description: { $ne: "" },
+
+          $sort: {
+            createdAt: -1,
+          },
+          // $select: [
+          //   "preauthCode",
+          //   "preauthid",
+          //   "beneficiary.firstname",
+          //   "beneficiary.middlename",
+          //   "beneficiary.lastname",
+          //   "provider.facilityName",
+          //   "clinical_details.admission_date",
+          //   "clinical_details.discharged_date",
+          //   "clinical_details.preauthtype",
+          //   "policy.planType",
+          //   "policy.providers",
+          // ],
+        },
+      });
+
+      // console.log(authRes.data[0]);
+      console.log(appointmentsRes.data);
+      // setData(medicalRecordRes.data);
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <View style={{ backgroundColor: "#Faf83F9", flex: 1 }}>
       <Bar hideBar={false} />

@@ -52,9 +52,13 @@ const Dashboard = ({ navigation }) => {
   return (
     <BottomSheetModalProvider>
       {/* This style was initially added into SafeAreaView 👉  style={{ paddingTop: StatusBar.currentHeight }}   */}
-      <SafeAreaView>
+      <SafeAreaView className="flex-1 pt-[10%]">
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
-        <StatusBar backgroundColor={"white"} barStyle="dark-content" />
+        <StatusBar
+          backgroundColor={"white"}
+          barStyle="dark-content"
+          translucent
+        />
         <View
           style={{ backgroundColor: COLORS.primaryBlue }}
           className="w-full py-3 px-[29]"
@@ -139,7 +143,7 @@ const Dashboard = ({ navigation }) => {
 
           <View className="h-[178] w-[96%] mx-auto justify-center space-x-2 flex-row">
             <View className="h-full w-[45%] pt-8 rounded-[10px] flex justify-center items-center bg-[#FCE6D8]">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("View")}>
                 <Image source={assets.record} />
                 <Text
                   className="text-center mt-[17] mb-[20] text-[18]"
@@ -150,7 +154,10 @@ const Dashboard = ({ navigation }) => {
               </TouchableOpacity>
             </View>
             <View className="space-y-2 w-[45%]">
-              <TouchableOpacity className="h-[47%] rounded-[10px] relative px-[14] py-[11] bg-[#FFF2D0]">
+              <TouchableOpacity
+                onPress={() => navigation.navigate("BlogHome")}
+                className="h-[47%] rounded-[10px] relative px-[14] py-[11] bg-[#FFF2D0]"
+              >
                 <Image source={assets.read} />
                 <Text
                   className="text-center absolute right-5 bottom-3 mt-[17] mb-[12] text-[18]"
@@ -159,7 +166,10 @@ const Dashboard = ({ navigation }) => {
                   Read
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity className="h-[47%] rounded-[10px] relative px-[14] py-[11] bg-[#E4D9FC]">
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Buy")}
+                className="h-[47%] rounded-[10px] relative px-[14] py-[11] bg-[#E4D9FC]"
+              >
                 <Image source={assets.buy} />
                 <Text
                   className="text-center absolute right-5 bottom-3 mt-[17] mb-[12] text-[18]"
@@ -170,7 +180,10 @@ const Dashboard = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity className="py-[13] relative rounded-[10px] mt-2 px-[21] w-[90%] mx-auto bg-[#CFE8FF]">
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ChatHome")}
+            className="py-[13] relative rounded-[10px] mt-2 px-[21] w-[90%] mx-auto bg-[#CFE8FF]"
+          >
             <Image source={assets.chat} />
             <Text
               className="text-center absolute left-28 bottom-3 mt-[17] mb-[12] text-[18]"

@@ -6,15 +6,17 @@ import UpperNavigation from "../../components/seed1/UpperNavigation";
 import Bar from "../../components/seed1/Bar";
 import AppText from "../../components/seed1/AppText";
 
-export default function ProviderDetails() {
+export default function ProviderDetails({ route }) {
   const [planBought, setPlanBought] = useState(false);
   const windowWidth = Dimensions.get("window").width;
+  const { data } = route.params;
+
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
       {!planBought ? (
         <>
-          <UpperNavigation color="#03045E" back title="Reliance Health Care" />
+          <UpperNavigation color="#03045E" back title={data.title} />
           <View
             style={{
               width: windowWidth - 40,
@@ -30,9 +32,9 @@ export default function ProviderDetails() {
                 fontWeight: "400",
               }}
             >
-              Reliance Health care guarantees life insurance for everyone and
-              has differnt plans that benefits you. You can choose to subscribe
-              to any of the plans monthly, annually or quarterly.
+              {data.title} guarantees life insurance for everyone and has
+              differnt plans that benefits you. You can choose to subscribe to
+              any of the plans monthly, annually or quarterly.
             </AppText>
           </View>
           <ScrollView

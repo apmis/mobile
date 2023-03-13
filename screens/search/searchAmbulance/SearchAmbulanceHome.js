@@ -71,7 +71,7 @@ const SearchAmbulanceHome = ({ navigation }) => {
   const [search, setSearch] = useState("");
   const [isSubmitSearch, setIsSubmitSearch] = useState(false);
   return (
-    <SafeAreaView className="flex-1 relative bg-[#f3f3f3] ">
+    <SafeAreaView className="flex-1 relative bg-[#f3f3f3] pt-[7%]">
       <View className="m-[10%]">
         <SearchInput
           search={search}

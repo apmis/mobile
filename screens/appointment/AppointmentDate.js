@@ -75,6 +75,7 @@ export default function AppointmentDate({ navigation }) {
             { date: 16, day: "THU" },
           ].map((item, i) => (
             <TouchableOpacity
+              key={i}
               onPress={() => setSelectedDay(item.date)}
               style={{
                 height: 100,
@@ -200,7 +201,6 @@ export default function AppointmentDate({ navigation }) {
             }}
             placeholder="Enter  how you are feeling"
           />
-
         </View>
         <View
           style={{

@@ -7,7 +7,7 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../components/seed1/Button";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import { Picker } from "@react-native-picker/picker";
@@ -15,6 +15,7 @@ import AppText from "../../components/seed1/AppText";
 import Bar from "../../components/seed1/Bar";
 import Allergies from "../../components/seed1/Allergies";
 import Diseases from "../../components/seed1/Diseases";
+import client from "../../feathers";
 
 export default function MedicalRecords() {
   const { width: windowWidth } = Dimensions.get("window");
@@ -22,9 +23,50 @@ export default function MedicalRecords() {
   const [showDiseases, setShowDiseases] = useState(false);
   const [allergiesArr, setAllergiesArr] = useState(["Paracetamol"]);
   const [diseasesArr, setDiseasesArr] = useState(["Cholesterol"]);
+  const medicalRecord = client.service("client");
+  const [data, setData] = useState();
+
+  const fetch = async () => {
+    try {
+      const medicalRecordRes = await medicalRecord.find({
+        query: {
+          _id: "640f0146c5e3bd001446e928",
+          $limit: 1,
+          // description: { $ne: "" },
+
+          $sort: {
+            createdAt: -1,
+          },
+          // $select: [
+          //   "preauthCode",
+          //   "preauthid",
+          //   "beneficiary.firstname",
+          //   "beneficiary.middlename",
+          //   "beneficiary.lastname",
+          //   "provider.facilityName",
+          //   "clinical_details.admission_date",
+          //   "clinical_details.discharged_date",
+          //   "clinical_details.preauthtype",
+          //   "policy.planType",
+          //   "policy.providers",
+          // ],
+        },
+      });
+
+      // console.log(authRes.data[0]);
+      console.log(medicalRecordRes.data);
+      // setData(medicalRecordRes.data);
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
-    <View style={{ backgroundColor: "#F3F3F3", flex: 1,  }}>
+    <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar />
       <UpperNavigation back title="My Medical Records" />
 
@@ -100,10 +142,7 @@ export default function MedicalRecords() {
               overflow: "hidden",
             }}
           >
-     
-     
-            <AppText>{allergiesArr.slice(0, 3) + '...'}</AppText>
-           
+            <AppText>{allergiesArr.slice(0, 3) + "..."}</AppText>
           </Pressable>
         </View>
         <View
@@ -132,10 +171,7 @@ export default function MedicalRecords() {
               overflow: "hidden",
             }}
           >
-     
-     
-            <AppText>{diseasesArr.slice(0, 3) + '...'}</AppText>
-           
+            <AppText>{diseasesArr.slice(0, 3) + "..."}</AppText>
           </Pressable>
         </View>
         <View
@@ -169,8 +205,7 @@ export default function MedicalRecords() {
                 borderRadius: 4,
                 marginTop: 8,
               }}
-              keyboardType = "phone-pad"
-      
+              keyboardType="phone-pad"
             />
           </View>
           <View
@@ -193,7 +228,7 @@ export default function MedicalRecords() {
                 borderRadius: 4,
                 marginTop: 8,
               }}
-              keyboardType = "phone-pad"
+              keyboardType="phone-pad"
             />
           </View>
         </View>
@@ -231,19 +266,19 @@ export default function MedicalRecords() {
         </View>
 
         <View
-        style={{
-          width: windowWidth - 40,
-          marginHorizontal: 20,
-          marginTop: 100
-        }}
-      >
-        <Button
-          btnRadius={4}
-          bgColor={"#0364FF"}
-          title={"Save Changes"}
-          txtStyle={{ color: "#FFFFFF", fontSize: 16, fontWeight: "700" }}
-        />
-      </View>
+          style={{
+            width: windowWidth - 40,
+            marginHorizontal: 20,
+            marginTop: 100,
+          }}
+        >
+          <Button
+            btnRadius={4}
+            bgColor={"#0364FF"}
+            title={"Save Changes"}
+            txtStyle={{ color: "#FFFFFF", fontSize: 16, fontWeight: "700" }}
+          />
+        </View>
       </ScrollView>
 
       <Allergies
@@ -253,7 +288,12 @@ export default function MedicalRecords() {
         allergiesArr={allergiesArr}
       />
 
-      <Diseases show={showDiseases} setShowDiseases={setShowDiseases} diseasesArr={diseasesArr} setDiseasesArr={setDiseasesArr} />
+      <Diseases
+        show={showDiseases}
+        setShowDiseases={setShowDiseases}
+        diseasesArr={diseasesArr}
+        setDiseasesArr={setDiseasesArr}
+      />
     </View>
   );
 }

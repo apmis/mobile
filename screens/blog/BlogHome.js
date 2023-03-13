@@ -40,7 +40,7 @@ const POSTS = [
 const BlogHome = ({ navigation }) => {
   const [isSelectedTab, setIsSelectedTab] = useState("");
   return (
-    <SafeAreaView>
+    <SafeAreaView className="pt-[7%]">
       <Header title="Read" />
       <View className=" w-[85%] mx-auto mt-[10%]">
         <Text
