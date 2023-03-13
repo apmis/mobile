@@ -15,11 +15,42 @@ import Button from "../../components/seed1/Button";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CancelPlanModal from "../../components/seed1/CancelPlanModal";
 import AppText from "../../components/seed1/AppText";
+import { useEffect } from "react";
+import client from "../../feathers";
 
 export default function GetInsured({ navigation }) {
   const [chosenTab, setChosenTab] = useState("Plans");
   const [isOpenCancelModal, setIsOpenCancelModal] = useState(false);
   const { width: windowWidth } = Dimensions.get("window");
+  const providers = client.service("preauth");
+  const [data, setData] = useState([
+    { provider: { facilityName: "", facilitylogo: "" } },
+  ]);
+  const fetch = async () => {
+    try {
+      const providersRes = await providers.find({
+        query: {
+          // "beneficiary._id": "63df51a83c894f0016f4366e",
+          // $limit: 1,
+          // description: { $ne: "" },
+          $sort: {
+            createdAt: -1,
+          },
+          $select: ["provider.facilityName", "provider.facilitylogo"],
+        },
+      });
+      // console.log(authRes.data[0]);
+      console.log(providersRes.data);
+      setData(providersRes.data);
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
@@ -109,19 +140,16 @@ export default function GetInsured({ navigation }) {
               width: windowWidth,
             }}
           >
-            {[
-              "Oceans Health...",
-              "Oceans Health...",
-              "Oceans Health...",
-              "Oceans Health...",
-              "Oceans Health...",
-              "Oceans Health...",
-              "Oceans Health...",
-              "Oceans Health...",
-            ].map((item, i) => (
+            {data.map((item) => (
               <Pressable
-                key={i}
-                onPress={() => navigation.navigate("ProviderDetails")}
+                key={item._id}
+                onPress={() =>
+                  navigation.navigate("ProviderDetails", {
+                    data: {
+                      title: item.provider.facilityName,
+                    },
+                  })
+                }
                 style={{ width: windowWidth / 3.3, marginHorizontal: 2 }}
               >
                 <View
@@ -135,14 +163,15 @@ export default function GetInsured({ navigation }) {
                 >
                   <View style={{ height: 64, width: 64 }}>
                     <Image
-                      style={{ width: "100%", height: "100%" }}
-                      source={require("../../assets/images/ins_sample.png")}
+                      className="rounded-full h-[46] w-[46]"
+                      source={{ uri: item.provider.facilitylogo }}
                     />
                   </View>
                   <AppText
+                    className="capitalize"
                     style={{ marginTop: 8, fontSize: 14, fontWeight: "400" }}
                   >
-                    {item}
+                    {item.provider.facilityName}
                   </AppText>
                 </View>
               </Pressable>
@@ -250,7 +279,7 @@ export default function GetInsured({ navigation }) {
                   position: "absolute",
                   bottom: 20,
                   width: 300,
-                  left: 25,
+                  left: 10,
                   alignItems: "center",
                   justifyContent: "center",
                 }}
@@ -261,7 +290,7 @@ export default function GetInsured({ navigation }) {
                   borderColor={"#3679F8"}
                   title="Cancel Plan"
                   bgColor="#fff"
-                  btnW={320}
+                  btnW={"94%"}
                   txtStyle={{
                     color: "#3679F8",
                     fontWeight: "700",

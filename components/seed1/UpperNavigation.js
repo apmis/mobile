@@ -5,7 +5,6 @@ import AppText from "./AppText";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
-
 export default function UpperNavigation({
   title,
   back = false,
@@ -15,7 +14,7 @@ export default function UpperNavigation({
   rightIconName = "options-outline",
   rightIconFunc,
   isCart = false,
-  rightIconSize = 30
+  rightIconSize = 30,
 }) {
   // const windowWidth = Dimensions.get("window").width;
   const navigation = useNavigation();
@@ -27,14 +26,15 @@ export default function UpperNavigation({
         justifyContent: "center",
         alignItems: "center",
         marginTop: 20,
+        paddingBottom: 10,
         position: "relative",
       }}
     >
       {back ? (
         <TouchableOpacity
-        onPress={() => {
-          navigation.goBack();
-        }}
+          onPress={() => {
+            navigation.goBack();
+          }}
           style={{ position: "absolute", left: 20 }}
         >
           <Ionicons
@@ -76,9 +76,8 @@ export default function UpperNavigation({
       )}
 
       {isCart && cartItems.length ? (
-        
         <TouchableOpacity
-          onPress={()=>navigation.navigate("CartDetails")}
+          onPress={() => navigation.navigate("CartDetails")}
           style={{
             height: 20,
             width: 20,

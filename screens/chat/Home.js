@@ -343,8 +343,8 @@ const Home = ({ navigation }) => {
   const [searchOptionID, setSearchOptionID] = useState(0);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   return (
-    <SafeAreaView>
-      <StatusBar backgroundColor={COLORS.primaryBlue} barStyle="default" />
+    <SafeAreaView className="flex-1 pt-[7%]">
+      <StatusBar backgroundColor="transparent" translucent />
       {isCommentModalOpen && (
         <CommentModal setIsCommentModalOpen={setIsCommentModalOpen} />
       )}

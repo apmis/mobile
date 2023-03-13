@@ -19,7 +19,7 @@ const PatientProfile = ({ navigation }) => {
   // const { deviceWidth, deviceHeight } = Dimensions.get("window");
   const [isModalVisible, setIsModalVisible] = useState(false);
   return (
-    <SafeAreaView style={{}} className="">
+    <SafeAreaView style={{}} className="pt-[7%]">
       <View className="relative pb-2 ">
         <Header title="My Profile" />
       </View>

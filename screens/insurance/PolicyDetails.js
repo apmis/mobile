@@ -7,14 +7,26 @@ import {
 } from "react-native";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Bar from "../../components/seed1/Bar";
 import AppText from "../../components/seed1/AppText";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
+import client from "../../feathers";
 
 export default function PolicyDetails() {
-  const [openedNote, setOpenedNote] = useState("Sponsor Details");
+  const [openedNote, setOpenedNote] = useState("Policy Details");
   const { width: windowWidth } = Dimensions.get("window");
+  const [data, setData] = useState({
+    active: "",
+    principal: {
+      policyNo: "",
+      firstname: "",
+      lastname: "",
+      gender: "",
+      phone: "",
+    },
+  });
+  const policy = client.service("policy");
 
   const openNote = (noteId) => {
     if (noteId == openedNote) {
@@ -23,6 +35,40 @@ export default function PolicyDetails() {
       setOpenedNote(noteId);
     }
   };
+  const fetch = async () => {
+    try {
+      const policyRes = await policy.find({
+        query: {
+          "principal._id": "63ed2431d041780014e92d03",
+          // "participantInfo.clientId": "63e2311467307d001434e3b8",
+          // createdBy: "61b3610e316cc8001649a9fd",
+          // clientId: { $nin: ["63e2311467307d001434e3b8"] },
+          $limit: 1,
+          $sort: {
+            createdAt: -1,
+          },
+          $select: [
+            "active",
+            "principal.policyNo",
+            "principal.firstname",
+            "principal.lastname",
+            "principal.gender",
+            "principal.phone",
+          ],
+        },
+      });
+
+      console.log("Policy: ", policyRes.data[0]);
+      setData(policyRes.data[0]);
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
@@ -96,7 +142,7 @@ export default function PolicyDetails() {
                       marginTop: 5,
                     }}
                   >
-                    13322BA
+                    {data.principal.policyNo}
                   </AppText>
                 </View>
                 <View style={{ marginTop: 24 }}>
@@ -117,7 +163,7 @@ export default function PolicyDetails() {
                       marginTop: 5,
                     }}
                   >
-                    08074567832
+                    {data.principal.phone}
                   </AppText>
                 </View>
                 <View style={{ marginTop: 24 }}>
@@ -195,13 +241,13 @@ export default function PolicyDetails() {
                   </AppText>
                   <AppText
                     style={{
-                      color: "#00B67A",
+                      color: `${data.active === true ? "#00B67A" : "red"}`,
                       fontSize: 16,
                       fontWeight: "400",
                       marginTop: 5,
                     }}
                   >
-                    Active
+                    {data.active === true ? "Active" : "In-Active"}
                   </AppText>
                 </View>
               </View>
