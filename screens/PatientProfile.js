@@ -143,7 +143,7 @@ const PatientProfile = ({ navigation }) => {
         </View>
 
         {/* ------------------------- ADDRESS ACCORDION ---------------------------------- */}
-        <View className="mb-12">
+        <View className="mb-16">
           <Accordion
             parentContainerStyles={{
               marginHorizontal: "5%",

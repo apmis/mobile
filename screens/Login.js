@@ -19,14 +19,40 @@ import {
   Tab,
 } from "../components/seed";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
+import client from "../feathers";
 
 const Login = () => {
   const [isEmailSelected, setIsEmailSelected] = useState(true);
-
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigation = useNavigation();
-  const submitHandler = () => {
-    navigation.navigate("Dashboard");
+  const ProductServ = client.service("products");
+  const ClientServ = client.service("appointments");
+  const BandServ = client.service("bands");
+  // navigation.navigate("Dashboard");
+
+  const submitHandler = async () => {
+    try {
+      setLoading(true);
+      console.log("clicked", email, password);
+      // console.log(client.hooks());
+      const res = await client.authenticate({
+        strategy: "local",
+        email,
+        password,
+      });
+
+      console.log(res);
+      console.log("You successfully logged in");
+      navigation.navigate("Dashboard");
+    } catch (err) {
+      setLoading(false);
+      console.log(`Error logging in User, probable network issues  ${err}`);
+    }
   };
+
   return (
     <SafeAreaView className="">
       <StatusBar backgroundColor={COLORS.primaryBlue} barStyle={""} />
@@ -55,7 +81,12 @@ const Login = () => {
         <View className="pb-10">
           {isEmailSelected ? (
             <View className="mb-5">
-              <InputWithLabel labelValue="Email" placeholder="Enter email..." />
+              <InputWithLabel
+                inputValue={email}
+                changeHandler={(text) => setEmail(text)}
+                labelValue="Email"
+                placeholder="Enter email..."
+              />
             </View>
           ) : (
             <View className="mb-5">
@@ -68,6 +99,8 @@ const Login = () => {
 
           <View className="relative">
             <InputWithLabel
+              inputValue={password}
+              changeHandler={(text) => setPassword(text)}
               labelValue="Password"
               placeholder="Enter password..."
             />
