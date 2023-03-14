@@ -35,7 +35,7 @@ const Row = ({ data: { description } }) => {
 
 const Notifications = ({ navigation }) => {
   const notifications = client.service("notification");
-  const [data, setData] = useState([{ description: "" }]);
+  const [data, setData] = useState([{ description: "", _id: "" }]);
 
   const fetch = async () => {
     try {
@@ -71,7 +71,7 @@ const Notifications = ({ navigation }) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={data}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item, i) => item._id || i}
           renderItem={({ item }) => <Row data={item} />}
           ItemSeparatorComponent={
             <View className="w-[90%] h-[1px] my-4 mx-auto bg-[#D2D2D2]" />

@@ -14,12 +14,25 @@ import AppText from "../components/seed1/AppText";
 import UpperNavigation from "../components/seed1/UpperNavigation";
 import ShareNote from "../components/seed1/ShareNote";
 import client from "../feathers";
+import dateHandler from "../utils/functions/date";
 
 export default function ClinicalNotes() {
   const [openedNote, setOpenedNote] = useState(-1);
   const { width: windowWidth } = Dimensions.get("window");
   const [share, setShare] = useState(false);
   const clinicalNotes = client.service("clinicaldocument");
+  const [data, setData] = useState([
+    {
+      createdAt: "",
+      createdByname: "",
+      documentname: "",
+      documentdetail: {
+        Documentation: "",
+        Recommendation: "",
+        Title: "",
+      },
+    },
+  ]);
 
   const openNote = (noteId) => {
     if (noteId == openedNote) {
@@ -34,17 +47,25 @@ export default function ClinicalNotes() {
       const clinicalNotesRes = await clinicalNotes.find({
         query: {
           client: "61dc1aefad488300168cb5fe",
-          $limit: 1,
+          // documentname: "Prescription",
+          documentname: "Doctor Note",
+          // $limit: 40,
           // description: { $ne: "" },
           $sort: {
             createdAt: -1,
           },
-          // $select: ["provider.facilityName", "provider.facilitylogo"],
+          $select: [
+            "createdAt",
+            "documentname",
+            "documentdetail",
+            "createdBy",
+            "createdByname",
+          ],
         },
       });
       // console.log(authRes.data[0]);
-      console.log(clinicalNotesRes.data[0].documentdetail);
-      // setData(clinicalNotesRes.data);
+      console.log(clinicalNotesRes.data);
+      setData(clinicalNotesRes.data);
       // Do something with the user object here
     } catch (error) {
       console.error("Something went wrong", error);
@@ -67,158 +88,150 @@ export default function ClinicalNotes() {
       />
 
       <ScrollView style={{ flex: 1 }}>
-        {Array(8)
-          .fill("")
-          .map((item, i) => (
+        {data.map((item, i) => (
+          <View
+            key={i}
+            style={{
+              backgroundColor: "#fff",
+              width: windowWidth - 40,
+              marginHorizontal: 20,
+              paddingHorizontal: 18,
+              marginTop: 16,
+              borderRadius: 16,
+            }}
+          >
             <View
-              key={i}
               style={{
                 backgroundColor: "#fff",
-                width: windowWidth - 40,
-                marginHorizontal: 20,
-                paddingHorizontal: 18,
-                marginTop: 16,
-                borderRadius: 16,
+                height: 64,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              <View
-                style={{
-                  backgroundColor: "#fff",
-                  height: 64,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
+              <AppText
+                style={{ color: "#03045E", fontSize: 14, fontWeight: "400" }}
               >
-                <AppText
-                  style={{ color: "#03045E", fontSize: 14, fontWeight: "400" }}
-                >
-                  Blood Cancer Treatment
-                </AppText>
-                <TouchableOpacity onPress={() => openNote(i)}>
-                  {i == openedNote ? (
-                    <Ionicons
-                      name="chevron-forward-outline"
-                      style={{
-                        fontSize: 26,
-                      }}
-                    />
-                  ) : (
-                    <Ionicons
-                      name="chevron-down-outline"
-                      style={{
-                        fontSize: 26,
-                      }}
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-              {i == openedNote ? (
-                <View style={{ paddingBottom: 80 }}>
-                  <AppText
+                {item.documentname}
+              </AppText>
+              <TouchableOpacity onPress={() => openNote(i)}>
+                {i == openedNote ? (
+                  <Ionicons
+                    name="chevron-forward-outline"
                     style={{
-                      color: "#0364FF",
-                      fontSize: 16,
-                      fontWeight: "400",
+                      fontSize: 26,
                     }}
-                  >
-                    22, November, 2022
-                  </AppText>
-                  <AppText
+                  />
+                ) : (
+                  <Ionicons
+                    name="chevron-down-outline"
                     style={{
-                      color: "#6D7589",
-                      fontSize: 16,
-                      fontWeight: "400",
-                      marginTop: 8,
-                      lineHeight: 22,
+                      fontSize: 26,
                     }}
-                  >
-                    Both Ulna and Radius bones fractured, significant
-                    displacement diagnosed.
-                  </AppText>
-                  <AppText
-                    style={{
-                      color: "#0E214D",
-                      fontSize: 14,
-                      fontWeight: "500",
-                      marginTop: 22,
-                    }}
-                  >
-                    Doctor On Duty
-                  </AppText>
-                  <AppText
-                    style={{
-                      color: "#6D7589",
-                      fontSize: 16,
-                      fontWeight: "400",
-                      marginTop: 8,
-                    }}
-                  >
-                    Brooklyn Simmons
-                  </AppText>
-                  <AppText
-                    style={{
-                      color: "#0E214D",
-                      fontSize: 14,
-                      fontWeight: "500",
-                      marginTop: 22,
-                    }}
-                  >
-                    Diagnosis
-                  </AppText>
-                  <AppText
-                    style={{
-                      color: "#6D7589",
-                      fontSize: 16,
-                      fontWeight: "400",
-                      marginTop: 8,
-                      lineHeight: 22,
-                    }}
-                  >
-                    Liver tests show abnormal liver enzyme levels,which may be a
-                    sign of liver damage. I suspect cirrhosis you have:
-                    Increased levels of the liver enzymes alanine transaminase
-                    (ALT), aspartate transaminase (AST), and alkaline
-                    phosphatase (ALP). Increased levels of bilirubin. Decreased
-                    levels of blood proteins.
-                  </AppText>
-                  <AppText
-                    style={{
-                      color: "#0E214D",
-                      fontSize: 14,
-                      fontWeight: "500",
-                      marginTop: 22,
-                    }}
-                  >
-                    Medications
-                  </AppText>
-                  <AppText
-                    style={{
-                      color: "#6D7589",
-                      fontSize: 16,
-                      fontWeight: "400",
-                      marginTop: 8,
-                    }}
-                  >
-                    Diclofenac, 200 mg
-                  </AppText>
-                  <AppText
-                    style={{
-                      color: "#6D7589",
-                      fontSize: 16,
-                      fontWeight: "400",
-                      lineHeight: 22,
-                      // marginTop: 8,
-                    }}
-                  >
-                    3 capsules with meals daily
-                  </AppText>
-                </View>
-              ) : (
-                <></>
-              )}
+                  />
+                )}
+              </TouchableOpacity>
             </View>
-          ))}
+            {i == openedNote ? (
+              <View style={{ paddingBottom: 80 }}>
+                <AppText
+                  style={{
+                    color: "#0364FF",
+                    fontSize: 16,
+                    fontWeight: "400",
+                  }}
+                >
+                  {dateHandler(item.createdAt)}
+                </AppText>
+                <AppText
+                  style={{
+                    color: "#6D7589",
+                    fontSize: 16,
+                    fontWeight: "400",
+                    marginTop: 8,
+                    lineHeight: 22,
+                  }}
+                >
+                  {item.documentdetail.Title}
+                </AppText>
+                <AppText
+                  style={{
+                    color: "#0E214D",
+                    fontSize: 14,
+                    fontWeight: "500",
+                    marginTop: 22,
+                  }}
+                >
+                  Doctor On Duty
+                </AppText>
+                <AppText
+                  style={{
+                    color: "#6D7589",
+                    fontSize: 16,
+                    fontWeight: "400",
+                    marginTop: 8,
+                  }}
+                >
+                  {item.createdByname}
+                </AppText>
+                <AppText
+                  style={{
+                    color: "#0E214D",
+                    fontSize: 14,
+                    fontWeight: "500",
+                    marginTop: 22,
+                  }}
+                >
+                  Documentation
+                </AppText>
+                <AppText
+                  style={{
+                    color: "#6D7589",
+                    fontSize: 16,
+                    fontWeight: "400",
+                    marginTop: 8,
+                    lineHeight: 22,
+                  }}
+                >
+                  {item.documentdetail.Documentation}
+                </AppText>
+                <AppText
+                  style={{
+                    color: "#0E214D",
+                    fontSize: 14,
+                    fontWeight: "500",
+                    marginTop: 22,
+                  }}
+                >
+                  Recommendation
+                </AppText>
+                <AppText
+                  style={{
+                    color: "#6D7589",
+                    fontSize: 16,
+                    fontWeight: "400",
+                    marginTop: 8,
+                  }}
+                >
+                  {item.documentdetail.Recommendation}
+                </AppText>
+                {/* <AppText
+                  style={{
+                    color: "#6D7589",
+                    fontSize: 16,
+                    fontWeight: "400",
+                    lineHeight: 22,
+                    // marginTop: 8,
+                  }}
+                >
+                  3 capsules with meals daily
+                </AppText> */}
+              </View>
+            ) : (
+              <></>
+            )}
+          </View>
+        ))}
       </ScrollView>
 
       <ShareNote setShare={setShare} show={share} />
