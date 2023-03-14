@@ -1,12 +1,62 @@
-import { View, Text, Dimensions, Image, ScrollView, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  Image,
+  ScrollView,
+  Pressable,
+} from "react-native";
 import React from "react";
 import Bar from "../../components/seed1/Bar";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import AppText from "../../components/seed1/AppText";
+import { useState, useEffect } from "react";
+import client from "../../feathers";
 
-export default function Prescriptions({navigation}) {
+export default function Prescriptions({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
+  const prescriptions = client.service("appointments");
+  const [data, setData] = useState([
+    {
+      createdAt: "",
+      createdByname: "",
+      documentname: "",
+      documentdetail: [],
+    },
+  ]);
+  const fetch = async () => {
+    try {
+      const prescriptionsRes = await prescriptions.find({
+        query: {
+          // client: "61dc1aefad488300168cb5fe",
+          // documentname: "Prescription",
+          // documentname: "Prescription",
+          $limit: 10,
+          // description: { $ne: "" },
+          $sort: {
+            createdAt: -1,
+          },
+          // $select: [
+          //   "createdAt",
+          //   "documentname",
+          //   "documentdetail",
+          //   "createdBy",
+          //   "createdByname",
+          // ],
+        },
+      });
+      // console.log(authRes.data[0]);
+      console.log("Appoin: ", prescriptionsRes.data);
+      // setData(prescriptionsRes.data);
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
   return (
     <View style={{ backgroundColor: "#F3F3F3", flex: 1 }}>
       <Bar hideBar={false} />
@@ -40,7 +90,7 @@ export default function Prescriptions({navigation}) {
               justifyContent: "flex-start",
               marginBottom: 27,
             }}
-            onPress={()=>navigation.navigate("PrescriptionData")}
+            onPress={() => navigation.navigate("PrescriptionData")}
           >
             <View
               style={{
