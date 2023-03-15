@@ -8,7 +8,7 @@ import {
   Dimensions,
   Pressable,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-native-modal";
 import { Accordion } from "react-native-animated-accordion";
 import { StatusBar } from "react-native";
@@ -21,9 +21,11 @@ import {
   InputWithLabelAuth,
   Label,
 } from "../components/seed";
+import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
 import { createUserProfile } from "../utils/auth/schemas";
 import { LgaSelect, Select, StateSelect } from "../components/seed/Select";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const PatientProfile = ({ navigation }) => {
   // const { deviceWidth, deviceHeight } = Dimensions.get("window");
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,7 +35,7 @@ const PatientProfile = ({ navigation }) => {
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedReligion, setSelectedReligion] = useState("");
-
+  const [image, setImage] = useState("");
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -59,7 +61,46 @@ const PatientProfile = ({ navigation }) => {
   const submitHandler = (data) => {
     console.log(data);
   };
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    setIsModalVisible(false);
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      try {
+        await AsyncStorage.setItem("uri", result.assets[0].uri);
+        console.log(`Data with key uri has been successfully stored.`);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  };
 
+  useEffect(() => {
+    console.log(image);
+    (async () => {
+      try {
+        const value = await AsyncStorage.getItem("uri");
+        if (value !== null) {
+          console.log(
+            `Data with key uri has been successfully retrieved. Value: ${value}`
+          );
+          setImage(value);
+          return value;
+        } else {
+          console.log(`Data with key uri does not exist.`);
+          return null;
+        }
+      } catch (error) {
+        console.log(error.message);
+        return null;
+      }
+    })();
+  }, [image]);
   return (
     <SafeAreaView style={{}} className="pt-[7%]">
       <View className="relative pb-2 ">
@@ -74,7 +115,7 @@ const PatientProfile = ({ navigation }) => {
           />
           <View className="absolute top-0 bottom-0 left-0 right-0">
             <View className="h-[20%]  w-[90%] mx-auto z-30 top-[25%] py-10 pl-[30px]  rounded-[10px] bg-white">
-              <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+              <TouchableOpacity onPress={pickImage}>
                 <Text
                   style={{ fontFamily: "ManropeSemibold" }}
                   className="text-base align-middle text-[#475464]"
@@ -99,7 +140,14 @@ const PatientProfile = ({ navigation }) => {
         <View className="w-[100%] mt-[25%] h-[170px] mb-[34px] bg-[#E4F3FE] flex-row space-x-2">
           <View className="mx-auto relative -top-14">
             <View className="relative">
-              <Image source={assets.profilePic} className="rounded-2xl" />
+              <Image
+                source={{
+                  uri:
+                    image ||
+                    "https://images.unsplash.com/photo-1670272504471-61a632484750?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                }}
+                className="rounded-2xl w-[160px] h-[170px]"
+              />
               <TouchableOpacity onPress={() => setIsModalVisible(true)}>
                 <Image
                   source={assets.changeProfileImage}
