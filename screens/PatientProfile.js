@@ -144,7 +144,7 @@ const PatientProfile = ({ navigation }) => {
                 source={{
                   uri:
                     image ||
-                    "https://images.unsplash.com/photo-1670272504471-61a632484750?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                    "https://images.unsplash.com/photo-1565945887714-d5139f4eb0ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZW1vaml8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
                 }}
                 className="rounded-2xl w-[160px] h-[170px]"
               />
