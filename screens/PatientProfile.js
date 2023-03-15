@@ -14,10 +14,52 @@ import { Accordion } from "react-native-animated-accordion";
 import { StatusBar } from "react-native";
 import { assets } from "../components/seed/constants";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { Btn, Header, InputWithLabel } from "../components/seed";
+import {
+  Btn,
+  Header,
+  InputWithLabel,
+  InputWithLabelAuth,
+  Label,
+} from "../components/seed";
+import { Formik } from "formik";
+import { createUserProfile } from "../utils/auth/schemas";
+import { LgaSelect, Select, StateSelect } from "../components/seed/Select";
 const PatientProfile = ({ navigation }) => {
   // const { deviceWidth, deviceHeight } = Dimensions.get("window");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedLga, setSelectedLga] = useState("");
+  const [selectedMaritalStatus, setSelectedMaritalStatus] = useState("");
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedReligion, setSelectedReligion] = useState("");
+
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    middleName: "",
+    email: "",
+    phoneNumber1: "",
+    phoneNumber2: "",
+    gender: "",
+    dob: "",
+    religion: "",
+    profession: "",
+    maritalStatus: "",
+    country: "",
+    residentialAddress: "",
+    state: "",
+    localgov: "",
+    town: "",
+    city: "",
+    neighbourhood: "",
+    streetAddress: "",
+  };
+
+  const submitHandler = (data) => {
+    console.log(data);
+  };
+
   return (
     <SafeAreaView style={{}} className="pt-[7%]">
       <View className="relative pb-2 ">
@@ -73,149 +115,370 @@ const PatientProfile = ({ navigation }) => {
             </Text>
           </View>
         </View>
-        <View>
-          <View className="mb-5">
-            <InputWithLabel labelValue="First Name" placeholder="Christian" />
-          </View>
-          <View className="mb-5">
-            <InputWithLabel labelValue="Last Name" placeholder="Peters" />
-          </View>
-          <View className="mb-5">
-            <InputWithLabel labelValue="Middle Name" placeholder="Chigozie" />
-          </View>
-        </View>
-        {/* ------------------ BIO-DATA ACCORDION ----------------------- */}
-        <View>
-          <Accordion
-            parentContainerStyles={{
-              marginHorizontal: "5%",
-              marginVertical: "5%",
-            }}
-            headerText="BIO DATA"
-            headerTextStyles={{
-              fontFamily: "ManropeExtrBold",
-              paddingLeft: 18,
-              fontSize: 18,
-            }}
-          >
-            <View style={{ padding: 10 }}>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Email"
-                  placeholder="auraqule@gmail.com"
-                />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Phone Number 1"
-                  placeholder="07066389644"
-                />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Phone Number 2"
-                  placeholder="08066389644"
-                />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel labelValue="Gender" placeholder="select" />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Date of Birth"
-                  placeholder="dd/mm/yyy"
-                />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel labelValue="Religion" placeholder="select" />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel labelValue="Profession" placeholder="select" />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Marital Status"
-                  placeholder="select"
-                />
-              </View>
-            </View>
-          </Accordion>
-        </View>
 
-        {/* ------------------------- ADDRESS ACCORDION ---------------------------------- */}
-        <View className="mb-16">
-          <Accordion
-            parentContainerStyles={{
-              marginHorizontal: "5%",
-            }}
-            headerText="ADDRESS"
-            headerTextStyles={{
-              fontFamily: "ManropeExtrBold",
-              paddingLeft: 18,
-              fontSize: 18,
-            }}
-          >
-            <View style={{ padding: 10 }}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={createUserProfile}
+          onSubmit={(values) => {
+            submitHandler(values);
+          }}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+            <View>
               <View className="mb-5">
-                <InputWithLabel labelValue="Country" placeholder="select" />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Residential address"
-                  placeholder="enter address"
-                />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel labelValue="State" placeholder="select" />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Local Government"
-                  placeholder="select"
-                />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel labelValue="Town" placeholder="select" />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel labelValue="City" placeholder="select" />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Neighourhood"
-                  placeholder="enter address"
-                />
-              </View>
-              <View className="mb-5">
-                <InputWithLabel
-                  labelValue="Street address"
-                  placeholder="enter address"
-                />
-              </View>
-              <View className="mt-4 px-3 mb-[72px]">
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#0364FF"
-                  unfillColor="#FFFFFF"
-                  text="I give the doctor consent to see my Health Profile during my appointment and/ or treatment."
-                  iconStyle={{ borderColor: "#0364FF" }}
-                  innerIconStyle={{ borderWidth: 2 }}
-                  textStyle={{
-                    fontFamily: "ManropeRegular",
-                    fontSize: 14,
-                    textDecorationLine: "none",
-                  }}
-                />
-              </View>
-              <View className="pb-[49px]">
-                <Btn
-                  onPressHandler={() => console.log("clicked")}
-                  value="Save Changes"
-                />
+                {/* TAB 1 */}
+                <View>
+                  <View className="mb-5">
+                    <InputWithLabelAuth
+                      labelValue="First Name"
+                      placeholder="Christian"
+                      onBlur={handleBlur("firstName")}
+                      changeHandler={handleChange("firstName")}
+                      inputValue={values.firstName}
+                    />
+                    {errors.firstName && (
+                      <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                        {errors.firstName}
+                      </Text>
+                    )}
+                  </View>
+                  <View className="mb-5">
+                    <InputWithLabelAuth
+                      labelValue="Last Name"
+                      placeholder="Peters"
+                      onBlur={handleBlur("lastName")}
+                      changeHandler={handleChange("lastName")}
+                      inputValue={values.lastName}
+                    />
+                    {errors.lastName && (
+                      <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                        {errors.lastName}
+                      </Text>
+                    )}
+                  </View>
+                  <View className="mb-5">
+                    <InputWithLabelAuth
+                      labelValue="Middle Name"
+                      placeholder="Chigozie"
+                      onBlur={handleBlur("middleName")}
+                      changeHandler={handleChange("middleName")}
+                      inputValue={values.middleName}
+                    />
+                    {errors.middleName && (
+                      <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                        {errors.middleName}
+                      </Text>
+                    )}
+                  </View>
+                </View>
+
+                {/* ------------------ BIO-DATA ACCORDION ----------------------- */}
+                <View>
+                  <Accordion
+                    parentContainerStyles={{
+                      marginHorizontal: "5%",
+                      marginVertical: "5%",
+                    }}
+                    headerText="BIO DATA"
+                    headerTextStyles={{
+                      fontFamily: "ManropeExtrBold",
+                      paddingLeft: 18,
+                      fontSize: 18,
+                    }}
+                  >
+                    <View style={{ padding: 10 }}>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Email"
+                          placeholder="auraqule@gmail.com"
+                          onBlur={handleBlur("email")}
+                          changeHandler={handleChange("email")}
+                          inputValue={values.email}
+                        />
+                        {errors.email && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.email}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Phone Number 1"
+                          placeholder="07066389644"
+                          onBlur={handleBlur("phoneNumber1")}
+                          changeHandler={handleChange("phoneNumber1")}
+                          inputValue={values.phoneNumber1}
+                        />
+                        {errors.phoneNumber1 && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.phoneNumber1}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Phone Number 2"
+                          placeholder="08066389644"
+                          onBlur={handleBlur("phoneNumber2")}
+                          changeHandler={handleChange("phoneNumber2")}
+                          inputValue={values.phoneNumber2}
+                        />
+                        {errors.phoneNumber2 && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.phoneNumber2}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        {/* <InputWithLabelAuth
+                          labelValue="Gender"
+                          placeholder="select"
+                          onBlur={handleBlur("gender")}
+                          changeHandler={handleChange("gender")}
+                          inputValue={values.gender}
+                        /> */}
+                        <Select
+                          labelValue="Gender"
+                          selectedValue={selectedGender}
+                          setSelectedValue={setSelectedGender}
+                          list={["Select", "Male", "Female", "Others"]}
+                        />
+                        {errors.gender && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.gender}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Date of Birth"
+                          placeholder="dd/mm/yyy"
+                          onBlur={handleBlur("dob")}
+                          changeHandler={handleChange("dob")}
+                          inputValue={values.dob}
+                        />
+                        {errors.dob && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.dob}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        {/* <InputWithLabelAuth
+                          labelValue="Religion"
+                          placeholder="select"
+                          onBlur={handleBlur("religion")}
+                          changeHandler={handleChange("religion")}
+                          inputValue={values.religion}
+                        /> */}
+                        <Select
+                          labelValue="Religion"
+                          selectedValue={selectedReligion}
+                          setSelectedValue={setSelectedReligion}
+                          list={["Select", "Christianity", "Islam", "Others"]}
+                        />
+                        {errors.religion && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.religion}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Profession"
+                          placeholder="enter profession"
+                          onBlur={handleBlur("profession")}
+                          changeHandler={handleChange("profession")}
+                          inputValue={values.profession}
+                        />
+                        {errors.profession && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.profession}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        {/* <InputWithLabelAuth
+                          labelValue="Marital Status"
+                          placeholder="select"
+                          onBlur={handleBlur("maritalStatus")}
+                          changeHandler={handleChange("maritalStatus")}
+                          inputValue={values.maritalStatus}
+                        /> */}
+                        <Select
+                          labelValue="Marital Status"
+                          selectedValue={selectedMaritalStatus}
+                          setSelectedValue={setSelectedMaritalStatus}
+                          list={["Select", "Married", "Single", "Others"]}
+                        />
+                        {errors.maritalStatus && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.maritalStatus}
+                          </Text>
+                        )}
+                      </View>
+                    </View>
+                  </Accordion>
+                </View>
+
+                {/* ------------------------- ADDRESS ACCORDION ---------------------------------- */}
+                <View className="mb-16">
+                  <Accordion
+                    parentContainerStyles={{
+                      marginHorizontal: "5%",
+                    }}
+                    headerText="ADDRESS"
+                    headerTextStyles={{
+                      fontFamily: "ManropeExtrBold",
+                      paddingLeft: 18,
+                      fontSize: 18,
+                    }}
+                  >
+                    <View style={{ padding: 10 }}>
+                      <View className="mb-5">
+                        {/* <InputWithLabelAuth
+                          labelValue="Country"
+                          placeholder="Nigeria"
+                          onBlur={handleBlur("country")}
+                          changeHandler={handleChange("country")}
+                          inputValue={values.country}
+                        /> */}
+                        <Select
+                          labelValue="Country"
+                          selectedValue={selectedCountry}
+                          setSelectedValue={setSelectedCountry}
+                          list={["Nigeria"]}
+                        />
+                        {errors.country && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.country}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Residential address"
+                          placeholder="enter address"
+                          onBlur={handleBlur("residentialAddress")}
+                          changeHandler={handleChange("residentialAddress")}
+                          inputValue={values.residentialAddress}
+                        />
+                        {errors.residentialAddress && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.residentialAddress}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        {/* STATE SELECT */}
+                        <StateSelect
+                          selectedValue={selectedState}
+                          setSelectedValue={setSelectedState}
+                        />
+                      </View>
+                      <View className="mb-5">
+                        <LgaSelect
+                          selectedValue={selectedLga}
+                          setSelectedValue={setSelectedLga}
+                          selectedState={selectedState}
+                        />
+                        {/* <InputWithLabelAuth
+                          labelValue="Local Government"
+                          placeholder="select"
+                          onBlur={handleBlur("localgov")}
+                          changeHandler={handleChange("localgov")}
+                          inputValue={values.localgov}
+                        />
+                        {errors.localgov && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.localgov}
+                          </Text>
+                        )} */}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Town"
+                          placeholder="enter town"
+                          onBlur={handleBlur("town")}
+                          changeHandler={handleChange("town")}
+                          inputValue={values.town}
+                        />
+                        {errors.town && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.town}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="City"
+                          placeholder="enter city"
+                          onBlur={handleBlur("city")}
+                          changeHandler={handleChange("city")}
+                          inputValue={values.city}
+                        />
+                        {errors.city && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.city}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Neighourhood"
+                          placeholder="enter address"
+                          onBlur={handleBlur("neighbourhood")}
+                          changeHandler={handleChange("neighbourhood")}
+                          inputValue={values.neighbourhood}
+                        />
+                        {errors.neighbourhood && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.neighbourhood}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mb-5">
+                        <InputWithLabelAuth
+                          labelValue="Street address"
+                          placeholder="enter address"
+                          onBlur={handleBlur("streetAddress")}
+                          changeHandler={handleChange("streetAddress")}
+                          inputValue={values.streetAddress}
+                        />
+                        {errors.streetAddress && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            {errors.streetAddress}
+                          </Text>
+                        )}
+                      </View>
+                      <View className="mt-4 px-3 mb-[72px]">
+                        <BouncyCheckbox
+                          size={25}
+                          fillColor="#0364FF"
+                          unfillColor="#FFFFFF"
+                          text="I give the doctor consent to see my Health Profile during my appointment and/ or treatment."
+                          iconStyle={{ borderColor: "#0364FF" }}
+                          innerIconStyle={{ borderWidth: 2 }}
+                          textStyle={{
+                            fontFamily: "ManropeRegular",
+                            fontSize: 14,
+                            textDecorationLine: "none",
+                          }}
+                        />
+                      </View>
+                      <View className="pb-[49px]">
+                        <Btn
+                          onPressHandler={handleSubmit}
+                          value="Save Changes"
+                        />
+                      </View>
+                    </View>
+                  </Accordion>
+                </View>
               </View>
             </View>
-          </Accordion>
-        </View>
+          )}
+        </Formik>
       </ScrollView>
     </SafeAreaView>
   );
