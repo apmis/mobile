@@ -24,8 +24,14 @@ import Foundation from "react-native-vector-icons/Foundation";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import { assets, COLORS } from "../components/seed/constants";
 import { AppointmentCard } from "../components/seed";
+import { useEffect } from "react";
+import client from "../feathers";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Dashboard = ({ navigation }) => {
-  const [isClose, setIsClose] = useState(true);
+  const [isClose, setIsClose] = useState(false);
+  const [hasCompleteProfile, setHasCompleteProfile] = useState(true);
+  const clientUser = client.service("client");
+  let id;
   // ref
   const bottomSheetModalRef = useRef();
 
@@ -49,6 +55,38 @@ const Dashboard = ({ navigation }) => {
     // navigation.navigate("SearchHome");
     isClose ? handlePresentModalPress() : handleDismissModal();
   };
+
+  const hasCompletedRegChecker = async () => {
+    try {
+      async function fetchClientId() {
+        try {
+          const client_id = await AsyncStorage.getItem("client_id");
+          if (client_id !== null) {
+            return client_id.replace(/^"(.*)"$/, "$1");
+          }
+        } catch (error) {
+          console.log(error.message);
+          // handle errors here
+        }
+      }
+      id = await fetchClientId();
+      const query = {
+        userId: id,
+        // $select: ['id', 'fieldName'],
+        $limit: 1,
+        // fieldName: { $exists: true, $ne: null }
+      };
+      const clientUserRes = await clientUser.find({ query });
+      console.log(clientUserRes);
+      setHasCompleteProfile(true);
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+
+  useEffect(() => {
+    hasCompletedRegChecker();
+  }, []);
   return (
     <BottomSheetModalProvider>
       {/* This style was initially added into SafeAreaView 👉  style={{ paddingTop: StatusBar.currentHeight }}   */}
@@ -59,21 +97,23 @@ const Dashboard = ({ navigation }) => {
           barStyle="dark-content"
           translucent
         />
-        <View
-          style={{ backgroundColor: COLORS.primaryBlue }}
-          className="w-full py-3 px-[29]"
-        >
-          <TouchableOpacity
-            onPress={() => navigation.navigate("PatientProfile")}
+        {!hasCompleteProfile && (
+          <View
+            style={{ backgroundColor: COLORS.primaryBlue }}
+            className="w-full py-3 px-[29]"
           >
-            <Text
-              style={{ fontFamily: "ManropeRegular" }}
-              className="text-white text-base"
+            <TouchableOpacity
+              onPress={() => navigation.navigate("PatientProfile", { id })}
             >
-              Complete Your Profile
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <Text
+                style={{ fontFamily: "ManropeRegular" }}
+                className="text-white text-base"
+              >
+                Complete Your Profile
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 20 }}
@@ -97,7 +137,7 @@ const Dashboard = ({ navigation }) => {
                   className="text-[10px] text-[#444444]"
                   style={{ fontFamily: "ManropeLight" }}
                 >
-                  I’m sure you’re good
+                  I&apos;m sure you&apos;re good
                 </Text>
               </View>
             </View>
