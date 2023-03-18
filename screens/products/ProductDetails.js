@@ -11,14 +11,19 @@ import React, { useState, useEffect } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ProductReview from "../../components/seed1/ProductReview";
 
-import { useSelector } from "react-redux";
-import { useCartHooks } from "../../hooks/seed1/useCartHooks";
+import { useDispatch, useSelector } from "react-redux";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import Bar from "../../components/seed1/Bar";
 import AppText from "../../components/seed1/AppText";
 import Button from "../../components/seed1/Button";
 import NotificationCard from "../../components/seed1/NotificationCard";
 import { useAppHooks } from "../../hooks/seed1/useAppHooks";
+import {
+  increaseQuantity,
+  reduceQuantity,
+  addToCart,
+  removeFromCart,
+} from "../../redux/slices/cartSlice";
 
 const { width } = Dimensions.get("window");
 const { numberWithCommas } = useAppHooks();
@@ -92,21 +97,10 @@ export default function ProductDetails({ navigation, route }) {
     setCurrentSlideIndex(currentIndex);
   };
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   //GLOBAL STATES
-  const cartItems = useSelector((state) => state.cartState);
-  const reRender = useSelector((state) => state.reRender);
+  const cartItems = useSelector((state) => state.cart);
   const prodAlreadyInCart = cartItems.find((prod) => prod.id == product.id);
-
-  const {
-    increaseProductQuantity,
-    decreaseProductQuantity,
-    addToCart,
-    reduceQuantity,
-  } = useCartHooks(setProduct);
-
-
-  useEffect(() => {}, [reRender]);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#f3f3f3" }}>
@@ -186,8 +180,8 @@ export default function ProductDetails({ navigation, route }) {
           <TouchableOpacity
             onPress={
               prodAlreadyInCart
-                ? () => reduceQuantity(product)
-                : () => decreaseProductQuantity(product)
+                ? () => dispatch(reduceQuantity(product))
+                : () => dispatch(removeFromCart(product))
             }
             style={{
               height: 30,
@@ -211,8 +205,8 @@ export default function ProductDetails({ navigation, route }) {
           <TouchableOpacity
             onPress={
               prodAlreadyInCart
-                ? () => addToCart(product)
-                : () => increaseProductQuantity(product)
+                ? () => dispatch(increaseQuantity(product))
+                : () => dispatch(addToCart(product))
             }
             style={{
               height: 30,
@@ -290,7 +284,7 @@ export default function ProductDetails({ navigation, route }) {
             onPressProp={() => {
               setShowNotification(true);
               setTimeout(() => {
-                addToCart(product);
+                dispatch(addToCart(product));
                 setShowNotification(false);
               }, 1000);
             }}

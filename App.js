@@ -64,7 +64,6 @@ import LabRequestMade from "./screens/lab/LabRequestMade";
 import ReferPerson from "./screens/ReferPerson";
 import ReferralMade from "./screens/ReferralMade";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
 import Bills from "./screens/Bills";
 import Products from "./screens/products/Products";
 import ProductDetails from "./screens/products/ProductDetails";
@@ -82,6 +81,7 @@ import BloodRequest from "./screens/blood/BloodRequest";
 import BloodRequestMade from "./screens/blood/BloodRequestMade";
 import BloodRequestList from "./screens/blood/BloodRequestList";
 import BloodDetails from "./screens/blood/BloodDetails";
+import store from "./redux/store";
 
 const Stack = createNativeStackNavigator();
 const theme = {

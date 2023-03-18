@@ -2,16 +2,17 @@ import { View, TouchableOpacity, Image, Pressable } from "react-native";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AppText from "./AppText";
-import { useCartHooks } from "../../hooks/seed1/useCartHooks";
+import { useDispatch } from "react-redux";
 import { useAppHooks } from "../../hooks/seed1/useAppHooks";
+import {
+  addToCart,
+  reduceQuantity,
+  removeFromCart,
+} from "../../redux/slices/cartSlice";
 
 export default function CartItem({ product, setShowNotification }) {
-  // function numberWithCommas(num) {
-  //   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  // }
-
+  const dispatch = useDispatch();
   const { numberWithCommas } = useAppHooks();
-  const { removeProduct, reduceQuantity, addToCart } = useCartHooks();
 
   return (
     <View
@@ -68,7 +69,7 @@ export default function CartItem({ product, setShowNotification }) {
                 marginTop: 7,
               }}
             >
-              ₦{numberWithCommas(product.total())}
+              ₦{numberWithCommas(product.totalCost)}
             </AppText>
           </View>
           <View
@@ -80,7 +81,7 @@ export default function CartItem({ product, setShowNotification }) {
             }}
           >
             <TouchableOpacity
-              onPress={() => reduceQuantity(product)}
+              onPress={() => dispatch(reduceQuantity(product))}
               style={{
                 height: 30,
                 width: 30,
@@ -105,7 +106,7 @@ export default function CartItem({ product, setShowNotification }) {
             </AppText>
 
             <TouchableOpacity
-              onPress={() => addToCart(product)}
+              onPress={() => dispatch(addToCart(product))}
               style={{
                 height: 30,
                 width: 30,
@@ -124,7 +125,7 @@ export default function CartItem({ product, setShowNotification }) {
       </View>
       <TouchableOpacity
         onPress={() => {
-          removeProduct(product);
+          dispatch(removeFromCart(product));
           setShowNotification(true);
           setTimeout(() => {
             setShowNotification(false);

@@ -76,8 +76,6 @@ export default function Products({ navigation }) {
     }
   };
 
-
-
   return (
     <View style={{ flex: 1, backgroundColor: "#f3f3f3" }}>
       <Bar hideBar={false} />
@@ -89,7 +87,6 @@ export default function Products({ navigation }) {
         rightIconFunc={() => navigation.navigate("CartDetails")}
         isCart
       />
-
 
       <View
         style={{
@@ -237,7 +234,6 @@ export default function Products({ navigation }) {
         )}
       </View>
       <NotificationCard content="Product added to cart" show={false} />
-
     </View>
   );
 }

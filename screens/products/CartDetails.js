@@ -15,10 +15,12 @@ export default function CartDetails({ navigation }) {
   const [showNotification, setShowNotification] = useState(false);
 
   //GLOBAL STATES
-  const cartItems = useSelector((state) => state.cartState);
-  const reRender = useSelector((state) => state.reRender);
+  const cartItems = useSelector((state) => state.cart) || [];
+  // const reRender = useSelector((state) => state.reRender);
 
-  useEffect(() => {}, [reRender]);
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
   return (
     <View style={{ flex: 1, paddingBottom: 20 }}>
       <Bar hideBar={false} />
