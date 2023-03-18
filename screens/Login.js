@@ -21,12 +21,14 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import client from "../feathers";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = () => {
   const [isEmailSelected, setIsEmailSelected] = useState(true);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigation = useNavigation();
   const ProductServ = client.service("products");
   const ClientServ = client.service("appointments");
@@ -46,10 +48,12 @@ const Login = () => {
 
       console.log(res);
       console.log("You successfully logged in");
+      AsyncStorage.setItem("client_id", JSON.stringify(res.user._id));
       navigation.navigate("Dashboard");
     } catch (err) {
       setLoading(false);
-      console.log(`Error logging in User, probable network issues  ${err}`);
+      setError(`${err.toString()}`);
+      // console.log(`Error logging in User, probable network issues  ${err}`);
     }
   };
 
@@ -104,6 +108,11 @@ const Login = () => {
               labelValue="Password"
               placeholder="Enter password..."
             />
+            {error && (
+              <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                {error}
+              </Text>
+            )}
             <Text
               onPress={() => navigation.navigate("ResetPassword")}
               style={{ fontFamily: "ManropeRegular" }}

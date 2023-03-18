@@ -50,8 +50,8 @@ const SignUp = () => {
         console.log(
           `You have successfully created an account ${response.data._id}`
         );
-        AsyncStorage.setItem("verify_id", JSON.stringify(response.data._id));
-        navigation.navigate("SignUpScreen2");
+        AsyncStorage.setItem("client_id", JSON.stringify(response.data._id));
+        navigation.navigate("Dashboard");
       })
       .catch((err) => {
         console.log(`Sorry, You are unable to create an account ${err}`);
@@ -100,15 +100,29 @@ const SignUp = () => {
               <View>
                 <View className="mb-5">
                   <InputWithLabelAuth
-                    labelValue="Full Name"
-                    placeholder="Enter full name..."
-                    onBlur={handleBlur("fullName")}
-                    changeHandler={handleChange("fullName")}
-                    inputValue={values.fullName}
+                    labelValue="First Name"
+                    placeholder="Enter first name..."
+                    onBlur={handleBlur("firstname")}
+                    changeHandler={handleChange("firstname")}
+                    inputValue={values.firstname}
                   />
-                  {errors.fullName && (
+                  {errors.firstname && (
                     <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                      {errors.fullName}
+                      {errors.firstname}
+                    </Text>
+                  )}
+                </View>
+                <View className="mb-5">
+                  <InputWithLabelAuth
+                    labelValue="Last Name"
+                    placeholder="Enter lastname..."
+                    onBlur={handleBlur("lastname")}
+                    changeHandler={handleChange("lastname")}
+                    inputValue={values.lastname}
+                  />
+                  {errors.lastname && (
+                    <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                      {errors.lastname}
                     </Text>
                   )}
                 </View>
@@ -180,3 +194,38 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+{
+  /* <Formik
+initialValues={initialValues}
+validationSchema={createUserSchema}
+onSubmit={(values) => {
+  submitHandler(values);
+}}
+>
+{({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+  <View>
+    <View className="mb-5">
+      <InputWithLabelAuth
+        labelValue="Full Name"
+        placeholder="Enter full name..."
+        onBlur={handleBlur("fullName")}
+        changeHandler={handleChange("fullName")}
+        inputValue={values.fullName}
+      />
+    
+    </View>
+ 
+  </View>
+)}
+</Formik> */
+}
+
+// {errors.fullName && (
+//   <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+//     {errors.fullName}
+//   </Text>
+// )}
+{
+  /* <Btn onPressHandler={handleSubmit} value="Sign Up" /> */
+}

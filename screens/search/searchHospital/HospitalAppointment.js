@@ -32,11 +32,11 @@ const APPOINTMENT_TIME = [
   "06:00 PM",
 ];
 const HospitalAppointment = ({ navigation }) => {
-  const [date, setDate] = useState(new Date());
   const [isFocused, setIsFocused] = useState(false);
   const [selectedTime, setSelectedTime] = useState("");
-  //   const [mode, setMode] = useState("date");
+  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  //   const [mode, setMode] = useState("date");
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -57,7 +57,7 @@ const HospitalAppointment = ({ navigation }) => {
   }, []); */
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 pt-[7%]">
       <Header title="Book Appointment" />
       <View className="mt-[8%] w-[90%] mx-auto">
         {/* CALENDAR */}

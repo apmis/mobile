@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  Text,
 } from "react-native";
 import React from "react";
 import Button from "../components/seed1/Button";
@@ -109,11 +110,18 @@ export default function ClinicalNotes() {
                 justifyContent: "space-between",
               }}
             >
-              <AppText
-                style={{ color: "#03045E", fontSize: 14, fontWeight: "400" }}
-              >
-                {item.documentname}
-              </AppText>
+              <View>
+                <AppText
+                  style={{ color: "#03045E", fontSize: 14, fontWeight: "400" }}
+                >
+                  {item.documentname}
+                </AppText>
+                <AppText
+                  style={{ color: "#0364FF", fontSize: 14, fontWeight: "400" }}
+                >
+                  {dateHandler(item.createdAt)}
+                </AppText>
+              </View>
               <TouchableOpacity onPress={() => openNote(i)}>
                 {i == openedNote ? (
                   <Ionicons
@@ -134,7 +142,7 @@ export default function ClinicalNotes() {
             </View>
             {i == openedNote ? (
               <View style={{ paddingBottom: 80 }}>
-                <AppText
+                {/* <AppText
                   style={{
                     color: "#0364FF",
                     fontSize: 16,
@@ -142,7 +150,7 @@ export default function ClinicalNotes() {
                   }}
                 >
                   {dateHandler(item.createdAt)}
-                </AppText>
+                </AppText> */}
                 <AppText
                   style={{
                     color: "#6D7589",

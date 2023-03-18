@@ -12,54 +12,119 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-native-modal";
 import { Accordion } from "react-native-animated-accordion";
 import { StatusBar } from "react-native";
-import { assets } from "../components/seed/constants";
+import { assets, COLORS } from "../components/seed/constants";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {
   Btn,
   Header,
   InputWithLabel,
   InputWithLabelAuth,
-  Label,
+  LabelSmall,
 } from "../components/seed";
 import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
 import { createUserProfile } from "../utils/auth/schemas";
 import { LgaSelect, Select, StateSelect } from "../components/seed/Select";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const PatientProfile = ({ navigation }) => {
+import DateTimePicker from "@react-native-community/datetimepicker";
+import dateHandler from "../utils/functions/date";
+import client from "../feathers";
+const PatientProfile = ({ navigation, route }) => {
+  const { id } = route.params;
   // const { deviceWidth, deviceHeight } = Dimensions.get("window");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedLga, setSelectedLga] = useState("");
-  const [selectedMaritalStatus, setSelectedMaritalStatus] = useState("");
-  const [selectedGender, setSelectedGender] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedReligion, setSelectedReligion] = useState("");
-  const [image, setImage] = useState("");
+  const [isAcceptTerms, setIsAcceptTerms] = useState(false);
+  const [state, setState] = useState("");
+  const [lga, setLga] = useState("");
+  const [maritalstatus, setMaritalStatus] = useState("");
+  const [gender, setGender] = useState("");
+  const [country, setCountry] = useState("");
+  const [religion, setReligion] = useState("");
+  const [imageurl, setImageUrl] = useState("");
+  const [isComplete, setIscomplete] = useState(null);
+  const [dob, setDob] = useState(new Date());
+  const [dobValue, setDobValue] = useState("");
+  const [show, setShow] = useState(false);
+  const clientUser = client.service("client");
   const initialValues = {
-    firstName: "",
-    lastName: "",
-    middleName: "",
+    firstname: "",
+    lastname: "",
+    middlename: "",
     email: "",
-    phoneNumber1: "",
-    phoneNumber2: "",
+    phone: "",
+    phone2: "",
     gender: "",
     dob: "",
     religion: "",
     profession: "",
-    maritalStatus: "",
+    maritalstatus: "",
     country: "",
-    residentialAddress: "",
+    address: "",
     state: "",
-    localgov: "",
+    lga: "",
     town: "",
     city: "",
     neighbourhood: "",
     streetAddress: "",
   };
-
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDob(currentDate);
+    setDobValue(dateHandler(currentDate));
+    console.log(dateHandler(currentDate));
+  };
   const submitHandler = (data) => {
     console.log(data);
+    if (
+      gender.includes("Select") ||
+      !dobValue ||
+      religion.includes("Select") ||
+      maritalstatus.includes("Select") ||
+      state.includes("Select") ||
+      lga.includes("Select") ||
+      !isAcceptTerms
+    ) {
+      setIscomplete(false);
+      return;
+    }
+    const updatedObject = {};
+    Object.keys(data).forEach((key) => {
+      if (
+        key === "town" ||
+        key === "neighbourhood" ||
+        key === "streetAddress" ||
+        key === "phone2"
+      ) {
+        delete data[key];
+      } else {
+        updatedObject[key] = data[key];
+      }
+    });
+
+    clientUser
+      .create({
+        ...updatedObject,
+        userId: id,
+        gender,
+        dob,
+        country,
+        state,
+        lga,
+        religion,
+        imageurl,
+        maritalstatus,
+        facility: {
+          _id: "63b7fda4221ded00166e5a7c",
+        },
+      })
+      .then((createdClient) => {
+        console.log("Object created:", createdClient);
+        navigation.navigate("Dashboard");
+      })
+      .catch((error) => {
+        console.error("Error creating object:", error);
+      });
   };
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -70,7 +135,7 @@ const PatientProfile = ({ navigation }) => {
     });
     setIsModalVisible(false);
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setImageUrl(result.assets[0].uri);
       try {
         await AsyncStorage.setItem("uri", result.assets[0].uri);
         console.log(`Data with key uri has been successfully stored.`);
@@ -81,7 +146,7 @@ const PatientProfile = ({ navigation }) => {
   };
 
   useEffect(() => {
-    console.log(image);
+    console.log(imageurl);
     (async () => {
       try {
         const value = await AsyncStorage.getItem("uri");
@@ -89,7 +154,7 @@ const PatientProfile = ({ navigation }) => {
           console.log(
             `Data with key uri has been successfully retrieved. Value: ${value}`
           );
-          setImage(value);
+          setImageUrl(value);
           return value;
         } else {
           console.log(`Data with key uri does not exist.`);
@@ -100,7 +165,7 @@ const PatientProfile = ({ navigation }) => {
         return null;
       }
     })();
-  }, [image]);
+  }, [imageurl]);
   return (
     <SafeAreaView style={{}} className="pt-[7%]">
       <View className="relative pb-2 ">
@@ -143,8 +208,8 @@ const PatientProfile = ({ navigation }) => {
               <Image
                 source={{
                   uri:
-                    image ||
-                    "https://images.unsplash.com/photo-1670272504471-61a632484750?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                    imageurl ||
+                    "https://images.unsplash.com/photo-1565945887714-d5139f4eb0ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZW1vaml8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
                 }}
                 className="rounded-2xl w-[160px] h-[170px]"
               />
@@ -168,6 +233,7 @@ const PatientProfile = ({ navigation }) => {
           initialValues={initialValues}
           validationSchema={createUserProfile}
           onSubmit={(values) => {
+            console.log(values);
             submitHandler(values);
           }}
         >
@@ -180,13 +246,13 @@ const PatientProfile = ({ navigation }) => {
                     <InputWithLabelAuth
                       labelValue="First Name"
                       placeholder="Christian"
-                      onBlur={handleBlur("firstName")}
-                      changeHandler={handleChange("firstName")}
-                      inputValue={values.firstName}
+                      onBlur={handleBlur("firstname")}
+                      changeHandler={handleChange("firstname")}
+                      inputValue={values.firstname}
                     />
-                    {errors.firstName && (
+                    {errors.firstname && (
                       <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                        {errors.firstName}
+                        {errors.firstname}
                       </Text>
                     )}
                   </View>
@@ -194,13 +260,13 @@ const PatientProfile = ({ navigation }) => {
                     <InputWithLabelAuth
                       labelValue="Last Name"
                       placeholder="Peters"
-                      onBlur={handleBlur("lastName")}
-                      changeHandler={handleChange("lastName")}
-                      inputValue={values.lastName}
+                      onBlur={handleBlur("lastname")}
+                      changeHandler={handleChange("lastname")}
+                      inputValue={values.lastname}
                     />
-                    {errors.lastName && (
+                    {errors.lastname && (
                       <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                        {errors.lastName}
+                        {errors.lastname}
                       </Text>
                     )}
                   </View>
@@ -208,13 +274,13 @@ const PatientProfile = ({ navigation }) => {
                     <InputWithLabelAuth
                       labelValue="Middle Name"
                       placeholder="Chigozie"
-                      onBlur={handleBlur("middleName")}
-                      changeHandler={handleChange("middleName")}
-                      inputValue={values.middleName}
+                      onBlur={handleBlur("middlename")}
+                      changeHandler={handleChange("middlename")}
+                      inputValue={values.middlename}
                     />
-                    {errors.middleName && (
+                    {errors.middlename && (
                       <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                        {errors.middleName}
+                        {errors.middlename}
                       </Text>
                     )}
                   </View>
@@ -253,13 +319,13 @@ const PatientProfile = ({ navigation }) => {
                         <InputWithLabelAuth
                           labelValue="Phone Number 1"
                           placeholder="07066389644"
-                          onBlur={handleBlur("phoneNumber1")}
-                          changeHandler={handleChange("phoneNumber1")}
-                          inputValue={values.phoneNumber1}
+                          onBlur={handleBlur("phone")}
+                          changeHandler={handleChange("phone")}
+                          inputValue={values.phone}
                         />
-                        {errors.phoneNumber1 && (
+                        {errors.phone && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.phoneNumber1}
+                            {errors.phone}
                           </Text>
                         )}
                       </View>
@@ -267,13 +333,13 @@ const PatientProfile = ({ navigation }) => {
                         <InputWithLabelAuth
                           labelValue="Phone Number 2"
                           placeholder="08066389644"
-                          onBlur={handleBlur("phoneNumber2")}
-                          changeHandler={handleChange("phoneNumber2")}
-                          inputValue={values.phoneNumber2}
+                          onBlur={handleBlur("phone2")}
+                          changeHandler={handleChange("phone2")}
+                          inputValue={values.phone2}
                         />
-                        {errors.phoneNumber2 && (
+                        {errors.phone2 && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.phoneNumber2}
+                            {errors.phone2}
                           </Text>
                         )}
                       </View>
@@ -287,27 +353,54 @@ const PatientProfile = ({ navigation }) => {
                         /> */}
                         <Select
                           labelValue="Gender"
-                          selectedValue={selectedGender}
-                          setSelectedValue={setSelectedGender}
+                          selectedValue={gender}
+                          setSelectedValue={setGender}
                           list={["Select", "Male", "Female", "Others"]}
                         />
-                        {errors.gender && (
+                        {!isComplete && !gender && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.gender}
+                            Select your gender
                           </Text>
                         )}
                       </View>
                       <View className="mb-5">
-                        <InputWithLabelAuth
+                        {/* <InputWithLabelAuth
                           labelValue="Date of Birth"
                           placeholder="dd/mm/yyy"
                           onBlur={handleBlur("dob")}
                           changeHandler={handleChange("dob")}
                           inputValue={values.dob}
-                        />
-                        {errors.dob && (
+                        /> */}
+                        <Text
+                          style={{ fontFamily: "ManropeRegular" }}
+                          className="mb-2 text-base ml-4 text-black"
+                        >
+                          Date of birth
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => setShow(true)}
+                          // style={{ backgroundColor: COLORS.primaryBlue }}
+                          className={`py-3 rounded-[4px] border-[1px] border-gray-300  w-[90%] mx-auto px-4`}
+                        >
+                          <Text
+                            style={{ fontFamily: "ManropeRegular" }}
+                            className="text-small text-gray-400"
+                          >
+                            {dobValue ? dobValue : "Enter date of birth"}
+                          </Text>
+                        </TouchableOpacity>
+                        {show && (
+                          <DateTimePicker
+                            testID="dateTimePicker"
+                            value={dob}
+                            mode={"date"}
+                            is24Hour={true}
+                            onChange={onChange}
+                          />
+                        )}
+                        {!isComplete && !dobValue && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.dob}
+                            Enter your date of birth
                           </Text>
                         )}
                       </View>
@@ -321,13 +414,13 @@ const PatientProfile = ({ navigation }) => {
                         /> */}
                         <Select
                           labelValue="Religion"
-                          selectedValue={selectedReligion}
-                          setSelectedValue={setSelectedReligion}
+                          selectedValue={religion}
+                          setSelectedValue={setReligion}
                           list={["Select", "Christianity", "Islam", "Others"]}
                         />
-                        {errors.religion && (
+                        {!isComplete && !religion && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.religion}
+                            Select your religion
                           </Text>
                         )}
                       </View>
@@ -355,13 +448,13 @@ const PatientProfile = ({ navigation }) => {
                         /> */}
                         <Select
                           labelValue="Marital Status"
-                          selectedValue={selectedMaritalStatus}
-                          setSelectedValue={setSelectedMaritalStatus}
+                          selectedValue={maritalstatus}
+                          setSelectedValue={setMaritalStatus}
                           list={["Select", "Married", "Single", "Others"]}
                         />
-                        {errors.maritalStatus && (
+                        {!isComplete && !maritalstatus && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.maritalStatus}
+                            Select your marital status
                           </Text>
                         )}
                       </View>
@@ -393,55 +486,60 @@ const PatientProfile = ({ navigation }) => {
                         /> */}
                         <Select
                           labelValue="Country"
-                          selectedValue={selectedCountry}
-                          setSelectedValue={setSelectedCountry}
+                          selectedValue={country}
+                          setSelectedValue={setCountry}
                           list={["Nigeria"]}
                         />
-                        {errors.country && (
+                        {/* {errors.country && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
                             {errors.country}
                           </Text>
-                        )}
+                        )} */}
                       </View>
                       <View className="mb-5">
                         <InputWithLabelAuth
                           labelValue="Residential address"
                           placeholder="enter address"
-                          onBlur={handleBlur("residentialAddress")}
-                          changeHandler={handleChange("residentialAddress")}
-                          inputValue={values.residentialAddress}
+                          onBlur={handleBlur("address")}
+                          changeHandler={handleChange("address")}
+                          inputValue={values.address}
                         />
-                        {errors.residentialAddress && (
+                        {errors.address && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.residentialAddress}
+                            {errors.address}
                           </Text>
                         )}
                       </View>
                       <View className="mb-5">
                         {/* STATE SELECT */}
                         <StateSelect
-                          selectedValue={selectedState}
-                          setSelectedValue={setSelectedState}
+                          selectedValue={state}
+                          setSelectedValue={setState}
                         />
+                        {!isComplete && !state && (
+                          <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                            Select state
+                          </Text>
+                        )}
                       </View>
                       <View className="mb-5">
                         <LgaSelect
-                          selectedValue={selectedLga}
-                          setSelectedValue={setSelectedLga}
-                          selectedState={selectedState}
+                          selectedValue={lga}
+                          setSelectedValue={setLga}
+                          selectedState={state}
                         />
-                        {/* <InputWithLabelAuth
+                        {/*     <InputWithLabelAuth
                           labelValue="Local Government"
                           placeholder="select"
                           onBlur={handleBlur("localgov")}
                           changeHandler={handleChange("localgov")}
                           inputValue={values.localgov}
-                        />
-                        {errors.localgov && (
+                        /> */}
+                        {!isComplete && !lga && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
-                            {errors.localgov}
+                            Select your local government
                           </Text>
-                        )} */}
+                        )}
                       </View>
                       <View className="mb-5">
                         <InputWithLabelAuth
@@ -504,6 +602,7 @@ const PatientProfile = ({ navigation }) => {
                           size={25}
                           fillColor="#0364FF"
                           unfillColor="#FFFFFF"
+                          onPress={() => setIsAcceptTerms((prev) => !prev)}
                           text="I give the doctor consent to see my Health Profile during my appointment and/ or treatment."
                           iconStyle={{ borderColor: "#0364FF" }}
                           innerIconStyle={{ borderWidth: 2 }}

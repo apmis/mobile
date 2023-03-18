@@ -79,7 +79,7 @@ export const LgaSelect = ({
         >
           {(lgaList.hasOwnProperty(selectedState)
             ? lgaList[selectedState]
-            : []
+            : ["Select"]
           ).map((lga, i) => (
             <Picker.Item key={i} label={lga} value={lga} />
           ))}
