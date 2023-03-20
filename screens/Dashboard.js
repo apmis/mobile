@@ -239,7 +239,9 @@ const Dashboard = ({ navigation }) => {
             >
               Appointments
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("AppointmentList")}
+            >
               <Text
                 className="text-center text-[#0364FF] text-[14] mr-2"
                 style={{ fontFamily: "ManropeMedium" }}

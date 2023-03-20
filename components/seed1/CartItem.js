@@ -13,7 +13,6 @@ import {
 export default function CartItem({ product, setShowNotification }) {
   const dispatch = useDispatch();
   const { numberWithCommas } = useAppHooks();
-
   return (
     <View
       style={{
@@ -59,7 +58,7 @@ export default function CartItem({ product, setShowNotification }) {
                 color: "#03045E",
               }}
             >
-              {product.product_name}
+              {product.name}
             </AppText>
             <AppText
               style={{

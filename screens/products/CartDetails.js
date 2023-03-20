@@ -16,6 +16,7 @@ export default function CartDetails({ navigation }) {
 
   //GLOBAL STATES
   const cartItems = useSelector((state) => state.cart) || [];
+  console.log(cartItems);
   // const reRender = useSelector((state) => state.reRender);
 
   useEffect(() => {
@@ -42,9 +43,9 @@ export default function CartDetails({ navigation }) {
             paddingTop: 48,
           }}
         >
-          {cartItems?.map((item, i) => (
+          {cartItems?.map((item) => (
             <CartItem
-              key={i}
+              key={item.id}
               product={item}
               setShowNotification={setShowNotification}
             />

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Alert, Modal, Text, Pressable, View, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import timeHandler from "../../utils/functions/time";
 import AppText from "./AppText";
 
-export default function AppointmentPreview({ show, setPreviewModal }) {
+export default function AppointmentPreview({ show, setPreviewModal, data }) {
   return (
     <Modal animationType="slide" transparent={true} visible={show}>
       <View style={styles.centeredView}>
@@ -16,9 +17,9 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
               marginVertical: 20,
             }}
           >
-            Pregnancy Visit
+            {data.appointment_reason}
           </AppText>
-          <View style={{marginBottom: 24}}>
+          <View style={{ marginBottom: 24 }}>
             <AppText
               style={{
                 fontSize: 16,
@@ -31,16 +32,17 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
               Venue
             </AppText>
             <AppText
+              className="capitalize"
               style={{
                 fontSize: 14,
                 fontWeight: "500",
                 color: "#6D7589",
               }}
             >
-              Kings Hospital
+              {data.location_name}
             </AppText>
           </View>
-          <View style={{marginBottom: 24}}>
+          <View style={{ marginBottom: 24 }}>
             <AppText
               style={{
                 fontSize: 16,
@@ -59,10 +61,10 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
                 color: "#6D7589",
               }}
             >
-              8:00a.m
+              {timeHandler(data.client.createdAt)}
             </Text>
           </View>
-          <View style={{marginBottom: 24}}>
+          <View style={{ marginBottom: 24 }}>
             <AppText
               style={{
                 fontSize: 16,
@@ -72,7 +74,7 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
                 marginBottom: 10,
               }}
             >
-            Instructions
+              Instructions
             </AppText>
             <AppText
               style={{
@@ -80,10 +82,11 @@ export default function AppointmentPreview({ show, setPreviewModal }) {
                 fontWeight: "400",
                 color: "#6D7589",
                 lineHeight: 19,
-                textAlign: "auto"
+                textAlign: "auto",
               }}
             >
-              Do not exceed 4 doses in any 24 hours. If symptoms persist consult your doctor 
+              Do not exceed 4 doses in any 24 hours. If symptoms persist consult
+              your doctor
             </AppText>
           </View>
           <Ionicons

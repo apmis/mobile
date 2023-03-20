@@ -47,7 +47,10 @@ const Slide = ({ item, currentSlideIndex }) => {
       style={{ width: width - 40, backgroundColor: "#fff", borderRadius: 10 }}
     >
       <View style={{ height: 209, width: 209, marginTop: 57 }}>
-        <Image style={{ height: "100%", width: "100%" }} source={item.image} />
+        <Image
+          style={{ height: "100%", width: "100%" }}
+          source={productImages[0].image}
+        />
       </View>
       <View
         style={{
@@ -90,13 +93,17 @@ export default function ProductDetails({ navigation, route }) {
   const [showNotification, setShowNotification] = useState(false);
 
   const { item } = route.params;
-  const [product, setProduct] = useState(item);
+  const [product, setProduct] = useState({
+    ...item,
+    id: item._id,
+    price: item.amount / item.quantity,
+    totalCost: item.amount,
+  });
   const updateCurrentSlideIndex = (e) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
     const currentIndex = Math.round(contentOffsetX / width);
     setCurrentSlideIndex(currentIndex);
   };
-
   const dispatch = useDispatch();
   //GLOBAL STATES
   const cartItems = useSelector((state) => state.cart);
@@ -107,7 +114,7 @@ export default function ProductDetails({ navigation, route }) {
       <Bar hideBar={false} />
       <UpperNavigation
         back
-        title={product.product_name}
+        title={product.name}
         rightIcon
         rightIconName="cart"
         rightIconFunc={() => navigation.navigate("CartDetails")}
@@ -131,8 +138,8 @@ export default function ProductDetails({ navigation, route }) {
           onMomentumScrollEnd={updateCurrentSlideIndex}
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <Slide item={item} currentSlideIndex={currentSlideIndex} />
+          renderItem={({ product }) => (
+            <Slide item={product} currentSlideIndex={currentSlideIndex} />
           )}
         />
       </View>
@@ -144,19 +151,21 @@ export default function ProductDetails({ navigation, route }) {
           marginTop: 19,
           display: "flex",
           flexDirection: "row",
+          flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
         <View>
           <AppText
+            className="capitalize"
             style={{
               fontWeight: "800",
               fontSize: 22,
               color: "rgba(7, 12, 24, 0.87)",
             }}
           >
-            {product.product_name}
+            {product.name}
           </AppText>
           <AppText
             style={{
@@ -165,7 +174,7 @@ export default function ProductDetails({ navigation, route }) {
               color: "#0364FF",
             }}
           >
-            ₦{numberWithCommas(product.price)}
+            ₦{numberWithCommas(product.totalCost / product.quantity)}
           </AppText>
         </View>
 
@@ -286,7 +295,7 @@ export default function ProductDetails({ navigation, route }) {
               setTimeout(() => {
                 dispatch(addToCart(product));
                 setShowNotification(false);
-              }, 1000);
+              }, 100);
             }}
             btnW="48%"
             title="Add to Cart"

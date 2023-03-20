@@ -5,7 +5,7 @@ const cartSlice = createSlice({
   initialState: [
     {
       id: 1,
-      product_name: "Paracetamol",
+      name: "Paracetamol",
       img: "",
       price: 520,
       quantity: 1,
@@ -13,7 +13,7 @@ const cartSlice = createSlice({
     },
     {
       id: 2,
-      product_name: "Chloraphenicol",
+      name: "Chloraphenicol",
       img: "",
       price: 650,
       quantity: 1,
@@ -28,7 +28,7 @@ const cartSlice = createSlice({
       if (!itemIsInCart) {
         state.push({
           ...product,
-          totalCost: product.price,
+          // totalCost: product.price ,
         });
       } else {
         const prod_index = state.map((prod) => prod.id).indexOf(product.id);
