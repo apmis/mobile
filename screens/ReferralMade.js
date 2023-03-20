@@ -53,7 +53,7 @@ export default function ReferralMade({ navigation }) {
             }}
           >
             <Button
-              onPressProp={() => navigation.navigate("Onboard")}
+              onPressProp={() => navigation.navigate("Dashboard")}
               bgColor={"#0364FF"}
               btnRadius={4}
               btnH={55}

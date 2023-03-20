@@ -5,7 +5,6 @@ import UpperNavigation from "../../components/seed1/UpperNavigation";
 import AppText from "../../components/seed1/AppText";
 import Button from "../../components/seed1/Button";
 
-
 export default function OrderPlaced({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
   return (
@@ -44,7 +43,6 @@ export default function OrderPlaced({ navigation }) {
               width: windowWidth - 100,
               marginHorizontal: 50,
             }}
-           
           >
             Your Order has been placed! You will recieve an email reciept
             shortly
@@ -57,7 +55,7 @@ export default function OrderPlaced({ navigation }) {
             }}
           >
             <Button
-              onPressProp={() => navigation.navigate("Onboard")}
+              onPressProp={() => navigation.navigate("Dashboard")}
               bgColor={"#0364FF"}
               btnRadius={4}
               btnH={50}

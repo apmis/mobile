@@ -11,14 +11,19 @@ import React, { useState, useEffect } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ProductReview from "../../components/seed1/ProductReview";
 
-import { useSelector } from "react-redux";
-import { useCartHooks } from "../../hooks/seed1/useCartHooks";
+import { useDispatch, useSelector } from "react-redux";
 import UpperNavigation from "../../components/seed1/UpperNavigation";
 import Bar from "../../components/seed1/Bar";
 import AppText from "../../components/seed1/AppText";
 import Button from "../../components/seed1/Button";
 import NotificationCard from "../../components/seed1/NotificationCard";
 import { useAppHooks } from "../../hooks/seed1/useAppHooks";
+import {
+  increaseQuantity,
+  reduceQuantity,
+  addToCart,
+  removeFromCart,
+} from "../../redux/slices/cartSlice";
 
 const { width } = Dimensions.get("window");
 const { numberWithCommas } = useAppHooks();
@@ -42,7 +47,10 @@ const Slide = ({ item, currentSlideIndex }) => {
       style={{ width: width - 40, backgroundColor: "#fff", borderRadius: 10 }}
     >
       <View style={{ height: 209, width: 209, marginTop: 57 }}>
-        <Image style={{ height: "100%", width: "100%" }} source={item.image} />
+        <Image
+          style={{ height: "100%", width: "100%" }}
+          source={productImages[0].image}
+        />
       </View>
       <View
         style={{
@@ -85,35 +93,28 @@ export default function ProductDetails({ navigation, route }) {
   const [showNotification, setShowNotification] = useState(false);
 
   const { item } = route.params;
-  const [product, setProduct] = useState(item);
+  const [product, setProduct] = useState({
+    ...item,
+    id: item._id,
+    price: item.amount / item.quantity,
+    totalCost: item.amount,
+  });
   const updateCurrentSlideIndex = (e) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
     const currentIndex = Math.round(contentOffsetX / width);
     setCurrentSlideIndex(currentIndex);
   };
-
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   //GLOBAL STATES
-  const cartItems = useSelector((state) => state.cartState);
-  const reRender = useSelector((state) => state.reRender);
+  const cartItems = useSelector((state) => state.cart);
   const prodAlreadyInCart = cartItems.find((prod) => prod.id == product.id);
-
-  const {
-    increaseProductQuantity,
-    decreaseProductQuantity,
-    addToCart,
-    reduceQuantity,
-  } = useCartHooks(setProduct);
-
-
-  useEffect(() => {}, [reRender]);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#f3f3f3" }}>
       <Bar hideBar={false} />
       <UpperNavigation
         back
-        title={product.product_name}
+        title={product.name}
         rightIcon
         rightIconName="cart"
         rightIconFunc={() => navigation.navigate("CartDetails")}
@@ -137,8 +138,8 @@ export default function ProductDetails({ navigation, route }) {
           onMomentumScrollEnd={updateCurrentSlideIndex}
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <Slide item={item} currentSlideIndex={currentSlideIndex} />
+          renderItem={({ product }) => (
+            <Slide item={product} currentSlideIndex={currentSlideIndex} />
           )}
         />
       </View>
@@ -150,19 +151,21 @@ export default function ProductDetails({ navigation, route }) {
           marginTop: 19,
           display: "flex",
           flexDirection: "row",
+          flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
         <View>
           <AppText
+            className="capitalize"
             style={{
               fontWeight: "800",
               fontSize: 22,
               color: "rgba(7, 12, 24, 0.87)",
             }}
           >
-            {product.product_name}
+            {product.name}
           </AppText>
           <AppText
             style={{
@@ -171,7 +174,7 @@ export default function ProductDetails({ navigation, route }) {
               color: "#0364FF",
             }}
           >
-            ₦{numberWithCommas(product.price)}
+            ₦{numberWithCommas(product.totalCost / product.quantity)}
           </AppText>
         </View>
 
@@ -186,8 +189,8 @@ export default function ProductDetails({ navigation, route }) {
           <TouchableOpacity
             onPress={
               prodAlreadyInCart
-                ? () => reduceQuantity(product)
-                : () => decreaseProductQuantity(product)
+                ? () => dispatch(reduceQuantity(product))
+                : () => dispatch(removeFromCart(product))
             }
             style={{
               height: 30,
@@ -211,8 +214,8 @@ export default function ProductDetails({ navigation, route }) {
           <TouchableOpacity
             onPress={
               prodAlreadyInCart
-                ? () => addToCart(product)
-                : () => increaseProductQuantity(product)
+                ? () => dispatch(increaseQuantity(product))
+                : () => dispatch(addToCart(product))
             }
             style={{
               height: 30,
@@ -290,9 +293,9 @@ export default function ProductDetails({ navigation, route }) {
             onPressProp={() => {
               setShowNotification(true);
               setTimeout(() => {
-                addToCart(product);
+                dispatch(addToCart(product));
                 setShowNotification(false);
-              }, 1000);
+              }, 100);
             }}
             btnW="48%"
             title="Add to Cart"

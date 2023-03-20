@@ -18,7 +18,7 @@ export default function UpperNavigation({
 }) {
   // const windowWidth = Dimensions.get("window").width;
   const navigation = useNavigation();
-  const cartItems = useSelector((state) => state.cartState);
+  const cartItems = useSelector((state) => state.cart) || [];
   return (
     <View
       style={{

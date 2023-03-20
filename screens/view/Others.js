@@ -38,7 +38,7 @@ export default function Others({ navigation }) {
     {
       title: "Appointments",
       img: require("../../assets/images/appointment.png"),
-      link: "BookAppointment",
+      link: "AppointmentList",
     },
     {
       title: "Referral",

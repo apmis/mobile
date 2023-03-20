@@ -27,7 +27,7 @@ export default function Buy({ navigation }) {
     {
       title: "Consumables",
       img: require("../../assets/images/consumables.png"),
-      link: "#",
+      link: "Dashboard",
     },
     {
       title: "Wallet",
