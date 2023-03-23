@@ -36,12 +36,10 @@ export const createPasswordSchema = yup.object().shape({
 
 export const createUserProfile = yup.object().shape({
   firstname: yup.string().required("Firstname is a required field"),
-  lastname: yup.string().required("Lastname is a required field"),
+  lastname: yup.string(), //.required("Lastname is a required field"),
   middlename: yup.string().required("Middlename is a required field"),
-  email: yup
-    .string()
-    .email("Must be a valid email!")
-    .required("Email is required!"),
+  email: yup.string().email("Must be a valid email!"),
+  // .required("Email is required!"),
   phone: yup
     .string()
     .matches(nigerianPhoneRegExp, "Enter a valid phone number (0900000000000).")

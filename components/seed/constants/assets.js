@@ -22,10 +22,15 @@ import appointmentCardGradient from "../../../assets/appointmentcard-gradient.pn
 import videoGradient from "../../../assets/video-gradient.png";
 import blog from "../../../assets/blog.png";
 import hospital from "../../../assets/hospital.png";
+import visibleEye from "../../../assets/visible-eye.png";
+import closedEye from "../../../assets/closed-eye.png";
 
 import profile2 from "../../../assets/profile2.png";
 import profile3 from "../../../assets/profile3.png";
 import profile4 from "../../../assets/profile4.png";
+
+import mapMarker from "../../../assets/map-marker.png";
+
 export default {
   apmisFullLogo,
   apple,
@@ -54,4 +59,7 @@ export default {
   profile4,
   blog,
   hospital,
+  mapMarker,
+  visibleEye,
+  closedEye,
 };

@@ -30,7 +30,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import dateHandler from "../utils/functions/date";
 import client from "../feathers";
 const PatientProfile = ({ navigation, route }) => {
-  const { id } = route.params;
+  const { firstname, lastname, email, _id } = route.params;
+  console.log(route.params);
   // const { deviceWidth, deviceHeight } = Dimensions.get("window");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isAcceptTerms, setIsAcceptTerms] = useState(false);
@@ -47,10 +48,10 @@ const PatientProfile = ({ navigation, route }) => {
   const [show, setShow] = useState(false);
   const clientUser = client.service("client");
   const initialValues = {
-    firstname: "",
-    lastname: "",
+    firstname: firstname,
+    lastname: lastname,
     middlename: "",
-    email: "",
+    email: email,
     phone: "",
     phone2: "",
     gender: "",
@@ -101,11 +102,11 @@ const PatientProfile = ({ navigation, route }) => {
         updatedObject[key] = data[key];
       }
     });
-
+    console.log(updatedObject);
     clientUser
       .create({
         ...updatedObject,
-        userId: id,
+        userId: _id,
         gender,
         dob,
         country,
@@ -115,12 +116,17 @@ const PatientProfile = ({ navigation, route }) => {
         imageurl,
         maritalstatus,
         facility: {
-          _id: "63b7fda4221ded00166e5a7c",
+          _id: "64100ee862eb890014af5194",
         },
       })
       .then((createdClient) => {
         console.log("Object created:", createdClient);
-        navigation.navigate("Dashboard");
+        navigation.navigate("SuccessWithThanks", {
+          screen: "Dashboard",
+          successMessage:
+            "Congratulations! You have successfully Updated your profile",
+          btnText: "Home",
+        });
       })
       .catch((error) => {
         console.error("Error creating object:", error);
@@ -222,9 +228,9 @@ const PatientProfile = ({ navigation, route }) => {
             </View>
             <Text
               style={{ fontFamily: "ManropeSemibold" }}
-              className="text-base text-center mt-5 text-[#070C18]"
+              className="text-base capitalize text-center mt-5 text-[#070C18]"
             >
-              Christian Peters
+              {`${firstname} ${lastname}`}
             </Text>
           </View>
         </View>
@@ -239,6 +245,7 @@ const PatientProfile = ({ navigation, route }) => {
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
             <View>
+              {/* {console.log(errors)} */}
               <View className="mb-5">
                 {/* TAB 1 */}
                 <View>
@@ -264,7 +271,7 @@ const PatientProfile = ({ navigation, route }) => {
                       changeHandler={handleChange("lastname")}
                       inputValue={values.lastname}
                     />
-                    {errors.lastname && (
+                    {errors.lastname && !lastnameRef && (
                       <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
                         {errors.lastname}
                       </Text>
@@ -273,7 +280,7 @@ const PatientProfile = ({ navigation, route }) => {
                   <View className="mb-5">
                     <InputWithLabelAuth
                       labelValue="Middle Name"
-                      placeholder="Chigozie"
+                      placeholder="Enter middle name"
                       onBlur={handleBlur("middlename")}
                       changeHandler={handleChange("middlename")}
                       inputValue={values.middlename}
@@ -303,13 +310,14 @@ const PatientProfile = ({ navigation, route }) => {
                     <View style={{ padding: 10 }}>
                       <View className="mb-5">
                         <InputWithLabelAuth
+                          isEditable={false}
                           labelValue="Email"
                           placeholder="auraqule@gmail.com"
                           onBlur={handleBlur("email")}
                           changeHandler={handleChange("email")}
                           inputValue={values.email}
                         />
-                        {errors.email && (
+                        {errors.email && !emailRef && (
                           <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
                             {errors.email}
                           </Text>
@@ -318,7 +326,8 @@ const PatientProfile = ({ navigation, route }) => {
                       <View className="mb-5">
                         <InputWithLabelAuth
                           labelValue="Phone Number 1"
-                          placeholder="07066389644"
+                          keyboardType={"numeric"}
+                          placeholder="Ex. 07066389644"
                           onBlur={handleBlur("phone")}
                           changeHandler={handleChange("phone")}
                           inputValue={values.phone}
@@ -332,7 +341,8 @@ const PatientProfile = ({ navigation, route }) => {
                       <View className="mb-5">
                         <InputWithLabelAuth
                           labelValue="Phone Number 2"
-                          placeholder="08066389644"
+                          keyboardType={"numeric"}
+                          placeholder="Ex. 08066389644"
                           onBlur={handleBlur("phone2")}
                           changeHandler={handleChange("phone2")}
                           inputValue={values.phone2}
@@ -384,7 +394,7 @@ const PatientProfile = ({ navigation, route }) => {
                         >
                           <Text
                             style={{ fontFamily: "ManropeRegular" }}
-                            className="text-small text-gray-400"
+                            className="text-small text-gray-500"
                           >
                             {dobValue ? dobValue : "Enter date of birth"}
                           </Text>
@@ -427,7 +437,7 @@ const PatientProfile = ({ navigation, route }) => {
                       <View className="mb-5">
                         <InputWithLabelAuth
                           labelValue="Profession"
-                          placeholder="enter profession"
+                          placeholder="Enter profession"
                           onBlur={handleBlur("profession")}
                           changeHandler={handleChange("profession")}
                           inputValue={values.profession}
@@ -499,7 +509,7 @@ const PatientProfile = ({ navigation, route }) => {
                       <View className="mb-5">
                         <InputWithLabelAuth
                           labelValue="Residential address"
-                          placeholder="enter address"
+                          placeholder="Enter address"
                           onBlur={handleBlur("address")}
                           changeHandler={handleChange("address")}
                           inputValue={values.address}
@@ -572,7 +582,7 @@ const PatientProfile = ({ navigation, route }) => {
                       <View className="mb-5">
                         <InputWithLabelAuth
                           labelValue="Neighourhood"
-                          placeholder="enter address"
+                          placeholder="Enter address"
                           onBlur={handleBlur("neighbourhood")}
                           changeHandler={handleChange("neighbourhood")}
                           inputValue={values.neighbourhood}

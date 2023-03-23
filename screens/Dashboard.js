@@ -27,11 +27,21 @@ import { AppointmentCard } from "../components/seed";
 import { useEffect } from "react";
 import client from "../feathers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSelector } from "react-redux";
 const Dashboard = ({ navigation }) => {
   const [isClose, setIsClose] = useState(false);
+  const hasUserCompletedProfile = useSelector(
+    (state) => state.user.hasUserCompletedProfile
+  );
   const [hasCompleteProfile, setHasCompleteProfile] = useState(true);
   const clientUser = client.service("client");
-  let id;
+  const [id, setId] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+  });
+  const user = client.service("users");
   // ref
   const bottomSheetModalRef = useRef();
 
@@ -60,25 +70,54 @@ const Dashboard = ({ navigation }) => {
     try {
       async function fetchClientId() {
         try {
-          const client_id = await AsyncStorage.getItem("client_id");
-          if (client_id !== null) {
-            return client_id.replace(/^"(.*)"$/, "$1");
+          const client_email = await AsyncStorage.getItem("client_email");
+          console.log(client_email);
+          if (client_email !== null) {
+            return client_email.replace(/^"(.*)"$/, "$1");
           }
         } catch (error) {
           console.log(error.message);
           // handle errors here
         }
       }
-      id = await fetchClientId();
+      const idRes = await fetchClientId();
+      setId(idRes);
       const query = {
-        userId: id,
+        email: id,
         // $select: ['id', 'fieldName'],
         $limit: 1,
         // fieldName: { $exists: true, $ne: null }
       };
       const clientUserRes = await clientUser.find({ query });
-      console.log(clientUserRes);
-      setHasCompleteProfile(true);
+      // console.log(clientUserRes.data);
+      clientUserRes.data.length
+        ? setHasCompleteProfile(true)
+        : setHasCompleteProfile(false);
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+
+  const fetchUserInfo = async () => {
+    try {
+      const usersRes = await user.find({
+        query: {
+          email: id,
+
+          $limit: 1,
+          // description: { $ne: "" },
+
+          $sort: {
+            createdAt: -1,
+          },
+          $select: ["firstname", "lastname", "email"],
+        },
+      });
+
+      // console.log(authRes.data[0]);
+      console.log("what", usersRes.data[0]);
+      setUserInfo(usersRes.data[0]);
+      // Do something with the user object here
     } catch (error) {
       console.error("Something went wrong", error);
     }
@@ -86,7 +125,8 @@ const Dashboard = ({ navigation }) => {
 
   useEffect(() => {
     hasCompletedRegChecker();
-  }, []);
+    fetchUserInfo();
+  }, [id]);
   return (
     <BottomSheetModalProvider>
       {/* This style was initially added into SafeAreaView 👉  style={{ paddingTop: StatusBar.currentHeight }}   */}
@@ -97,23 +137,26 @@ const Dashboard = ({ navigation }) => {
           barStyle="dark-content"
           translucent
         />
-        {!hasCompleteProfile && (
-          <View
-            style={{ backgroundColor: COLORS.primaryBlue }}
-            className="w-full py-3 px-[29]"
-          >
-            <TouchableOpacity
-              onPress={() => navigation.navigate("PatientProfile", { id })}
+        {!hasCompleteProfile ||
+          (!hasUserCompletedProfile && (
+            <View
+              style={{ backgroundColor: COLORS.primaryBlue }}
+              className="w-full py-3 px-[29]"
             >
-              <Text
-                style={{ fontFamily: "ManropeRegular" }}
-                className="text-white text-base"
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("PatientProfile", { ...userInfo })
+                }
               >
-                Complete Your Profile
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
+                <Text
+                  style={{ fontFamily: "ManropeRegular" }}
+                  className="text-white text-base"
+                >
+                  Complete Your Profile
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ))}
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 20 }}
@@ -128,10 +171,10 @@ const Dashboard = ({ navigation }) => {
               </TouchableOpacity>
               <View>
                 <Text
-                  className="text-base"
+                  className="text-base capitalize"
                   style={{ fontFamily: "ManropeBold" }}
                 >
-                  Hello, Christian
+                  Hello, {userInfo?.firstname}
                 </Text>
                 <Text
                   className="text-[10px] text-[#444444]"

@@ -11,6 +11,9 @@ import { SearchInput } from "../Global";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { assets, COLORS } from "../../../components/seed/constants";
 import { LightBlueText } from "../../../components/seed";
+// import MapView, { Marker } from "react-native-maps";
+import { useEffect } from "react";
+import client from "../../../feathers";
 const hospitalData = [
   {
     id: "1",
@@ -174,14 +177,65 @@ const SearchHospitalHome = ({ navigation }) => {
   const [search, setSearch] = useState("");
   const [isSubmitSearch, setIsSubmitSearch] = useState(false);
   const [selectedHospital, setSelectedHospital] = useState({});
-
+  // const [currentLocation, setCurrentLocation] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const facility = client.service("location");
   const selectHospitalHandler = (hospitalInfo) => {
     setIsSubmitSearch(false);
     setSelectedHospital(hospitalInfo);
   };
+
+  const fetch = async () => {
+    try {
+      const facilityRes = await facility.find({
+        query: {
+          "facility._id": "641470dbccfc1d00147cb966",
+          name: "",
+          // client: "61dc1aefad488300168cb5fe",
+          // documentname: "Prescription",
+          $limit: 40,
+          $sort: {
+            createdAt: -1,
+          },
+          // $select: ["productitems"],
+        },
+      });
+      console.log(facilityRes.data);
+
+      // setProducts(
+      //   facilityRes.data.flatMap((product) => product.productitems.flat())
+      // );
+      // setDisplayedProducts(
+      //   facilityRes.data.flatMap((product) => product.productitems.flat())
+      // );
+      // Do something with the user object here
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       setCurrentLocation({ latitude, longitude });
+  //     },
+  //     (error) => {
+  //       if (error.code === 1) {
+  //         setErrorMessage("Please allow location access");
+  //       } else {
+  //         setErrorMessage("Error getting location");
+  //       }
+  //     },
+  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+  //   );
+  // }, []);
   return (
     <SafeAreaView className="flex-1 relative bg-[#f3f3f3] pt-[7%]">
-      <View className="m-[10%]">
+      <View className="m-[10%] mb-[5%]">
         <SearchInput
           search={search}
           setSearch={setSearch}
@@ -196,10 +250,29 @@ const SearchHospitalHome = ({ navigation }) => {
       )}
       {isSubmitSearch && (
         <View className="flex-1">
-          <View>
-            <Text className="text-2xl text-center text-[#0364FF]">MAP</Text>
+          <View className="flex-1">
+            {/* <MapView
+              // mapType="standard"
+              initialRegion={{
+                latitude: 7.41809,
+                longitude: 3.90521,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+              className="h-full w-full"
+            >
+              <Marker
+                coordinate={{
+                  latitude: 7.41809,
+                  longitude: 3.90521,
+                }}
+                image={require("../../../assets/map-marker.png")}
+                title="You are here"
+              />
+            </MapView> */}
+            {/* <Text className="text-2xl text-center text-[#0364FF]">MAP</Text> */}
           </View>
-          <View className="w-full pt-6 bg-white h-[65%] absolute bottom-0">
+          <View className="w-full pt-4 bg-white  h-[60%] absolute bottom-0">
             <FlatList
               className="w-[90%] mx-auto"
               showsVerticalScrollIndicator={false}
