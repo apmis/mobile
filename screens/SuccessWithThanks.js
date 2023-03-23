@@ -2,10 +2,14 @@ import { View, Text, Image, SafeAreaView, StatusBar } from "react-native";
 import React from "react";
 import { assets, COLORS } from "../components/seed/constants";
 import { Backbtn, Btn, Header } from "../components/seed";
+import { useDispatch } from "react-redux";
+import { updateProfileStatus } from "../redux/slices/userSlice";
 const SuccessWithThanks = ({ route, navigation }) => {
   const { screen, successMessage, btnText } = route.params;
+  const dispatch = useDispatch();
+
   return (
-    <SafeAreaView className="">
+    <SafeAreaView className="mt-[7%]">
       <View className="relative">
         <Header title="Thank You!" />
       </View>
@@ -13,12 +17,15 @@ const SuccessWithThanks = ({ route, navigation }) => {
         <Image resizeMode="contain" source={assets.checkmark} />
         <Text
           style={{ fontFamily: "ManropeSemibold", color: COLORS.secondaryBlue }}
-          className="mt-[60px] mb-10"
+          className="mt-[60px] w-[90%] mb-10"
         >
           {successMessage}
         </Text>
         <Btn
-          onPressHandler={() => navigation.navigate(screen)}
+          onPressHandler={() => {
+            dispatch(updateProfileStatus);
+            navigation.navigate(screen);
+          }}
           value={btnText}
         />
       </View>

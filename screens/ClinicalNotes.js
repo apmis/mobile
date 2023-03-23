@@ -47,21 +47,21 @@ export default function ClinicalNotes() {
     try {
       const clinicalNotesRes = await clinicalNotes.find({
         query: {
-          client: "61dc1aefad488300168cb5fe",
+          // client: "61dc1aefad488300168cb5fe",
           // documentname: "Prescription",
           documentname: "Doctor Note",
-          // $limit: 40,
+          $limit: 40,
           // description: { $ne: "" },
           $sort: {
             createdAt: -1,
           },
-          $select: [
-            "createdAt",
-            "documentname",
-            "documentdetail",
-            "createdBy",
-            "createdByname",
-          ],
+          // $select: [
+          //   "createdAt",
+          //   "documentname",
+          //   "documentdetail",
+          //   "createdBy",
+          //   "createdByname",
+          // ],
         },
       });
       // console.log(authRes.data[0]);

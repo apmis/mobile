@@ -105,10 +105,10 @@ const SearchDoctorHome = () => {
   useEffect(() => {
     setSearchResult(
       data.filter((item) =>
-        item.firstname?.toLowerCase().includes(searchValue.toLocaleLowerCase())
+        item.firstname?.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
-  }, [searchValue]);
+  }, [searchValue, data]);
   return (
     <SafeAreaView className="flex-1 bg-[#f3f3f3] mb-[60] pt-[7%]">
       <Header title="Find Doctor" />

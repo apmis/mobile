@@ -27,6 +27,7 @@ const ResetPassword = () => {
   const [isEmailSelected, setIsEmailSelected] = useState(true);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const ClientServ = client.service("auth-management");
   const baseuRL = "https://healthstack-backend.herokuapp.com";
 
@@ -50,6 +51,7 @@ const ResetPassword = () => {
         navigation.navigate("ResetPasswordScreen2");
       })
       .catch((err) => {
+        setError(err.code);
         console.log(`Sorry, You are unable to reset your account ${err}`);
       });
 
@@ -95,6 +97,7 @@ const ResetPassword = () => {
                     /> */}
                     <InputWithLabelAuth
                       labelValue="Email"
+                      keyboardType={"email-address"}
                       placeholder="Enter email..."
                       onBlur={handleBlur("email")}
                       changeHandler={handleChange("email")}
@@ -109,12 +112,17 @@ const ResetPassword = () => {
                 ) : (
                   <View className="mb-5">
                     <InputWithLabel
+                      keyboardType={"numeric"}
                       labelValue="Phone Number"
                       placeholder="Enter phone number..."
                     />
                   </View>
                 )}
-
+                {error && (
+                  <Text className="text-red-500 text-[11px] ml-[6%] -mt-4">
+                    {error}
+                  </Text>
+                )}
                 <View className="mt-[56px] mb-[27px]">
                   <Btn onPressHandler={handleSubmit} value="Continue" />
                 </View>

@@ -26,11 +26,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import client from "../../feathers";
 import { createUserSchema } from "../../utils/auth/schemas";
 import { Formik } from "formik";
+import { InputWithLabelAuthPassword } from "../../components/seed/Inputs";
 const SignUp = () => {
   const navigation = useNavigation();
   const ClientServ = client.service("auth-management");
   const baseuRL = "https://healthstack-backend.herokuapp.com";
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const initialValues = {
     fullName: "",
@@ -50,10 +52,14 @@ const SignUp = () => {
         console.log(
           `You have successfully created an account ${response.data._id}`
         );
-        AsyncStorage.setItem("client_id", JSON.stringify(response.data._id));
+        AsyncStorage.setItem(
+          "client_email",
+          JSON.stringify(response.data.email)
+        );
         navigation.navigate("Dashboard");
       })
       .catch((err) => {
+        setError(err);
         console.log(`Sorry, You are unable to create an account ${err}`);
       })
       .finally(() => {
@@ -129,6 +135,7 @@ const SignUp = () => {
                 <View className="mb-5">
                   <InputWithLabelAuth
                     labelValue="Email"
+                    keyboardType={"email-address"}
                     placeholder="Enter email..."
                     onBlur={handleBlur("email")}
                     changeHandler={handleChange("email")}
@@ -143,6 +150,7 @@ const SignUp = () => {
                 <View className="mb-5">
                   <InputWithLabelAuth
                     labelValue="Phone Number"
+                    keyboardType={"numeric"}
                     placeholder="Enter phone number..."
                     onBlur={handleBlur("phoneNumber")}
                     changeHandler={handleChange("phoneNumber")}
@@ -156,7 +164,7 @@ const SignUp = () => {
                 </View>
 
                 <View className="mb-5">
-                  <InputWithLabelAuth
+                  <InputWithLabelAuthPassword
                     labelValue="Password"
                     placeholder="Enter password..."
                     onBlur={handleBlur("password")}
@@ -170,7 +178,7 @@ const SignUp = () => {
                   )}
                 </View>
                 <View className="mb-10">
-                  <InputWithLabelAuth
+                  <InputWithLabelAuthPassword
                     labelValue="Confirm Password"
                     placeholder="Re-type password..."
                     onBlur={handleBlur("confirmPassword")}
@@ -180,6 +188,11 @@ const SignUp = () => {
                   {errors.confirmPassword && (
                     <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
                       {errors.confirmPassword}
+                    </Text>
+                  )}
+                  {error && (
+                    <Text className="text-red-500 text-[11px] ml-[6%] mt-1">
+                      {`Invalid Credential: ${error.code}`}
                     </Text>
                   )}
                 </View>

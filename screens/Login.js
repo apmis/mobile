@@ -22,6 +22,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import client from "../feathers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { InputWithLabelPassword } from "../components/seed/Inputs";
 
 const Login = () => {
   const [isEmailSelected, setIsEmailSelected] = useState(true);
@@ -48,7 +49,7 @@ const Login = () => {
 
       console.log(res);
       console.log("You successfully logged in");
-      AsyncStorage.setItem("client_id", JSON.stringify(res.user._id));
+      AsyncStorage.setItem("client_email", JSON.stringify(res.user.email));
       navigation.navigate("Dashboard");
     } catch (err) {
       setLoading(false);
@@ -87,6 +88,7 @@ const Login = () => {
             <View className="mb-5">
               <InputWithLabel
                 inputValue={email}
+                keyboardType={"email-address"}
                 changeHandler={(text) => setEmail(text)}
                 labelValue="Email"
                 placeholder="Enter email..."
@@ -95,6 +97,7 @@ const Login = () => {
           ) : (
             <View className="mb-5">
               <InputWithLabel
+                keyboardType={"numeric"}
                 labelValue="Phone Number"
                 placeholder="Enter phone number..."
               />
@@ -102,7 +105,7 @@ const Login = () => {
           )}
 
           <View className="relative">
-            <InputWithLabel
+            <InputWithLabelPassword
               inputValue={password}
               changeHandler={(text) => setPassword(text)}
               labelValue="Password"
