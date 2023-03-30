@@ -15,7 +15,7 @@ export const SearchInput = ({
   return (
     <View
       style={{ shadowColor: "#000000", elevation: 12 }}
-      className="w-full flex-row justify-between items-center rounded pl-4 pr-3 py-2  bg-white"
+      className="w-full flex-row justify-between items-center rounded pl-4 pr-3 py-2 bg-white"
     >
       <TextInput
         value={search}

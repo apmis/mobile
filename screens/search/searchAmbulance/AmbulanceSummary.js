@@ -5,7 +5,7 @@ import { COLORS } from "../../../components/seed/constants";
 
 const AmbulanceSummary = ({ navigation }) => {
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-[#f3f3f3] pt-[7%]">
       <Header title="Ambulance Request Summary" />
       <View className="mt-[10%] w-[90%] mx-auto space-y-6">
         {/* SEX */}

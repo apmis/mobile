@@ -49,7 +49,7 @@ const Card = ({ navigation }) => {
 
 const HospitalDirection = ({ navigation }) => {
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-[#f3f3f3] pt-[7%]">
       <View className="bg-white pb-12">
         <Header title="Direction" />
         {/* FLOW */}

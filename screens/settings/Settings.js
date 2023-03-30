@@ -11,8 +11,11 @@ import { assets } from "../../components/seed/constants";
 import { Backbtn } from "../../components/seed";
 const Settings = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }} className="">
-      <View className="relative ">
+    <SafeAreaView
+      style={{ paddingTop: StatusBar.currentHeight }}
+      className="mt-[2%] flex-1"
+    >
+      <View className="relative">
         <Backbtn />
         <Text
           style={{ fontFamily: "ManropeSemibold" }}

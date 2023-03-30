@@ -57,7 +57,7 @@ const HospitalAppointment = ({ navigation }) => {
   }, []); */
 
   return (
-    <SafeAreaView className="flex-1 pt-[7%]">
+    <SafeAreaView className="flex-1 pt-[7%] bg-[#f3f3f3]">
       <Header title="Book Appointment" />
       <View className="mt-[8%] w-[90%] mx-auto">
         {/* CALENDAR */}

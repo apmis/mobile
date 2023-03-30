@@ -7,7 +7,7 @@ const BlogDetails = ({ route }) => {
     data: { image, author, article, publishedDate },
   } = route.params;
   return (
-    <SafeAreaView className="flex-1 relative">
+    <SafeAreaView className="flex-1 relative bg-[#f3f3f3]">
       <Header title=" Health Blog" />
 
       <ScrollView

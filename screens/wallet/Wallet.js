@@ -183,7 +183,10 @@ const Wallet = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }} className="">
+    <SafeAreaView
+      style={{ paddingTop: StatusBar.currentHeight }}
+      className="bg-[#f3f3f3] flex-1 mt-[2%]"
+    >
       {/* <StatusBar backgroundColor={COLORS.primaryBlue} barStyle={""} /> */}
       <View className="relative ">
         <Backbtn />

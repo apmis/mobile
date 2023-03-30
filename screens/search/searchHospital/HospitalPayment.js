@@ -5,7 +5,7 @@ import { assets, COLORS } from "../../../components/seed/constants";
 
 const HospitalPayment = ({ navigation }) => {
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-[#f3f3f3] pt-[7%]">
       <Header title="Make Payment" />
       <View className="flex-1 mt-[20%] justify-between">
         <View className="items-center w-[60%] mx-auto">

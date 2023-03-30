@@ -5,6 +5,7 @@ import OAuth from "./OAuth";
 import Backbtn from "./Backbtn";
 import Header from "./Header";
 import AppointmentCard from "./AppointmentCard";
+import CustomDrawer from "./CustomDrawer";
 import {
   BoldText,
   LightText,
@@ -34,4 +35,5 @@ export {
   Header,
   LightTextBase,
   ChatInput,
+  CustomDrawer,
 };

@@ -59,7 +59,7 @@ export default function BookAppointment({ navigation }) {
   }, []);
 
   return (
-    <View style={{ backgroundColor: "#Faf83F9", flex: 1 }}>
+    <View style={{ backgroundColor: "#f3f3f3", flex: 1 }}>
       <Bar hideBar={false} />
       <UpperNavigation back />
 
@@ -107,7 +107,7 @@ export default function BookAppointment({ navigation }) {
 
       <View
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#f3f3f3",
           width: windowWidth - 40,
           marginHorizontal: 20,
           borderRadius: 20,

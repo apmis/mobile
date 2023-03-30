@@ -54,7 +54,7 @@ const Conversation = ({ route, navigation }) => {
   const image = data.image;
   const [isFirstSelected, setIsFirstSelected] = useState(true);
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 pt-[8%]">
       <StatusBar backgroundColor={COLORS.primaryBlue} barStyle="default" />
       <View className="relative mt-3 ">
         <TouchableOpacity

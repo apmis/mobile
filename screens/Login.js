@@ -59,7 +59,7 @@ const Login = () => {
   };
 
   return (
-    <SafeAreaView className="">
+    <SafeAreaView className="bg-[#f3f3f3] ">
       <StatusBar backgroundColor={COLORS.primaryBlue} barStyle={""} />
       <ScrollView showsVerticalScrollIndicator={false} className="">
         <View className="pt-6 px-8">
