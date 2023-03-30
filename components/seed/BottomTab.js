@@ -3,15 +3,24 @@ import { Platform } from "react-native";
 import IonIcons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { BlogHome, Dashboard, Home } from "../../screens";
+import {
+  BlogHome,
+  Dashboard,
+  Home,
+  PatientProfile,
+  Settings,
+  Wallet,
+} from "../../screens";
 import Buy from "../../screens/buy";
-import Products from "../../screens/products/Products";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import Others from "../../screens/view/Others";
 import { COLORS } from "./constants";
-
-const Tab = createBottomTabNavigator();
+import CustomDrawer from "./CustomDrawer";
 
 function BottomTab() {
+  const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
       initialRouteName="Dashboard"
@@ -26,7 +35,7 @@ function BottomTab() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Dashboard"
         component={Dashboard}
         options={{
           tabBarLabel: "Home",
@@ -84,3 +93,78 @@ function BottomTab() {
   );
 }
 export default BottomTab;
+
+export const Dash = () => {
+  const Drawer = createDrawerNavigator();
+
+  return (
+    <NavigationContainer independent={true}>
+      <Drawer.Navigator
+        drawerContent={(props) => <CustomDrawer {...props} />}
+        screenOptions={{
+          headerShown: false,
+          drawerActiveBackgroundColor: COLORS.primaryBlue,
+          drawerActiveTintColor: "#fff",
+          drawerInactiveTintColor: "#333",
+          drawerLabelStyle: {
+            marginLeft: -25,
+            // fontFamily: "Roboto-Medium",
+            fontSize: 15,
+          },
+        }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={BottomTab}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons name="home-outline" size={22} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="My Profile"
+          component={Others}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons name="person-outline" size={22} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons
+                name="chatbox-ellipses-outline"
+                size={22}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Wallet"
+          component={Wallet}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons name="wallet-outline" size={22} color={color} />
+            ),
+          }}
+        />
+        {/* <Drawer.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons name="settings-outline" size={22} color={color} />
+            ),
+          }}
+        /> */}
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+};
+
+// export default Dash;

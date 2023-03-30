@@ -11,6 +11,7 @@ import {
   Pressable,
 } from "react-native";
 import React, { useCallback, useMemo, useRef, useState } from "react";
+
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -23,11 +24,12 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 import Foundation from "react-native-vector-icons/Foundation";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import { assets, COLORS } from "../components/seed/constants";
-import { AppointmentCard } from "../components/seed";
+import { AppointmentCard, CustomDrawer } from "../components/seed";
 import { useEffect } from "react";
 import client from "../feathers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector } from "react-redux";
+
 const Dashboard = ({ navigation }) => {
   const [isClose, setIsClose] = useState(false);
   const hasUserCompletedProfile = useSelector(
@@ -130,13 +132,15 @@ const Dashboard = ({ navigation }) => {
   return (
     <BottomSheetModalProvider>
       {/* This style was initially added into SafeAreaView 👉  style={{ paddingTop: StatusBar.currentHeight }}   */}
-      <SafeAreaView className="flex-1 pt-[10%]">
+      <SafeAreaView className="flex-1 pt-[10%] relative bg-[#f3f3f3] ">
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
         <StatusBar
           backgroundColor={"white"}
           barStyle="dark-content"
           translucent
         />
+
+        {/* <View className="bg-blue-100 w-[50%] h-screen absolute left-0 top-0 z-50"></View> */}
         {!hasCompleteProfile ||
           (!hasUserCompletedProfile && (
             <View
@@ -163,7 +167,7 @@ const Dashboard = ({ navigation }) => {
         >
           <View className="flex-row items-center w-[90%] mx-auto mt-[20] justify-between">
             <View className="flex-row items-center space-x-2">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.openDrawer()}>
                 <Image
                   className="rounded-full h-[46] w-[46]"
                   source={assets.profilePic}
@@ -238,7 +242,7 @@ const Dashboard = ({ navigation }) => {
             </View>
             <View className="space-y-2 w-[45%]">
               <TouchableOpacity
-                onPress={() => navigation.navigate("BlogHome")}
+                onPress={() => navigation.navigate("Read")}
                 className="h-[47%] rounded-[10px] relative px-[14] py-[11] bg-[#FFF2D0]"
               >
                 <Image source={assets.read} />

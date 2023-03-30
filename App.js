@@ -1,10 +1,10 @@
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
-
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { GlobalizeProvider } from "react-native-globalize";
 import { loadCldr } from "react-native-globalize";
+import { Dash } from "./components/seed/BottomTab";
 import BottomTab from "./components/seed/BottomTab";
 loadCldr(require("react-native-globalize/locale-data/en-NG"));
 import {
@@ -84,6 +84,7 @@ import BloodDetails from "./screens/blood/BloodDetails";
 import store from "./redux/store";
 
 const Stack = createNativeStackNavigator();
+
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -140,7 +141,7 @@ export default function App() {
               <Stack.Screen name="PatientProfile" component={PatientProfile} />
               <Stack.Screen name="Wallet" component={Wallet} />
               <Stack.Screen name="FundWallet" component={FundWallet} />
-              <Stack.Screen name="Dashboard" component={BottomTab} />
+              <Stack.Screen name="Dashboard" component={Dash} />
               <Stack.Screen name="Notifications" component={Notifications} />
               <Stack.Screen name="ChatHome" component={Home} />
               <Stack.Screen name="Conversation" component={Conversation} />

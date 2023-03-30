@@ -9,7 +9,7 @@ const SuccessWithThanks = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   return (
-    <SafeAreaView className="mt-[7%]">
+    <SafeAreaView className="mt-[7%] bg-[#f3f3f3]">
       <View className="relative">
         <Header title="Thank You!" />
       </View>

@@ -4,7 +4,7 @@ import { Btn, Header, InputWithLabel } from "../../../components/seed";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 const AmbulanceTime = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1 bg-[#f3f3f3] pt-[7%] ">
       <Header title="Set PickUp  Date and Time" />
       <View className="mt-[10%] w-[90%] mx-auto">
         <Text

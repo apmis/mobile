@@ -80,14 +80,14 @@ const SearchDoctorHome = () => {
       const doctorsRes = await doctors.find({
         query: {
           // dest_userId: ["602178f86875b80015e4c5de"],
-          // $limit: 4,
+          $limit: 1,
           // description: { $ne: "" },
-          department: "medical",
+          // department: "medical",
           // position: "doctor",
           $sort: {
             createdAt: -1,
           },
-          $select: ["firstname", "lastname", "position", "profession"],
+          // $select: ["firstname", "lastname", "position", "profession"],
         },
       });
 

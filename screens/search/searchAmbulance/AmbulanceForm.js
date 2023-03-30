@@ -20,7 +20,7 @@ const AmbulanceForm = ({ route, navigation }) => {
   } = route.params;
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-[#f3f3f3] pt-[7%]">
       <Header title={name} />
       <ScrollView
         showsVerticalScrollIndicator={false}

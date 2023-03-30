@@ -65,7 +65,10 @@ const Notifications = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ paddingTop: StatusBar.currentHeight }} className="">
+    <SafeAreaView
+      style={{ paddingTop: StatusBar.currentHeight }}
+      className="bg-[#f3f3f3]"
+    >
       <Header title="Notifications" />
       <View className="w-[95%] mx-auto mt-[50px] ">
         <FlatList

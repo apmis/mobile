@@ -22,14 +22,9 @@ export default function AppointmentPayment({ navigation }) {
     navigation.navigate("Onboard");
   };
   return (
-    <View
-      style={{ backgroundColor: "#Faf83F9", flex: 1, position: "relative" }}
-    >
+    <View style={{ flex: 1, position: "relative" }} className="">
       <Bar hideBar={false} />
-      <UpperNavigation
-        back
-        title="Make Payment"
-      />
+      <UpperNavigation back title="Make Payment" />
 
       <View
         style={{

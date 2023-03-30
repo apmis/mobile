@@ -11,7 +11,7 @@ import { SearchInput } from "../Global";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { assets, COLORS } from "../../../components/seed/constants";
 import { LightBlueText } from "../../../components/seed";
-// import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { useEffect } from "react";
 import client from "../../../feathers";
 const hospitalData = [
@@ -251,7 +251,7 @@ const SearchHospitalHome = ({ navigation }) => {
       {isSubmitSearch && (
         <View className="flex-1">
           <View className="flex-1">
-            {/* <MapView
+            <MapView
               // mapType="standard"
               initialRegion={{
                 latitude: 7.41809,
@@ -269,7 +269,7 @@ const SearchHospitalHome = ({ navigation }) => {
                 image={require("../../../assets/map-marker.png")}
                 title="You are here"
               />
-            </MapView> */}
+            </MapView>
             {/* <Text className="text-2xl text-center text-[#0364FF]">MAP</Text> */}
           </View>
           <View className="w-full pt-4 bg-white  h-[60%] absolute bottom-0">
